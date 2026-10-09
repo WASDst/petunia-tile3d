@@ -28,3 +28,9 @@ Embeddable PNG default para portabilidade; external linked tileset como opção 
 ## Invariantes
 
 Save after Undo produz a mesma geometria e UV, sem referências quebradas; dados de cache/thumbnails não serializados; ids estáveis ao renomear/mover; payload externo validado antes de alocar excessivamente.
+
+## Evolução de formato para os diferenciais aprovados
+
+[Select/Replace Similar](../05-tools/replace-similar-tiles.md) usa `TileBinding` persistente e `FaceId` estável; [Tile Variations](../05-tools/tile-variations.md) requer `VariantGroup` versionado e salva TileId resolvido por face + UV final; [Wall/Roof](../05-tools/smart-wall-roof-brush.md) salva mesh convencional, com recipe somente metadata opcional. [Surface Stamp](../05-tools/surface-tile-stamp.md) persiste UV e provenance explicitamente; [Density Doctor](../05-tools/pixel-density-doctor.md) armazena preferências no EditorSession (não o relatório transitório) e modificações confirmadas como UV/Geometry normais.
+
+**Nenhuma alteração no schema é exigida nesta rodada documental.** Campos novos entram apenas quando o primeiro slice for implementado, com version bump ou `serde(default)` compatível conforme formato adotado e fixtures de reopen, Undo, renderer e export.

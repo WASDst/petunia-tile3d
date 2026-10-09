@@ -43,3 +43,15 @@ Nenhuma operação silenciosa destrutiva. Erro deve preservar estado anterior e 
 ## Gates
 
 Testar preview/cancel, Undo/Redo, 100 repetições, zoom/HiDPI, stale response, invalid indices, load/save roundtrip e partial failure rollback.
+
+## Commands/queries das funcionalidades aprovadas
+
+| Feature | Query/preview transient | Mutation | Undo |
+|---|---|---|---|
+| [Surface Tile Stamp](../05-tools/surface-tile-stamp.md) | `PlanFaceStamp` por FaceId/TileRegion e modo | `StampSurfaceCommand` atualiza FaceCornerUV + binding | estado anterior completo |
+| [Replace Similar](../05-tools/replace-similar-tiles.md) | `FindTileOccurrences` (TileId + scope + revision) | `ReplaceTileBatchCommand` | todo lote, nunca por face |
+| [Pixel Density Doctor](../05-tools/pixel-density-doctor.md) | `AnalyzePixelDensity` (read-only) e preview fix | `ApplyDensityFixCommand` somente após confirmação/precondições | geometry/UV afetadas exatas |
+| [Tile Variations](../05-tools/tile-variations.md) | escolha estável de variante por seed/key | `PlaceVariantTile` / `RerollVariantsBatch` | mesmos TileIds/UV/seed |
+| [Wall/Roof Brush](../05-tools/smart-wall-roof-brush.md) | `PlanPatternGeometry`, limite de faces e atlas | `AddPatternGeometryCommand` | todo pattern/parts/UV |
+
+IDs devem ser estáveis; se documento alterou desde preview, recalc + reconfirmação. Queries não alteram Document. `MissingTexture`, `InvalidRegion`, `LockedFace`, `StaleRevision`, `UnreachableDensity`, `UnsupportedTopology` têm mensagens acessíveis com recuperação. Nenhum worker escreve diretamente no Document.

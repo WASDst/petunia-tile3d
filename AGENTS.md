@@ -37,7 +37,7 @@ Tile-first, accessible 3D modeling from 2D tilesets for stylized game assets, pr
 
 ## Scope & implementation status
 
-This repository was initialized with a *documentation website*, not an application. Do not mark 'implemented', 'tested', 'released' merely because a page contains code blocks. Implementation of novel features requires approval and documented acceptance criteria. `website/docs/15-ideas/` is research proposals, not approved tasks.
+This repository was initialized with a *documentation website*, not an application. Do not mark 'implemented', 'tested', 'released' merely because a page contains code blocks. Five features are now **approved for roadmap inclusion only** (T3D-015..019): Pixel Density Doctor, Surface Tile Stamp, Select/Replace Similar Tile, Tile Variations (V1), Smart Wall/Roof Brush (V1+). Read each spec in `website/docs/05-tools/`. They are **NOT IMPLEMENTED**, have no promised dates, and need vertical-slice UX/acceptance verification. Other ideas in `website/docs/15-ideas/` remain unapproved.
 
 ## Verification and delivery
 

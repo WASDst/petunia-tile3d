@@ -107,3 +107,57 @@ recomendação mínima e unresolved gates. Não self-approve.
 ## Aplicação
 
 P0 é envelope padrão, com apenas 1–2 prompts especialistas. Sempre registrar non-goals, evitar carregar todos os catálogos Prumo ou o Petunia3D inteiro.
+
+## P9 — Surface Tile Stamp (T3D-016)
+
+```text
+Implemente Surface Tile Stamp segundo docs/05-tools/surface-tile-stamp.md
+em slice pequeno, após validar FaceCornerUV/selection. O usuário deve
+escolher TileRegion, identificar face, ver UV ghost, aceitar Fit/Keep
+Pixel Scale e confirmar; sem novo UVMesh ou alteração topológica silenciosa.
+UV custom requer decisão explícita. App aplica 1 Command/Undo,
+Slint emite UiIntent; testes: face X/Y/Z, flip/rotation, nonplanar,
+missing/locked, no mutation on cancel, export.
+```
+
+## P10 — Select/Replace Similar (T3D-017)
+
+```text
+Implemente read-only query de ocorrências por TileId/binding, scope visível,
+exclusão default de UV custom e bloqueados, preview com contagem/causas.
+Replace = transação atômica com FaceCornerUV + binding, 1 Undo.
+Conflito revision invalida preview. Rust std para index se medido.
+Não fazer image similarity nem update automático ao editar TilePalette.
+```
+
+## P11 — Pixel Density Doctor (T3D-015)
+
+```text
+Primeiro entregue apenas uma query Rust pura para analisar texels por world
+unit usando transform/world surface e UV por face-corner, com relatórios
+de desvio e degeneração. Não auto-reparar; ao avançar, permitir somente
+fixes matematicamente viáveis com preview, confirmação e Undo.
+Teste atlas não quadrado, escala não uniforme, UV skew e limites de TileRegion.
+Prove que nenhum fix derrama UV para outros tiles do atlas.
+```
+
+## P12 — Tile Variations (T3D-019)
+
+```text
+Crie VariantGroup com TileIds e pesos, algoritmo inteiro seed/versionado
+e choice key por placement ID/cell estável. Preview fixo = commit;
+persistir TileId escolhido e FaceCornerUV final. Nunca reroll no render,
+abrir arquivo ou export. Sem crate rand salvo justificativa.
+Teste cross-platform fixtures, overflow, weighted distribution, Undo e a11y.
+```
+
+## P13 — Smart Wall / Roof (T3D-018)
+
+```text
+Comece somente com Wall Strip por grid ortogonal de quads usando
+Workplane, previews transientes e GeometryPatch/Command atômico.
+Dimension numeric + click-move-click, UV orientada, sem faces internas.
+Depois que Wall Strip passar testes/a11y, desenvolver gable roof simples;
+não adicionar graph procedural/CAD/booleans heavy. Teste cancel,
+winding, seams, dimensões degeneradas, export e Undo de grandes lotes.
+```

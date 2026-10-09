@@ -54,3 +54,13 @@ Compartilhar vertex buffers/material por atlas e **batch por cena/objeto/textura
 - UV seam independente em borda compartilhada;
 - Undo/replay idempotent por comando;
 - raw GL extraction mantém correspondência face-corner ao triangulate.
+
+## Semântica de novos fluxos aprovados
+
+[Surface Tile Stamp](../05-tools/surface-tile-stamp.md) trabalha apenas em atributos UV da face escolhida: conservar winding, normais, topologia e seams. Para n-gons não planares/deformados não fingir projeção perfeita; preview de distorção ou rejeição. [Replace Similar](../05-tools/replace-similar-tiles.md) reusa aplicação de UV com orientação individual persistida.
+
+[Pixel Density Doctor](../05-tools/pixel-density-doctor.md) mede escala a partir de **geometria em mundo + pixels de atlas + UV face-corner**; não inferir densidade somente por rect width ou grid. Escala não uniforme, faces oblíquas e atlas anisotrópico exigem análise dos eixos tangentes; faces degeneradas são reportadas como não mensuráveis. UV não pode escapar de `TileRegion` para fabricar densidade inexistente. Auto fix com limites é distinto da query read-only.
+
+[Wall/Roof](../05-tools/smart-wall-roof-brush.md) produz GeometryPatch com orientação e UV coerentes, sem gerador universal paralelo. [Tile Variations](../05-tools/tile-variations.md) só escolhe TileId determinístico a cada placement e fixa UV, não ativa shader random.
+
+**DoD transversal:** preview/cancel não mutam malha; Commands atualizam geometry/UV/binding em uma única transação, validam revision e permitem Undo integral. Testar export roundtrip visual sem exigir que GLB/OBJ carregue os metadados exclusivos do editor.

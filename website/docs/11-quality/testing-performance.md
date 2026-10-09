@@ -47,3 +47,15 @@ read_only_export: export snapshot -> Document revision unchanged
 ## End-user testing
 
 Test actual first-session task with artists unfamiliar with 3D. Record instruction prompts, misclicks, terminology confusion, whether users can recover. Treat cognitive load as observable usability, not subjective decorations.
+
+## Matriz de conformidade dos diferenciais aprovados
+
+| Feature | Testes obrigatórios antes de marcar verified |
+|---|---|
+| [Surface Stamp](../05-tools/surface-tile-stamp.md) | mapping em quads/tri, rotation/mirror, nonplanar reject, custom UV consent, preview=commit, multi-face Undo, export |
+| [Replace Similar](../05-tools/replace-similar-tiles.md) | TileId identity, locked/custom skips, scope, missing atlas, stale revision, full rollback, 10k occurrence query |
+| [Tile Variations](../05-tools/tile-variations.md) | same seed/id → same tile across OS/reopen/Undo, weights/overflow, preview stable, 1000 variants, no reroll on redraw |
+| [Density Doctor](../05-tools/pixel-density-doctor.md) | transform não uniforme, 8/16/32 px, skew/distortion, degenerate face, custom UV, impossible target, query no-write, fix preview |
+| [Wall/Roof](../05-tools/smart-wall-roof-brush.md) | grid 1×1/N×M, mirrored frame, roof pitch/overhang, UV seams, duplicate faces, cancel, large atomic Undo, memory cap |
+
+**Ordenação de gates:** primeiro unit de Rust puro (sem Slint/GL), depois Command/Undo + roundtrip, então interação/AT + render, por fim compatibilidade/export/perf. Não adicionar framework de propriedades/geometry/camera automaticamente: somente dependências justificadas e auditadas. Documentar tempo/CPU/arquivo/grafo de dependências antes/depois no vertical slice mais próximo.

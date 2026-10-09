@@ -47,3 +47,7 @@ Fonte: [Blockbench](https://www.blockbench.net/) e [Wiki](https://www.blockbench
 | Grid/UV snapping difícil | Sticky workplane + planar/surface snap previsível | teste em cantos, diagonais e câmera ortho |
 
 **Não concluímos** que as features acima "ainda não existem" em Crocotile/Blockbench; são propostas de diferenciação por implementação simples e foco. Veja [Backlog de ideias](../15-ideas/opportunity-backlog.md).
+
+## Promoção de hipóteses à visão do produto (2026-10-09)
+
+Após a análise e a discussão, **cinco funcionalidades foram aprovadas para o roadmap do Tile3D**: [Pixel Density Doctor](../05-tools/pixel-density-doctor.md), [Surface Tile Stamp](../05-tools/surface-tile-stamp.md), [Select/Replace Similar](../05-tools/replace-similar-tiles.md), [Tile Variations](../05-tools/tile-variations.md), [Smart Wall/Roof](../05-tools/smart-wall-roof-brush.md). Isso **não constitui evidência de ausência em Crocotile3D ou outros concorrentes**, nem de implementação no nosso repositório. O diferencial reivindicado é redução de passos e consistência de UX/acessibilidade, sujeito a teste com usuários.

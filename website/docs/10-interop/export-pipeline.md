@@ -21,3 +21,13 @@ Troca básica por GLB/OBJ com aparência aproximada. Promessa de `Open in Petuni
 ## Sprite export — proposta complementar
 
 Export de imagens 2D renderizadas (PNG, múltiplos ângulos) é funcionalidade de outro nicho e será debatida depois: pode ser acessível, mas requer render target e transparência verificável; não entra no MVP por padrão.
+
+## Export dos recursos diferenciadores aprovados
+
+**GLB/OBJ exportam estado materializado**, não comandos específicos do editor:
+- [Surface Stamp](../05-tools/surface-tile-stamp.md) e [Replace Similar](../05-tools/replace-similar-tiles.md): exportar FaceCornerUV finais, winding, material e textura efetivamente aplicados.
+- [Tile Variations](../05-tools/tile-variations.md): exportar tiles **já escolhidos**, sem seed-random runtime obrigatório; advertir que grupo/seed não permanece editável em outros softwares.
+- [Wall/Roof](../05-tools/smart-wall-roof-brush.md): geometria explícita já gerada, sem generator/plugin no destino.
+- [Pixel Density Doctor](../05-tools/pixel-density-doctor.md): diagnosticar se desired antes do export, nunca auto-fixar export silenciosamente.
+
+Export é read-only em Document Snapshot; resultado repetível salvo salvo alteração explícita de UV/tile/geometry. Não vender roundtrip de metadados proprietários em GLB/OBJ.

@@ -57,3 +57,19 @@ Iniciar com "Importar tileset" ou "Experimente exemplo" e um cursor ghost sempre
 ## Não fazer
 
 Não duplicar DRAW/POLY/UV/PAINT gerais; não criar quatro painéis fechados obrigatórios para fazer um quad; não esconder Undo, seleção ou alvos de foco em gestos exclusivamente com mouse.
+
+## Entradas de UI das funcionalidades aprovadas — sem multiplicar workspaces
+
+As cinco novas funcionalidades não criam modo global extra, sidebars permanentes nem segundo editor UV:
+
+| Ação | Onde aparece primeiro | Onde aparecem ajustes avançados |
+|---|---|---|
+| [Surface Tile Stamp](../05-tools/surface-tile-stamp.md) | BUILD/EDIT: Palette → `Aplicar na superfície` ou face context menu | Context Bar: Fit, Orientation, Keep Pixel Scale |
+| [Select/Replace Similar](../05-tools/replace-similar-tiles.md) | Context menu do tile/face e Command Search | Dialog curto: escopo, contagem, ignoradas, preview |
+| [Tile Variations](../05-tools/tile-variations.md) | Palette: `Criar variações`; Brush: `Variar ao pintar` | Lista de pesos, seed, reroll |
+| [Pixel Density Doctor](../05-tools/pixel-density-doctor.md) | `Ferramentas > Escala dos pixels` e Command Search | Painel diagnóstico não modal, com `Corrigir...` opt-in |
+| [Wall/Roof Brush](../05-tools/smart-wall-roof-brush.md) | BUILD: `Construir parede` flyout; `Telhado` quando houver suporte | Context Bar: altura, comprimento, pitch, tile top/bottom |
+
+Não colocar todas as cinco no Tool Rail principal. Na first-run experience preservar **Tile Brush, Sticky, Select** como call to action mais imediata; secundárias em menu, Palette e Inspector. Tooltip, nomes, feedback de preview e Undo comuns; teclado/F6 e leitor de tela alcançam cada ação sem hover ou drag.
+
+No `Pixel Density Doctor`, legenda não depende só de vermelho/verde. No `Replace Similar`, anunciar quantas faces serão alteradas/ignoradas e por quê. No `Surface Tile Stamp`, mostrar mapeamento e distorção antes do click. No `Wall/Roof`, contagem de quads e custo antes de aplicar. No `Variations`, não sortear novos resultados a cada render.
