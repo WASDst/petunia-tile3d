@@ -1,0 +1,27 @@
+name: Documentation Integrity
+
+on:
+  push:
+    paths:
+      - 'website/**'
+      - 'AGENTS.md'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    paths:
+      - 'website/**'
+      - 'AGENTS.md'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check canonical Markdown, Prumo inventory and relative links
+        run: python3 website/scripts/verify-agent-docs.py
+      - name: Check SPA syntax
+        run: node --check website/app.js

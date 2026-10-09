@@ -1,0 +1,246 @@
+{
+  "domains": [
+    {
+      "id": "product",
+      "title": "Produto & Filosofia",
+      "files": [
+        {
+          "path": "00-product/principles.md",
+          "title": "Princípios e propósito"
+        },
+        {
+          "path": "00-product/decision-register.md",
+          "title": "Decisões e pendências"
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "title": "Arquitetura Modular",
+      "files": [
+        {
+          "path": "01-architecture/module-boundaries.md",
+          "title": "Boundaries, crates e ownership"
+        },
+        {
+          "path": "01-architecture/shared-contracts.md",
+          "title": "Shared Engine — contratos mínimos"
+        }
+      ]
+    },
+    {
+      "id": "reuse",
+      "title": "Reuso do Petunia3D",
+      "files": [
+        {
+          "path": "02-reuse/reuse-audit.md",
+          "title": "Auditoria técnica de reuso"
+        },
+        {
+          "path": "02-reuse/license-provenance.md",
+          "title": "Licenças e proveniência"
+        }
+      ]
+    },
+    {
+      "id": "tile-domain",
+      "title": "Tileset & Autoria",
+      "files": [
+        {
+          "path": "03-domain/tileset-tilemap-model.md",
+          "title": "Tilesets, TileRegion, TileBinding"
+        },
+        {
+          "path": "03-domain/placement-rules.md",
+          "title": "Workplane, snapping e placement"
+        }
+      ]
+    },
+    {
+      "id": "geometry",
+      "title": "Mesh & UV",
+      "files": [
+        {
+          "path": "04-geometry/tile-mesh-uv.md",
+          "title": "Mesh, FaceCorner UV e pixel art"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Ferramentas",
+      "files": [
+        {
+          "path": "05-tools/mvp-tools.md",
+          "title": "Ferramentas do MVP"
+        },
+        {
+          "path": "05-tools/post-mvp-tools.md",
+          "title": "V1/V2 — propostas condicionais"
+        }
+      ]
+    },
+    {
+      "id": "application",
+      "title": "Commands & Undo",
+      "files": [
+        {
+          "path": "06-application/commands-undo.md",
+          "title": "Commands, ToolSessions e Undo"
+        }
+      ]
+    },
+    {
+      "id": "ui",
+      "title": "UI, Viewport & Renderer",
+      "files": [
+        {
+          "path": "07-ui/workspaces-and-shell.md",
+          "title": "Slint — Shell, Palette e Work Surface"
+        },
+        {
+          "path": "07-ui/viewport-renderer.md",
+          "title": "OpenGL 3.3 — PoC e renderer"
+        }
+      ]
+    },
+    {
+      "id": "accessibility",
+      "title": "Acessibilidade & Neurodivergência",
+      "files": [
+        {
+          "path": "08-accessibility/accessibility-contract.md",
+          "title": "Acessibilidade, foco e neurodivergência"
+        }
+      ]
+    },
+    {
+      "id": "project",
+      "title": "Projeto & Persistência",
+      "files": [
+        {
+          "path": "09-project/project-format.md",
+          "title": "Projeto nativo, save e recovery"
+        }
+      ]
+    },
+    {
+      "id": "interchange",
+      "title": "Importação & Exportação",
+      "files": [
+        {
+          "path": "10-interop/export-pipeline.md",
+          "title": "GLB, OBJ, assets e games"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "title": "Qualidade & Performance",
+      "files": [
+        {
+          "path": "11-quality/testing-performance.md",
+          "title": "Testes, CI, performance e DoD"
+        }
+      ]
+    },
+    {
+      "id": "roadmap",
+      "title": "Roadmap MVP / V1",
+      "files": [
+        {
+          "path": "12-roadmap/milestones.md",
+          "title": "Roadmap, milestones e gates"
+        }
+      ]
+    },
+    {
+      "id": "dependencies",
+      "title": "Rust & Dependências",
+      "files": [
+        {
+          "path": "13-engineering/dependencies-rust.md",
+          "title": "Rust cru e dependências leves"
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "title": "Pesquisa & Concorrentes",
+      "files": [
+        {
+          "path": "14-research/competitive-landscape.md",
+          "title": "Crocotile3D, Blockbench e outras ferramentas"
+        }
+      ]
+    },
+    {
+      "id": "ideas",
+      "title": "Ideias para Discussão",
+      "files": [
+        {
+          "path": "15-ideas/opportunity-backlog.md",
+          "title": "Propostas de diferenciação — discutiremos"
+        }
+      ]
+    },
+    {
+      "id": "agents",
+      "title": "Code Agents & Prumo",
+      "files": [
+        {
+          "path": "16-agents/index.md",
+          "title": "Code Agents — comece aqui"
+        },
+        {
+          "path": "16-agents/reading-navigation.md",
+          "title": "Leitura, autoridade e contexto"
+        },
+        {
+          "path": "16-agents/implementation-protocol.md",
+          "title": "Protocolo para criar o novo produto"
+        },
+        {
+          "path": "16-agents/prompt-library.md",
+          "title": "Biblioteca de prompts"
+        },
+        {
+          "path": "16-agents/evidence-handoffs.md",
+          "title": "Evidências e handoffs"
+        },
+        {
+          "path": "16-agents/workforce-index.md",
+          "title": "Prumo — catálogo total (248 recursos)"
+        },
+        {
+          "path": "16-agents/agents-catalog.md",
+          "title": "Prumo — 39 Agents"
+        },
+        {
+          "path": "16-agents/recipes-catalog.md",
+          "title": "Prumo — 20 Recipes"
+        },
+        {
+          "path": "16-agents/skills-foundations.md",
+          "title": "Prumo Skills — Engenharia e Docs"
+        },
+        {
+          "path": "16-agents/skills-experience.md",
+          "title": "Prumo Skills — Acessibilidade e UX"
+        },
+        {
+          "path": "16-agents/skills-engine-graphics.md",
+          "title": "Prumo Skills — Engine e Render"
+        },
+        {
+          "path": "16-agents/skills-security-delivery.md",
+          "title": "Prumo Skills — Segurança"
+        },
+        {
+          "path": "16-agents/skills-languages-specialized.md",
+          "title": "Prumo Skills — Linguagens"
+        }
+      ]
+    }
+  ]
+}

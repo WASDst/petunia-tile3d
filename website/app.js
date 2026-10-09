@@ -20,11 +20,23 @@ let tocObserver = null;
 let keyboardResultIndex = -1;
 
 const domainIcons = {
-  architecture: "ph-compass",
-  core: "ph-cube",
-  engine: "ph-gear",
-  render: "ph-image-square",
-  ui: "ph-layout"
+  product: "ph-plant",
+  architecture: "ph-circles-three",
+  reuse: "ph-git-branch",
+  "tile-domain": "ph-grid-four",
+  geometry: "ph-cube",
+  tools: "ph-hammer",
+  application: "ph-gear",
+  ui: "ph-layout",
+  accessibility: "ph-person-arms-spread",
+  project: "ph-floppy-disk",
+  interchange: "ph-export",
+  quality: "ph-check-circle",
+  roadmap: "ph-map-trifold",
+  dependencies: "ph-code",
+  research: "ph-binoculars",
+  ideas: "ph-lightbulb",
+  agents: "ph-robot"
 };
 
 const THEME_STORAGE_KEY = "petunia-tile-docs-theme";
@@ -441,7 +453,7 @@ function enhanceRenderedMarkdown() {
       : currentPath;
     if (target && /\.json$/i.test(target)) {
       // The verified machine-readable workforce catalog is a static file, not an SPA page.
-      if (resolved === "16-code-agents/workforce-catalog.json") {
+      if (resolved === "16-agents/workforce-catalog.json") {
         link.href = "./docs/" + resolved;
       }
       return;

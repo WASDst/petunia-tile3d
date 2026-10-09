@@ -1,0 +1,46 @@
+# Petunia Tile3D — documentação canônica para agentes e humanos
+
+> New tile-first 3D editor, NOT Petunia3D refactor. This repo initially contains only documentation.
+> Repository https://github.com/WASDst/petunia-tile3d
+> Product website lives in website/; GitHub Pages/deploy not implied.
+> Never claim feature implemented without code and test evidence. Novel product ideas remain proposals.
+
+## Fast entrance
+- [AGENTS.md](https://github.com/WASDst/petunia-tile3d/blob/main/AGENTS.md): mandatory rules and repo boundaries.
+- [Home](docs/home.md): value proposition and chapter links.
+- [Product principles](docs/00-product/principles.md)
+- [Decision register](docs/00-product/decision-register.md)
+- [Module boundaries](docs/01-architecture/module-boundaries.md)
+- [Reuse audit Petunia3D](docs/02-reuse/reuse-audit.md)
+- [License and provenance](docs/02-reuse/license-provenance.md)
+- [Dependency-light Rust](docs/13-engineering/dependencies-rust.md)
+
+## Authoring and implementation
+- [Tilesets and binding model](docs/03-domain/tileset-tilemap-model.md)
+- [Placement and snapping](docs/03-domain/placement-rules.md)
+- [Mesh UV](docs/04-geometry/tile-mesh-uv.md)
+- [MVP tools](docs/05-tools/mvp-tools.md)
+- [Application Commands](docs/06-application/commands-undo.md)
+- [Slint Shell](docs/07-ui/workspaces-and-shell.md)
+- [OpenGL renderer PoC](docs/07-ui/viewport-renderer.md)
+- [Accessibility and neurodivergence](docs/08-accessibility/accessibility-contract.md)
+- [Project format](docs/09-project/project-format.md)
+- [Interoperability](docs/10-interop/export-pipeline.md)
+- [CI/quality](docs/11-quality/testing-performance.md)
+- [Roadmap](docs/12-roadmap/milestones.md)
+
+## Research and optional ideas (NOT approved features)
+- [Competitive landscape](docs/14-research/competitive-landscape.md)
+- [Software killer hypotheses](docs/15-ideas/opportunity-backlog.md)
+
+## Code agents
+- [Agent guide](docs/16-agents/index.md)
+- [Navigation](docs/16-agents/reading-navigation.md)
+- [Implementation](docs/16-agents/implementation-protocol.md)
+- [Prompt Library](docs/16-agents/prompt-library.md)
+- [Evidence](docs/16-agents/evidence-handoffs.md)
+- [Full Prumo workforce](docs/16-agents/workforce-index.md): 39 Agents, 189 Skills, 20 Recipes with direct official source links.
+- [Catalog JSON](docs/16-agents/workforce-catalog.json): versioned inventory.
+- [Manifest](docs/manifest.json): all site Markdown routes.
+
+Only documentation is committed. No desktop GUI, geometry, OpenGL or app commands exist until implemented and verified.
