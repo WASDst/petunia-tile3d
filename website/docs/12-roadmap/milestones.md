@@ -1,6 +1,6 @@
 # Roadmap e vertical slices
 
-> Sequência de desenvolvimento **proposta**, não compromissos de data. Critérios aceitos pelo usuário devem ser congelados em ADR/issue antes de programar.
+> Sequência de desenvolvimento sem datas de entrega. O usuário aprovou **incluir cinco funcionalidades** no roadmap (T3D-015..019); o MVP permanece concentrado no básico. Implementação, UX final e cronograma continuam sujeitos aos gates.
 
 ## Fase 0 — Docs + protótipos CPU
 
@@ -28,15 +28,26 @@
 
 - Block Brush robusto com Add/Erase validated; multi-face stamps.
 - Groups/Parts e Palette tags/favorites; copies e prefabs leves.
-- Explicit Rebind/Replace Tile; UV tool simples, Pixel Density Doctor.
+- [Surface Tile Stamp](../05-tools/surface-tile-stamp.md): aplicar TileRegion a faces com preview, preservando UV e orientação.
+- [Select/Replace Similar Tile](../05-tools/replace-similar-tiles.md): localizar ocorrências por binding, substituir em lote, um Undo.
+- [Tile Variations](../05-tools/tile-variations.md): variações de tiles com seeds determinísticas e preview estável.
+- [Pixel Density Doctor](../05-tools/pixel-density-doctor.md): relatório de densidade e reparos explícitos apenas quando viáveis.
+- Rebind manual e UV tool simples permanecem como suporte especializado, sem recriar um UV workspace completo.
 - Projeto portátil/recovery, OBJ, relink e atlas consistency.
 - Advanced shortcuts/help, tutorial em contexto e pipeline de release.
 
 **Critério:** cenas maiores mantêm boa interação em hardware modesto; problemas export identificáveis e corrigíveis.
 
-## Fase 3 — Diferenciais priorizados por usuários
+## Fase 3 — Construção contextual (V1+ aprovada)
 
-Hipóteses: regra simples de autotiling, material variations, template de telhado, sprite export, animated tile UV; só priorizar com evidência de necessidade, performance e complexidade.
+- [Smart Wall/Roof Brush](../05-tools/smart-wall-roof-brush.md): começar por **Wall Strip** de quads com grid/UV previsíveis, seguir com telhado básico em duas águas quando o primeiro vertical slice estiver validado.
+- Evitar graph procedural genérico e geometria implícita concorrente com Mesh: resultado é mesh normal + UV explícita, batch Command/Undo.
+
+**Gate:** casa com paredes e telhado texturizados construída com teclado e exportável, sem faces internas/duplicadas, com preview e cancel seguros.
+
+## Fase 4 — Outras hipóteses (ainda não aprovadas)
+
+Autotile contextual de cantos, additional roof presets, sprite export, animated UV tiles, texture editor embutido e outros somente após pesquisa/testes de usuário e nova decisão. [Backlog](../15-ideas/opportunity-backlog.md).
 
 ## Explicitamente não priorizar
 

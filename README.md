@@ -14,6 +14,7 @@ Novo produto da [WASD Studio](https://wasd.lat), tecnicamente relacionado ao [Pe
 - [Arquitetura e limites](website/docs/01-architecture/module-boundaries.md)
 - [Integração com Petunia3D](website/docs/02-reuse/reuse-audit.md)
 - [Ferramentas e fluxos](website/docs/05-tools/mvp-tools.md)
+- [Diferenciais aprovados para V1/V1+](website/docs/05-tools/post-mvp-tools.md): Surface Tile Stamp, Replace Similar, Tile Variations, Pixel Density Doctor e Smart Wall/Roof
 - [Acessibilidade](website/docs/08-accessibility/accessibility-contract.md)
 - [Research + ideias para discussão](website/docs/14-research/competitive-landscape.md)
 - [Code agents](AGENTS.md)

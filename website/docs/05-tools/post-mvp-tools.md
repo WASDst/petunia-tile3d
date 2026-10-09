@@ -1,30 +1,29 @@
-# Ferramentas pós-MVP — backlog condicionado
+# Ferramentas pós-MVP — funcionalidades aprovadas e demais hipóteses
 
-> **Não aprovadas como implementação imediata.** Propostas para V1/V2, alinhadas com pesquisas em [Comparativo](../14-research/competitive-landscape.md). Cada feature precisa validar demanda, adequação ao foco do produto, custo e compatibilidade.
+> **Situação:** cinco ferramentas aprovadas para **inclusão no roadmap**, mas nenhuma implementada. Esta decisão não adiciona complexidade ao MVP nem substitui os [gates de qualidade](../11-quality/testing-performance.md). Subfuncionalidades genéricas além das cinco continuam em análise.
 
-## V1 candidatas
+## Funcionalidades aprovadas
 
-**Tile Palette avançada:** variações por peso, favoritos, grupos, etiquetas, seletor de região irregular opcional. Complexidade pequena/média, mas requer modelo de seleção claro.
+| Funcionalidade | Fase proposta | Especificação | Dependency gate |
+|---|---|---|---|
+| **Surface Tile Stamp** | V1 | [Desenhar tiles diretamente em faces](./surface-tile-stamp.md) | FaceCorner UV, seleção de faces e undo |
+| **Select/Replace Similar Tile** | V1 | [Substituir tiles semelhantes](./replace-similar-tiles.md) | TileBinding/TileId e comandos atômicos |
+| **Tile Variations** | V1 | [Variações com seed determinística](./tile-variations.md) | Palette, TileRegion e placement IDs estáveis |
+| **Pixel Density Doctor** | V1 | [Diagnóstico de escala de pixels](./pixel-density-doctor.md) | geometria avaliada e UV + atlas size |
+| **Smart Wall/Roof Brush** | V1+ | [Wall Strip e telhado básico](./smart-wall-roof-brush.md) | Workplane, snapping e preview de geometry patch |
 
-**Surface Stamp:** selecione faces de mesh já existente e aplique TileRegion sem editar UV manualmente. Uso forte para pipeline vindo de Blockbench/Blender; detectar orientation, fit/preserve scale e seams. Evitar auto-reunwrap destrutivo.
+**Ordem não fixa:** ganho quick-win de Similar/Variants, compatibilidade de Surface Stamp, análise read-only de densidade e por último geração Wall/Roof. Antes de editar código, especificar vertical slice, testes, memória, licenças e acessibilidade. `Aprovado` não significa build pronto.
 
-**Tile Density Doctor:** analisa diferenças de pixels/mundo, stretched UV, overlap inesperado, bleeding risco, atlas out-of-bounds. Reparar apenas com preview e comando explícito.
+## Fluxos complementares que continuam como propostas
 
-**Macro Brush:** repetir tiles por linha/retângulo/padrão, com previsualização e edição numérica. Reuse GeometryPatch/batch transaction, sem scripting engine.
+- Tile Palette avançada: favoritos, tags, quick presets e grupos mais elaborados.
+- Macro Brush genérico, shape presets, material kits, custom TileRegion polygons.
+- Autotile por regras de vizinhança e cantos automáticos (não confundir com Wall/Roof básicos).
+- Asset Shelf e Prefab Quick Stamp de grupos.
+- Animated UV/tiles, sprite exporter, Atlas packing/repair, complex roofs/curved surfaces.
+- Editor de textura embutido (MVP: abrir externamente + reload).
+- Universal geometry generators, skinning e rigging: fora do foco inicial.
 
-**Autotile simples:** mapa de regras declarativas de vizinhança para tile top/side/corner em faces coplanares de grade. Evitar solver universal e dependência de ML.
+## Critérios de inclusão de novos recursos
 
-**Tile Variation Paint:** substituir aleatoriamente tiles por grupo com seed persistente/preview; seed determinística para exports reproduzíveis.
-
-**Asset Shelf:** pequeno catálogo reutilizável de grupos transformáveis e referências de atlas; pode começar como snapshots imutáveis.
-
-## Estudos separados
-
-- Animated UV/sprites: Crocotile3D já suporta; exige serialização de frames/tempo, renderer e export target semantics.
-- Sprite renderer: export planar isométrico ou spritesheet 4/8 direções; pipeline GPU/headless pode ser demorado.
-- Procedural roofs/stairs/fences: templates limitados, preview reversível, não um graph universal.
-- Semantic brushes (e.g., wall/window/door): só se a validação com usuários mostrar benefício ao invés de menus novos.
-
-## Critérios de promoção
-
-Só passa de proposta a backlog aprovado quando registrar: cenário real, número de passos poupados, custos de manutenção, avaliação com pessoa iniciante, suporte keyboard-only, riscos em geometry/UV e test plan, interação com existing tools e non-goals. Refusar recurso que exige produto inteiro adicional para ganho marginal.
+Cenário real, valor demonstrável, número de passos, interação por teclado, preview/Undo, respeito ao pixel scale, conservação dos dados, cenário de erro, testes, impacto do grafo de dependências e custo de manutenção. Ferramenta que exige outra engine ou muitos painéis para um caso simples deve ser redesenhada.

@@ -3,7 +3,7 @@
 > New tile-first 3D editor, NOT Petunia3D refactor. This repo initially contains only documentation.
 > Repository https://github.com/WASDst/petunia-tile3d
 > Product website lives in website/; GitHub Pages/deploy not implied.
-> Never claim feature implemented without code and test evidence. Novel product ideas remain proposals.
+> Never claim feature implemented without code and test evidence. Exactly five additional features are approved for roadmap (T3D-015..019), NOT implemented; other ideas remain proposals.
 
 ## Fast entrance
 - [AGENTS.md](https://github.com/WASDst/petunia-tile3d/blob/main/AGENTS.md): mandatory rules and repo boundaries.
@@ -20,6 +20,11 @@
 - [Placement and snapping](docs/03-domain/placement-rules.md)
 - [Mesh UV](docs/04-geometry/tile-mesh-uv.md)
 - [MVP tools](docs/05-tools/mvp-tools.md)
+- [Pixel Density Doctor — approved V1, unimplemented](docs/05-tools/pixel-density-doctor.md)
+- [Surface Tile Stamp — approved V1, unimplemented](docs/05-tools/surface-tile-stamp.md)
+- [Select/Replace Similar Tile — approved V1, unimplemented](docs/05-tools/replace-similar-tiles.md)
+- [Tile Variations — approved V1, unimplemented](docs/05-tools/tile-variations.md)
+- [Smart Wall/Roof Brush — approved V1+, unimplemented](docs/05-tools/smart-wall-roof-brush.md)
 - [Application Commands](docs/06-application/commands-undo.md)
 - [Slint Shell](docs/07-ui/workspaces-and-shell.md)
 - [OpenGL renderer PoC](docs/07-ui/viewport-renderer.md)
@@ -29,7 +34,7 @@
 - [CI/quality](docs/11-quality/testing-performance.md)
 - [Roadmap](docs/12-roadmap/milestones.md)
 
-## Research and optional ideas (NOT approved features)
+## Research and optional ideas (remaining ideas NOT approved)
 - [Competitive landscape](docs/14-research/competitive-landscape.md)
 - [Software killer hypotheses](docs/15-ideas/opportunity-backlog.md)
 

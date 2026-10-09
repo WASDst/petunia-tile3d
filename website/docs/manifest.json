@@ -77,6 +77,26 @@
         {
           "path": "05-tools/post-mvp-tools.md",
           "title": "V1/V2 — propostas condicionais"
+        },
+        {
+          "path": "05-tools/surface-tile-stamp.md",
+          "title": "Surface Tile Stamp — aprovado V1"
+        },
+        {
+          "path": "05-tools/replace-similar-tiles.md",
+          "title": "Select/Replace Similar — aprovado V1"
+        },
+        {
+          "path": "05-tools/tile-variations.md",
+          "title": "Tile Variations — aprovado V1"
+        },
+        {
+          "path": "05-tools/pixel-density-doctor.md",
+          "title": "Pixel Density Doctor — aprovado V1"
+        },
+        {
+          "path": "05-tools/smart-wall-roof-brush.md",
+          "title": "Smart Wall/Roof — aprovado V1+"
         }
       ]
     },

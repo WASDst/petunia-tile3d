@@ -2,7 +2,7 @@
 
 **Crie pequenos mundos tridimensionais a partir dos seus tilesets.** Uma ferramenta desktop especializada em desenhar superfícies e cenários 3D diretamente de texturas pixel art, sem obrigar o usuário a dominar UV mapping e modelagem complexa.
 
-> **Status:** produto novo, especificação inicial em construção (2026-10-09). A arquitetura-base deste caderno é recomendação para implementação; as funcionalidades diferenciadoras da pesquisa são **hipóteses para debate**, não promessas.
+> **Status:** produto novo, especificação em construção (2026-10-09). Cinco funcionalidades foram **aprovadas para o roadmap (V1/V1+)**, mas **nenhuma foi implementada**. Outras ideias permanecem em debate; arquitetura e UI detalhadas exigem protótipos e validação.
 
 ## Cinco compromissos
 
@@ -27,11 +27,12 @@
 - [Domínio tileset e autoria](./03-domain/tileset-tilemap-model.md)
 - [Geometry e UV](./04-geometry/tile-mesh-uv.md)
 - [Ferramentas MVP](./05-tools/mvp-tools.md) e [fluxos UX](./07-ui/workspaces-and-shell.md)
+- **Novas ferramentas aprovadas:** [Surface Tile Stamp](./05-tools/surface-tile-stamp.md) · [Replace Similar](./05-tools/replace-similar-tiles.md) · [Tile Variations](./05-tools/tile-variations.md) · [Pixel Density Doctor](./05-tools/pixel-density-doctor.md) · [Smart Wall/Roof](./05-tools/smart-wall-roof-brush.md)
 - [Acessibilidade e neurodivergência](./08-accessibility/accessibility-contract.md)
 - [Formatos e pipeline](./09-project/project-format.md)
 - [Qualidade, testes e performance](./11-quality/testing-performance.md)
 - [Roadmap](./12-roadmap/milestones.md)
-- [Pesquisa concorrencial](./14-research/competitive-landscape.md) e [backlog de hipóteses](./15-ideas/opportunity-backlog.md)
+- [Pesquisa concorrencial](./14-research/competitive-landscape.md) e [backlog: aprovadas versus hipóteses](./15-ideas/opportunity-backlog.md)
 - [Guia para code agents](./16-agents/index.md)
 
 ## Fora de escopo por padrão
