@@ -6,7 +6,7 @@
 
 O `Cargo.toml` da [branch Petunia3D analisada](https://github.com/WASDst/petunia3d/blob/refactor/architecture-foundation/Cargo.toml) especifica `license = "GPL-3.0-or-later"`. O repositório tem [LICENSE GPLv3](https://github.com/WASDst/petunia3d/blob/refactor/architecture-foundation/LICENSE). Portanto copiar parte relevante de código não é "copiar livremente sem obrigações".
 
-O Petunia Tile3D é repositório separado e **não recebeu licença própria nesta entrega documental**; não declarar open-source aprovado ou redistribuir sem decisão do detentor de direitos.
+O código do **futuro aplicativo Rust** ainda não recebeu uma licença própria; não declarar suas crates como licenciadas ou redistribuí-las sem decisão do detentor de direitos. O **website/documentação** já contém código adaptado sob GPL-3.0-or-later, com [licença local](../../LICENSE) e [proveniência](../../NOTICE.md).
 
 ## Caminhos viáveis (decidir)
 

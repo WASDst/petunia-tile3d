@@ -17,3 +17,7 @@ Publicação: servir `website/` como diretório estático. Nenhuma implantação
 
 ## Fonte e direitos
 Estrutura visual/roteamento adaptados do website Petunia3D; não copiar docs de refatoração como se fossem requisitos deste produto. Consulte `docs/02-reuse/license-provenance.md`.
+
+## Licença e origem
+
+O website e seus documentos são **GPL-3.0-or-later**, seguindo a licença do website Petunia3D do qual esta implementação de site deriva: [LICENSE](./LICENSE), [NOTICE](./NOTICE.md). O licenciamento do futuro editor desktop é **decisão ainda pendente** e deve ser tratado separadamente.

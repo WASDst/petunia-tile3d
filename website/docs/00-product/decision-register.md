@@ -16,7 +16,7 @@
 | T3D-010 | Acessibilidade | requisito | teclado completo, foco, UI scale, contraste, cognitive clarity |
 | T3D-011 | Escopo MVP | proposta detalhada | importar PNG, palette, quad/sticky/block, seleção/transform, save/export |
 | T3D-012 | Features diferenciadoras | em discussão | priorizadas por pesquisa; nenhuma automaticamente aprovada |
-| T3D-013 | Licença | PENDENTE | compatibilidade GPL Petunia3D e atribuições antes de copiar código |
+| T3D-013 | Licença do aplicativo | PENDENTE | crates Rust futuras sem licença definida; **website GPL-3.0-or-later** com proveniência documentada |
 | T3D-014 | Code ownership/release | baseline | repositório e versionamento próprios; CI independente |
 
 ## Como alterar decisão
