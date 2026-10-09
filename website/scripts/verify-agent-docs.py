@@ -61,9 +61,9 @@ def check() -> None:
             if not file.is_relative_to(DOCS.resolve()) or not file.is_file():
                 fail(f"Missing or unsafe route: {route}")
 
-    group = next((d for d in domains if d["id"] == "code-agents"), None)
+    group = next((d for d in domains if d["id"] == "agents"), None)
     if not group:
-        fail("Missing code-agents domain")
+        fail("Missing agents domain")
         return
     agent_pages = [DOCS / e["path"] for e in group["files"]]
     if len(agent_pages) != 13:
