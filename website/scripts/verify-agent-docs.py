@@ -66,8 +66,8 @@ def check() -> None:
         fail("Missing agents domain")
         return
     agent_pages = [DOCS / e["path"] for e in group["files"]]
-    if len(agent_pages) != 13:
-        fail(f"Expected 13 agent pages, got {len(agent_pages)}")
+    if len(agent_pages) != 14:
+        fail(f"Expected 14 agent pages, got {len(agent_pages)}")
 
     catalog_path = DOCS / "16-agents" / "workforce-catalog.json"
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
@@ -137,7 +137,7 @@ def check() -> None:
         fail("Root AGENTS.md missing")
 
     if not REPORT:
-        print(f"PASS: {len(routes)} site routes, 13 agent pages, "
+        print(f"PASS: {len(routes)} site routes, 14 agent pages, "
               f"{len(seen['agents'])} agents / {len(seen['skills'])} skills / "
               f"{len(seen['recipes'])} recipes, links/catalog consistent")
 

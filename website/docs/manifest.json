@@ -209,6 +209,10 @@
           "title": "Evidências e handoffs"
         },
         {
+          "path": "16-agents/agent-orchestration.md",
+          "title": "Orquestração, roles e permissions"
+        },
+        {
           "path": "16-agents/workforce-index.md",
           "title": "Prumo — catálogo total (248 recursos)"
         },
