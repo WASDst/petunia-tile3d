@@ -64,5 +64,5 @@ No centro do projeto existe um caminho: **tileset → face → snap → parede �
   <span>COMECE POR AQUI</span>
   <a href="#/docs/00-product/decision-register.md">Decisões e pendências ↗</a>
   <a href="#/docs/05-tools/mvp-tools.md">Ferramentas da PoC ↗</a>
-  <a href="#/docs/07-ui/imgui-ecosystem.md">ImGui e extensões ↗</a>
+  <a href="#/docs/07-ui/imgui-stack-complete.md">Stack profissional de ImGui ↗</a>
 </div>

@@ -15,11 +15,11 @@
 - SDL3 ou GLFW para plataforma.
 - OpenGL3 ou WGPU para o renderer; Vulkan poderá ser avaliado, mas não é requisito.
 - Multi-viewport nativo em múltiplas janelas do SO e comportamento sob Wayland/X11.
-- Biblioteca de gizmo, file browser, texture inspector, gráficos, icon pack e automação.
+- Integração exata das bibliotecas de gizmo, file browser, texture inspector, gráficos, icon pack e automação (stack arquitetural definida, ainda não integradas).
 - Alternativa para acessibilidade semântica; teclado apenas é insuficiente.
 
 ## Teste mínimo obrigatório
 
 Renderizar atlas nearest + viewport 3D em textura GPU dentro de DockSpace; criar Palette e Inspector; arrastar, dividir, tabular, redimensionar e persistir/restaurar layout; alternar foco, Tab/F6 e interagir com campo numérico; validar capture de input e 100–200% scale Windows/Linux. Tentar multi-viewport externo separadamente.
 
-[Catálogo de addons e bridges](./imgui-ecosystem.md) · [Arquitetura do viewport](./viewport-renderer.md).
+[Stack completa de longo prazo](./imgui-stack-complete.md) · [Catálogo de addons e bridges](./imgui-ecosystem.md) · [Componentes Odin](./ui-component-contracts.md) · [Próxima decisão: renderer](../13-engineering/graphics-backend-decision.md).

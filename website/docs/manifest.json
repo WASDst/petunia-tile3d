@@ -123,8 +123,16 @@
           "title": "Componentes, estados e foco"
         },
         {
+          "path": "07-ui/ui-component-contracts.md",
+          "title": "Componentes, estado e identidade Odin"
+        },
+        {
           "path": "07-ui/viewport-renderer.md",
           "title": "Viewport raylib — PoC"
+        },
+        {
+          "path": "07-ui/imgui-stack-complete.md",
+          "title": "Stack ImGui completa — MVP ao futuro"
         },
         {
           "path": "07-ui/gui-options.md",
@@ -197,6 +205,10 @@
         {
           "path": "13-engineering/odin-conformance.md",
           "title": "Conformance e testes Odin"
+        },
+        {
+          "path": "13-engineering/graphics-backend-decision.md",
+          "title": "Próxima decisão — SDL3 e renderer"
         }
       ]
     },

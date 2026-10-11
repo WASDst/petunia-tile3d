@@ -47,3 +47,7 @@ Esses comandos são **planejamento da estrutura**, não evidência de que o repo
 ## Bibliotecas para próxima conversa
 
 [Decisão ImGui](../07-ui/gui-options.md) e [catálogo de addons](../07-ui/imgui-ecosystem.md). Escolher o backend de plataforma e renderer e testar o DockSpace antes de incluir extensões.
+
+## Stack de UI prevista para evolução
+
+Consultar [Stack completa de Dear ImGui](../07-ui/imgui-stack-complete.md) e [contratos de componentes](../07-ui/ui-component-contracts.md). O produto se prepara para ImGuizmo, ImPlot, atlas/UV, nodes, timeline, code editor e testes sem instalar todo addon na PoC. A próxima escolha é [SDL3 + renderer](./graphics-backend-decision.md); **OpenGL3 é recomendação para discussão, não aprovação**.
