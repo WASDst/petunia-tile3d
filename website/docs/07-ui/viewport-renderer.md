@@ -1,6 +1,6 @@
-# Viewport e renderização — hipótese raylib
+# Viewport e renderização — integração Dear ImGui
 
-> Render gráfico **ainda não implementado**. A PoC candidata usa vendor:raylib; não fixamos um backend de produção.
+> Render gráfico **ainda não implementado**. Dear ImGui com DockSpace é obrigatório; renderer e plataforma permanecem sob avaliação (SDL3 + OpenGL3 é candidato ao spike).
 
 ## Render path
 
@@ -9,12 +9,12 @@ Document (faces + atlas references)
     ↓ evaluate after revision
 RenderSnapshot (triângulos, UV, materiais, seleção)
     ↓ grouping by texture + dirty region
-raylib adapter (draw/update GPU buffers)
+renderer adapter (OpenGL3/WGPU; draw/update GPU buffers)
     ↓
 Viewport + overlay de grid/snap/selection + UI
 ~~~
 
-Não gravar handles raylib, GPU memory, texture IDs ou camera handles no documento. Descartar RenderSnapshot e reconstruir a partir do documento deve preservar o resultado.
+Não gravar handles da GUI, OpenGL/WGPU, GPU memory, texture IDs ou camera handles no documento. Descartar RenderSnapshot e reconstruir a partir do documento deve preservar o resultado.
 
 ## Primeiras exigências
 
@@ -28,7 +28,7 @@ Não gravar handles raylib, GPU memory, texture IDs ou camera handles no documen
 
 ## Critérios para trocar renderer
 
-Se a PoC exigir GUI docking profunda, melhor pipeline de GPU, offscreen viewport ou integrações específicas, medir alternativas SDL3 + WGPU (Odin vendor) e backends OpenGL sem comprometer as estruturas de geometry/app.
+A viewport será desenhada para framebuffer/textura GPU e exibida dentro de uma janela dockável ImGui. Validar resize, DPI, pointer coordinates, captura input, janela flutuante, contextos GL e caching. Compare SDL3+OpenGL3 e WGPU apenas por teste real, sem alterar geometry/app.
 
 ## Anti-objetivos
 

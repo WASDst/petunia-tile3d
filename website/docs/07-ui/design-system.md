@@ -26,4 +26,4 @@ Painéis não executam mutações diretamente. Consumir UiIntent → Command. Er
 
 ## Gates
 
-Verificar em 1366×768 e com 200% de UI Scale. Teclado-only e teclado remapeado. Leitor de tela deve ser demonstrado com biblioteca candidata; não prometer compatibilidade que o toolkit não fornece.
+Verificar em 1366×768 e com 200% de UI Scale. Teclado-only e teclado remapeado. Leitor de tela deve ser demonstrado ou permanecer registrado como lacuna do Dear ImGui; não prometer compatibilidade que o toolkit não fornece.

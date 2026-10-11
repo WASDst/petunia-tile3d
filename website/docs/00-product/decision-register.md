@@ -6,8 +6,8 @@
 |---|---|---|---|
 | T3D-001 | Produto | **Aprovado** | Produto independente em WASDst/petunia-tile3d; não migrar Petunia3D |
 | T3D-002 | Linguagem | **Aprovado para PoC** | Odin como linguagem principal e única do protótipo |
-| T3D-003 | Janela/3D inicial | **Provisório** | vendor:raylib para minimizar setup; medir limites |
-| T3D-004 | GUI final | **Pendente de estudo conjunto** | Não fixar ImGui, microui, Loom, Skald ou SDL3/WGPU agora |
+| T3D-003 | Janela/3D inicial | **Em reavaliação** | Raylib permanece referência histórica da PoC; escolher plataforma/renderer para compor ImGui, SDL3+OpenGL3 candidato |
+| T3D-004 | GUI | **APROVADO 11/10/2026** | Dear ImGui com **docking completo desde a primeira versão**, via binding Odin; Capati é candidato preferencial a teste |
 | T3D-005 | Dados | **Aprovado** | TileRegion + faces reais + UV por canto + provenance de tile |
 | T3D-006 | Estado | **Aprovado** | Single-writer, Commands, Undo transacional, previews isolados |
 | T3D-007 | Persistência | **Proposta para PoC** | JSON versionado; save atômico; textures relativas ao projeto |
@@ -23,6 +23,8 @@
 | T3D-017 | Select/Replace Similar | **Aprovada para V1** | Batch com preview/contagem e um Undo, não implementado |
 | T3D-018 | Smart Wall/Roof | **Aprovada para V1+** | Wall primeiro; Roof após contratos geométricos, não implementado |
 | T3D-019 | Tile Variations | **Aprovada para V1** | Variantes determinísticas versionadas, não implementado |
+| T3D-020 | Multi-viewport OS | **Pendente de validação** | Docking interno é obrigatório; painéis em janelas nativas independentes exigem teste SDL3/GL e Wayland |
+| T3D-021 | Addons | **Pesquisa, não aprovação** | ImGuizmo, ImPlot, ImGuiFileDialog, TexInspect e outros são candidatos conforme catálogo |
 
 ## O que está implementado?
 
@@ -34,4 +36,4 @@ Registrar o problema, alternativas, trade-offs, evidência, implicações de ace
 
 ## Próxima decisão compartilhada
 
-Confrontar bibliotecas de GUI nativas e interoperáveis de Odin com o protótipo de raylib: docking, acessibilidade, input, viewport, distribuição e custo de manutenção. Ver [estudo de GUI](../07-ui/gui-options.md).
+Validar **Capati/odin-imgui + docking** com a plataforma/renderizador ainda a escolher e identificar a estratégia de acessibilidade semântica. Ver [decisão](../07-ui/gui-options.md) e [catálogo de extensões](../07-ui/imgui-ecosystem.md).

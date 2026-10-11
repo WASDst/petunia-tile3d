@@ -14,8 +14,8 @@
 ## Estado e stack
 
 - **Editor a criar:** Odin nativo, tile-first e offline-first, Windows/Linux. Não é migração do Petunia3D.
-- **PoC inicial:** vendor:raylib é baseline **provisória** para janela, input e 3D. Domínio sem dependência de raylib.
-- **GUI futura:** EM ESTUDO. Dear ImGui, microui, Loom, Skald, SDL3/WGPU e outras serão discutidas sem decisão antecipada.
+- **GUI aprovada 11/10/2026:** Dear ImGui com **docking completo desde o primeiro vertical slice**. Capati/odin-imgui é candidato preferencial aos testes de integração, sem declarar compilação validada.
+- **Plataforma/renderer:** ainda não escolhidos; SDL3 + OpenGL3 é candidato ao primeiro spike. Raylib não é mais a arquitetura obrigatória da GUI, mas pode servir a experiências isoladas. Addons dependem de ADR/testes.
 - **Não implementado:** não declarar o editor, GUI, geometria, export ou testes concluídos sem código e evidência verificáveis.
 - **Licença de aplicativo:** pendente. O website derivado tem GPL-3.0-or-later.
 
@@ -45,7 +45,7 @@
 
 1. Confirmar repositório, branch, SHA e fonte canônica relevante.
 2. Mapear observado vs planejado: COMPLIANT, PARTIAL, MISSING, BROKEN e testes.
-3. Implementar a menor fatia vertical, sem desviar para GUI definitiva.
+3. Implementar a menor fatia vertical, sem substituir ou contornar Dear ImGui/docking aprovado.
 4. Validar formato/compilação/testes em Odin disponíveis, UV, export e a11y manual. NÃO alegar gates que não rodaram.
 5. Atualizar página do domínio, decisão e evidência; revisão, SHA, riscos, próximo passo.
 6. Não alterar WASDst/petunia3d nem outros repositórios por implicação.

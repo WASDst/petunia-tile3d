@@ -7,19 +7,19 @@
 | Necessidade | Escolha | Estado |
 |---|---|---|
 | Linguagem e build | [Odin](https://odin-lang.org/) e odin build/test | Definido para PoC |
-| Janela/câmera/input/3D | [vendor:raylib](https://pkg.odin-lang.org/vendor/raylib/) | Candidato inicial |
+| Janela e eventos | vendor:SDL3 ou GLFW | **Pendente de teste**; SDL3 é candidato inicial com ImGui |
 | Matemática | core:math, structs e vetores Odin | Preferencial |
 | Mesh, TileRegion, UV, Commands | implementação própria | Contrato definido |
-| Leitura PNG / textura | raylib no experimento; validar limites | Candidato |
+| Leitura PNG / textura | decoder próprio de plataforma ou vendor adequado | Escolha pendente; manter o domínio isolado |
 | JSON | core:encoding/json e schema versionado | Candidato |
 | OBJ/MTL | writer pequeno próprio com validação | Candidato |
-| GUI full/editor | ainda NÃO escolhida | Estudo aberto |
+| GUI editor | [Capati/odin-imgui](https://github.com/Capati/odin-imgui), Dear ImGui docking | **ImGui/docking aprovados**; binding específico condicionado a build |
 | GLB | vendor:cgltf como referência; writer futuro a avaliar | Pós-PoC |
-| GPU moderna | vendor:wgpu / SDL3 conforme necessidade | Alternativa futura |
+| GPU | OpenGL3 ou WGPU via backend ImGui | **Pendente**; OpenGL3 recomendado ao spike inicial |
 
-## Por que raylib?
+## Por que Dear ImGui agora?
 
-O compilador Odin distribui bindings para raylib, incluindo renderização 3D, janela, input e carregamento de textura; reduz o tempo até a primeira cena. O adapter raylib fica fora de geometry/document. Não significa que raylib fornecerá docking, accessibility tree ou widgets profissionais.
+O escopo passou a exigir **docking completo imediatamente**. Dear ImGui possui essa infraestrutura; raylib sozinho não entrega o mesmo shell. Podemos usá-lo em experimentos independentes, mas a arquitetura da aplicação precisa de um platform/render backend integrado com ImGui. SDL3+OpenGL3 é candidato de menor complexidade, não decisão final. Consulte [estudo de addons](../07-ui/imgui-ecosystem.md).
 
 ## Linguagem / padrões
 
@@ -46,4 +46,4 @@ Esses comandos são **planejamento da estrutura**, não evidência de que o repo
 
 ## Bibliotecas para próxima conversa
 
-[GUI shortlist](../07-ui/gui-options.md) inclui raylib minimal, Dear ImGui docking, microui, Loom, Skald e SDL3/WGPU. Comparar evidencia e custo para acessibilidade, não escolher por popularidade.
+[Decisão ImGui](../07-ui/gui-options.md) e [catálogo de addons](../07-ui/imgui-ecosystem.md). Escolher o backend de plataforma e renderer e testar o DockSpace antes de incluir extensões.
