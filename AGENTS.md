@@ -15,9 +15,10 @@
 
 - **Editor a criar:** Odin nativo, tile-first e offline-first, Windows/Linux. Não é migração do Petunia3D.
 - **GUI aprovada 11/10/2026:** Dear ImGui com **docking completo desde o primeiro vertical slice**. Capati/odin-imgui é candidato preferencial aos testes de integração, sem declarar compilação validada.
-- **Plataforma/renderer:** ainda não escolhidos; SDL3+OpenGL3 é **recomendação para discussão**, alternativas SDL3+SDL_GPU3 e SDL3+WGPU. Ver website/docs/13-engineering/graphics-backend-decision.md. Raylib não é mais a arquitetura obrigatória da GUI.
+- **Plataforma/renderer APROVADOS em 11/10/2026:** SDL3 + OpenGL 3.3 Core (GLSL 330, FBO offscreen, ImGui SDL3/OpenGL3). T3D-023. SDL_GPU/WGPU somente possibilidades futuras; raylib não é baseline.
 - **Stack profissional aprovada como plano, não instalada:** PanelRegistry, UiIntent, InputRouter, ThemeTokens, FocusRegistry e extensões encapsuladas. Ver website/docs/07-ui/imgui-stack-complete.md e ui-component-contracts.md; addons são opcionais e exigem ABI/versão/licença/teste.
-- **Não implementado:** não declarar o editor, GUI, geometria, export ou testes concluídos sem código e evidência verificáveis.
+- **Não implementado:** não declarar o editor, GUI, renderer, geometria, export ou testes concluídos sem código e evidência verificáveis.
+- **Documentos prioritários para renderização:** website/docs/13-engineering/sdl3-opengl3-integration.md, website/docs/07-ui/viewport-framebuffer-contract.md, website/docs/07-ui/imguizmo-integration.md, website/docs/11-quality/graphics-compatibility-matrix.md. ImGuizmo/cimguizmo é candidato ainda não compilado; usar ToolSession/Command, não mutar Document por frame.
 - **Licença de aplicativo:** pendente. O website derivado tem GPL-3.0-or-later.
 
 ## Regras arquiteturais

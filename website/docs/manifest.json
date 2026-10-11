@@ -128,7 +128,15 @@
         },
         {
           "path": "07-ui/viewport-renderer.md",
-          "title": "Viewport raylib — PoC"
+          "title": "Viewport OpenGL3 — visão geral"
+        },
+        {
+          "path": "07-ui/viewport-framebuffer-contract.md",
+          "title": "Viewport — FBO, DPI, ImTextureRef"
+        },
+        {
+          "path": "07-ui/imguizmo-integration.md",
+          "title": "ImGuizmo — gizmos e Undo"
         },
         {
           "path": "07-ui/imgui-stack-complete.md",
@@ -181,6 +189,10 @@
         {
           "path": "11-quality/testing-performance.md",
           "title": "Testes, CI, performance e DoD"
+        },
+        {
+          "path": "11-quality/graphics-compatibility-matrix.md",
+          "title": "Compatibilidade GPU — Windows/Linux"
         }
       ]
     },
@@ -208,7 +220,11 @@
         },
         {
           "path": "13-engineering/graphics-backend-decision.md",
-          "title": "Próxima decisão — SDL3 e renderer"
+          "title": "T3D-023 — SDL3/OpenGL3 aprovado"
+        },
+        {
+          "path": "13-engineering/sdl3-opengl3-integration.md",
+          "title": "SDL3/OpenGL3 — bootstrap e GL"
         }
       ]
     },
