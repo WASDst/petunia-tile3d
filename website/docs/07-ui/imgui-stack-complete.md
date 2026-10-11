@@ -1,6 +1,6 @@
 # Stack de interface — Dear ImGui em Odin, do MVP às ferramentas futuras
 
-> **Especificação de arquitetura 11/10/2026.** O usuário aprovou **Dear ImGui + docking completo desde o início** e pediu uma stack auxiliar capaz de sustentar a evolução da GUI. Este documento escolhe a **organização da stack e os pontos de extensão**; **não** afirma que bibliotecas auxiliares foram integradas, que o backend foi escolhido ou que o editor já existe.
+> **Especificação de arquitetura 11/10/2026.** O usuário aprovou **Dear ImGui + docking completo desde o início** e pediu uma stack auxiliar capaz de sustentar a evolução da GUI. Este documento escolhe a **organização da stack e os pontos de extensão**; **não** afirma que bibliotecas auxiliares foram integradas, que o editor já existe. **Atualização de 11/10/2026:** SDL3 + OpenGL 3.3 Core foram aprovados.
 
 ## Princípio: stack completa ≠ incluir dezenas de dependências na PoC
 
@@ -20,8 +20,8 @@ Reservamos contratos e interfaces para tecnologias com alto potencial, mas só l
 | GUI/docking | Dear ImGui docking | A | DockSpace, janelas/abas/divisões/floating interno, salvar e restaurar layouts |
 | Binding Odin | [Capati/odin-imgui](https://github.com/Capati/odin-imgui) | R | Declara ImGui 1.92.9b-docking, dear_bindings e backends SDL3, OpenGL, WGPU, Vulkan |
 | Geração FFI | [dear_bindings](https://github.com/dearimgui/dear_bindings), [cimgui](https://github.com/cimgui/cimgui) | R | Um conjunto consistente de ABI e gerações; não misturar versões |
-| Plataforma, eventos, clipboard, IME | [vendor:sdl3](https://pkg.odin-lang.org/vendor/sdl3/) | R | Compatível com backends oficiais e diálogos nativos; validar Linux/Windows |
-| GPU/renderer | OpenGL3 / SDL_GPU3 / WGPU | P — próxima decisão | Contrato GPU próprio; offscreen framebuffer renderizado em ImGui |
+| Plataforma, eventos, clipboard, IME | [vendor:sdl3](https://pkg.odin-lang.org/vendor/sdl3/) | A | Compatível com backends oficiais e diálogos nativos; validar Linux/Windows |
+| GPU/renderer | OpenGL 3.3 Core / GLSL 330 | A | FBO offscreen + color texture mostrada no ImGui |
 | Layout persistence | ImGui ini + schema Tile3D | A | Separar dock layout do projeto autoral; versionar presets; recovery seguro |
 | Multi-viewport OS | ImGui ViewportsEnable + backend | P | Requer validação real sob X11/Wayland, monitores DPI heterogêneos e GL context |
 | Janelas e diálogos | SDL3 Native Dialog | R | Preferir UI nativa; [NFD Extended](https://github.com/btzy/nativefiledialog-extended) como fallback |
@@ -115,7 +115,7 @@ Design tokens no Odin: spacing, typography, color, semantic states, radius, shad
 
 | Marco | Dependências e integração real | Contratos preparados para crescer |
 |---|---|---|
-| F0 — Shell | Odin + Capati/odin-imgui + platform/renderer **a decidir**; docking, demo, viewport-texture, atlas dummy, focus e INI | UiIntent, PanelRegistry, InputRouter, ThemeTokens, RenderTexture |
+| F0 — Shell | Odin + Capati/odin-imgui + **SDL3/OpenGL3 aprovados** (binding a testar); docking, demo, viewport-texture, atlas dummy, focus e INI | UiIntent, PanelRegistry, InputRouter, ThemeTokens, RenderTexture |
 | F1 — Modeling MVP | ImGuizmo **se validado**, SDL3 file dialog, PNG, atlas nearest, numeric inputs, panels/command palette | TileRegion, UV, Tools, Undo, keyboard support |
 | F2 — Tile V1 | ImGuiTexInspect **se poupar código**; overlays e diagnósticos Odin; opcional ImPlot | Tile variations, Similar, Pixel Density Doctor, UI sem novo workspace obrigatório |
 | F3 — Professional | Node graph, curves, timeline, scripting editor **apenas sob demanda** | GraphDomain, AnimationDomain, ScriptDomain independentes de ImGui |
@@ -123,6 +123,6 @@ Design tokens no Odin: spacing, typography, color, semantic states, radius, shad
 
 **Não existe obrigação de incluir cada addon.** Contratos e seleção futura fazem parte da stack, dependências instaladas só entram após verificação.
 
-## I. Próxima decisão
+## I. Decisão fechada e evolução
 
-[ADR de plataforma e renderer](../13-engineering/graphics-backend-decision.md): escolher entre **SDL3 + OpenGL3**, **SDL3 + SDL_GPU3** e **SDL3 + WGPU**, com critérios de docking e multi-viewport, hardware modesto, integração com ImGuizmo, export de texturas GPU e Linux/Windows. Ainda **não** aprovada.
+**SDL3 + OpenGL3 aprovado**, não compilado. Ver [ADR](../13-engineering/graphics-backend-decision.md), [bootstrap GL3](../13-engineering/sdl3-opengl3-integration.md), [FBO](./viewport-framebuffer-contract.md) e [ImGuizmo](./imguizmo-integration.md). Próxima discussão: coordenadas, handedness, unidades, câmera e regras de snapping.

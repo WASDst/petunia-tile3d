@@ -7,7 +7,7 @@
       <a class="hero-primary" href="#/docs/12-roadmap/milestones.md">Explorar o roadmap <span aria-hidden="true">↗</span></a>
       <a class="hero-secondary" href="#/docs/01-architecture/module-boundaries.md">Arquitetura Odin →</a>
     </div>
-    <div class="hero-meta"><span>● Em especificação</span><span>Odin + Dear ImGui</span><span>ImGui docking</span></div>
+    <div class="hero-meta"><span>● Em especificação</span><span>Odin + SDL3/OpenGL3 + ImGui</span><span>ImGui docking</span></div>
   </div>
   <div class="hero-visual" aria-label="Ilustração conceitual: tiles coloridos organizados em um pequeno objeto tridimensional">
     <div class="visual-bar"><span class="visual-lights">● ● ●</span><span>tile3d / viewport</span><span>◎</span></div>

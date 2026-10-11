@@ -11,7 +11,7 @@ ui_model (PanelId, UiIntent, Focus, Preset, CommandRegistry, Theme)
   ↓
 ui_components (TilePalette, Viewport, Outliner, Inspector, History...)
   ↓ ImGui adapter / widget wrappers (Odin/C FFI)
-platform + graphics (SDL3, renderer ainda pendente)
+platform + graphics (SDL3 + OpenGL 3.3 Core aprovados)
 ~~~
 
 A GUI só recebe ponteiros temporários do estado de apresentação; estado documental e commands devem ser referenciados por IDs estáveis e revisões, não ImGuiID.

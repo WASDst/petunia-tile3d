@@ -1,6 +1,22 @@
-# PRÓXIMA DECISÃO — plataforma SDL3 e backend de renderização
+# T3D-023 — SDL3 + OpenGL3 APROVADO
 
-> Em discussão. **Dear ImGui + docking completo já estão aprovados**. Esta página apresenta alternativas e recomendação técnica; **nenhum backend foi aprovado nem implementado** em 11/10/2026.
+> **Aprovado pelo responsável em 11/10/2026.** Odin + SDL3 para janela/input e OpenGL **3.3 Core Profile** (GLSL 330) para viewport 3D, integrado ao Dear ImGui docking. Especificação, **não compilado ou testado**. O comparativo a seguir é histórico, não decisão em aberto.
+
+## Resultado e consequências
+
+- Backends ImGui `imgui_impl_sdl3` + `imgui_impl_opengl3`. Candidato Odin: Capati/odin-imgui, condicionado a build no Windows/Linux.
+- RenderScene GL3 em FBO (color texture RGBA8 + depth), apresentado por ImGui Image. A partir do ImGui 1.92, respeitar **ImTextureRef**.
+- DockSpace completo dentro da janela, layouts salvos. Multi-viewport nativo do SO não obrigatório, especialmente Wayland.
+- ImGuizmo/cimguizmo **recomendado**; integração e API C ainda não verificadas em código do projeto.
+- Alternativas SDL_GPU3 e WGPU não farão parte da primeira implementação; podem ser estudadas futuramente, sem promessa de migração barata.
+- Falha em criar GL3.3 Core gera diagnóstico, não fallback silencioso para GL2.
+
+**Implementação especificada:** [Ciclo SDL3/GL3](./sdl3-opengl3-integration.md) · [Viewport/FBO](../07-ui/viewport-framebuffer-contract.md) · [ImGuizmo](../07-ui/imguizmo-integration.md) · [Compatibilidade](../11-quality/graphics-compatibility-matrix.md).
+
+---
+
+## Comparação histórica que precedeu a aprovação
+
 
 ## Escopo correto
 
@@ -38,7 +54,7 @@ Docking interno pode e deve funcionar sem janelas OS extras. Janelas nativas flu
 
 O upstream [documenta que Wayland não fornece posicionamento arbitrário](https://github.com/ocornut/imgui/wiki/Multi-Viewports); existe investigação em 2026 sobre mitigação com xdg-toplevel-drag e melhorias do backend. Isso **não prova** suporte geral. Nunca bloquear a GUI principal nessa feature.
 
-## Minha recomendação técnica para decidir juntos
+## Alternativas anteriormente avaliadas
 
 **Proposta A — SDL3 + OpenGL3 na primeira versão:** menor risco para o primeiro viewport e excelente base para testar todos os comportamentos ImGui/docking. Criar RenderBackend interface própria que aceite snapshot, texture/resize e GPU resource lifetime; avaliar SDL_GPU3 ou WGPU depois **somente se exigir benefícios concretos**. Isso não significa que trocar o renderer é gratuito: shaders, buffers, pipelines, sync e formatos de textura exigem implementação independente.
 
@@ -58,7 +74,7 @@ O upstream [documenta que Wayland não fornece posicionamento arbitrário](https
 - Distribuição Windows/Linux, bibliotecas nativas, licenças, versões de compilador e builds reproduzíveis.
 - Registrar **PASS/FAIL/BLOCKED/NOT RUN**, versões e SHA. Nunca afirmar performance não medida.
 
-## Se escolher OpenGL3
+## Requisitos atuais de OpenGL3
 
 O backend GPU poderá evoluir se necessário, mas **o renderer OpenGL3 deve ser um produto completo da PoC**: perf, picking, texture cache, shader contract, partial invalidation, resize e disposal. Não construir uma abstração universal que atrase a primeira face.
 

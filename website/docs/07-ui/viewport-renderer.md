@@ -1,6 +1,6 @@
 # Viewport e renderização — integração Dear ImGui
 
-> Render gráfico **ainda não implementado**. Dear ImGui com DockSpace é obrigatório; renderer e plataforma permanecem sob avaliação (SDL3 + OpenGL3 é candidato ao spike).
+> Render gráfico **ainda não implementado**. Dear ImGui com DockSpace é obrigatório; renderer e plataforma **aprovados: SDL3 + OpenGL 3.3 Core**.
 
 ## Render path
 
@@ -9,7 +9,7 @@ Document (faces + atlas references)
     ↓ evaluate after revision
 RenderSnapshot (triângulos, UV, materiais, seleção)
     ↓ grouping by texture + dirty region
-renderer adapter (OpenGL3/WGPU; draw/update GPU buffers)
+renderer OpenGL3 (GLSL 330, VAO/VBO/EBO/FBO; GPU buffers)
     ↓
 Viewport + overlay de grid/snap/selection + UI
 ~~~
@@ -28,7 +28,7 @@ Não gravar handles da GUI, OpenGL/WGPU, GPU memory, texture IDs ou camera handl
 
 ## Critérios para trocar renderer
 
-A viewport será desenhada para framebuffer/textura GPU e exibida dentro de uma janela dockável ImGui. Validar resize, DPI, pointer coordinates, captura input, janela flutuante, contextos GL e caching. Compare SDL3+OpenGL3 e WGPU apenas por teste real, sem alterar geometry/app.
+A viewport será desenhada para framebuffer/textura GPU e exibida dentro de uma janela dockável ImGui. Validar resize, DPI, pointer coordinates, captura input, janela flutuante, contextos GL e caching. Reavaliar outro renderer apenas com necessidade comprovada, sem alterar geometry/app.
 
 ## Anti-objetivos
 
@@ -36,4 +36,10 @@ Não introduzir materiais PBR, sombras complexas, ECS, physics, animação ou ra
 
 ## Backend independente do painel
 
-RenderSnapshot → RenderBackend → texture GPU offscreen → ImGui::Image dentro do painel dockável; coordenadas de ponteiro convertidas por ViewportRect e DPI. O renderer não conhece Document mutável. OpenGL3, SDL_GPU3 e WGPU são avaliados na [próxima decisão](../13-engineering/graphics-backend-decision.md); nenhum está aprovado. ImGuizmo requer sincronizar view/projection e input capture, não alterar Document diretamente.
+RenderSnapshot → RenderBackend → texture GPU offscreen → ImGui::Image dentro do painel dockável; coordenadas de ponteiro convertidas por ViewportRect e DPI. O renderer não conhece Document mutável. **SDL3 + OpenGL3 foi aprovado**; SDL_GPU3/WGPU ficam como possibilidades futuras, não baseline. ImGuizmo requer sincronizar view/projection e input capture, não alterar Document diretamente.
+
+## Contratos detalhados vigentes
+
+- [FBO, ImTextureRef 1.92+, coordenadas e DPI](./viewport-framebuffer-contract.md)
+- [Bootstrap SDL3/OpenGL e GL lifecycle](../13-engineering/sdl3-opengl3-integration.md)
+- [ImGuizmo, matriz, preview e Undo](./imguizmo-integration.md)

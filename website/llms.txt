@@ -2,7 +2,7 @@
 
 Repo: https://github.com/WASDst/petunia-tile3d
 Estado (11/10/2026): docs-first, nenhuma aplicação Odin funcional demonstrada.
-Stack do futuro editor: **Odin**. Dear ImGui + docking completo aprovados para PoC; Capati binding é candidato ao spike. SDL3/OpenGL3 e addons pendentes de validação. NÃO interpretar Slint/Rust do histórico como baseline.
+Stack do futuro editor: **Odin**. Dear ImGui + docking completo aprovados para PoC; Capati binding é candidato ao spike. SDL3 + OpenGL 3.3 Core aprovados como backend inicial, não compilados; addons pendentes de validação. NÃO interpretar Slint/Rust do histórico como baseline.
 Projeto greenfield autônomo. Não migração nem fork do Petunia3D.
 Site: HTML/CSS/JS em website/, documentação em website/docs/manifest.json.
 
@@ -29,3 +29,9 @@ PoC: A TileAtlas/TileRegion/Tile Brush; B Sticky Edge/Wall/Block/Undo; C JSON/OB
 V1 aprovado: Pixel Density Doctor, Surface Tile Stamp, Select/Replace Similar, Tile Variations.
 V1+ aprovado: Smart Wall/Roof. Nenhuma funcionalidade do executável foi implementada.
 Não copiar código/arte de terceiros sem licença. Website é GPL-3.0-or-later; licença do editor futura pendente.
+
+## Renderer aprovado — referências mandatórias
+- website/docs/13-engineering/sdl3-opengl3-integration.md
+- website/docs/07-ui/viewport-framebuffer-contract.md
+- website/docs/07-ui/imguizmo-integration.md
+- website/docs/11-quality/graphics-compatibility-matrix.md
