@@ -7,7 +7,7 @@
 | Necessidade | Escolha | Estado |
 |---|---|---|
 | Linguagem e build | [Odin](https://odin-lang.org/) e odin build/test | Definido para PoC |
-| Janela e eventos | vendor:SDL3 ou GLFW | **Pendente de teste**; SDL3 é candidato inicial com ImGui |
+| Janela e eventos | vendor:sdl3 | **APROVADO T3D-023**, ainda não compilado |
 | Matemática | core:math, structs e vetores Odin | Preferencial |
 | Mesh, TileRegion, UV, Commands | implementação própria | Contrato definido |
 | Leitura PNG / textura | decoder próprio de plataforma ou vendor adequado | Escolha pendente; manter o domínio isolado |
@@ -15,11 +15,11 @@
 | OBJ/MTL | writer pequeno próprio com validação | Candidato |
 | GUI editor | [Capati/odin-imgui](https://github.com/Capati/odin-imgui), Dear ImGui docking | **ImGui/docking aprovados**; binding específico condicionado a build |
 | GLB | vendor:cgltf como referência; writer futuro a avaliar | Pós-PoC |
-| GPU | OpenGL3 ou WGPU via backend ImGui | **Pendente**; OpenGL3 recomendado ao spike inicial |
+| GPU | OpenGL 3.3 Core + GLSL 330, core:gl conforme versão pinada | **APROVADO T3D-023**, ainda não implementado |
 
 ## Por que Dear ImGui agora?
 
-O escopo passou a exigir **docking completo imediatamente**. Dear ImGui possui essa infraestrutura; raylib sozinho não entrega o mesmo shell. Podemos usá-lo em experimentos independentes, mas a arquitetura da aplicação precisa de um platform/render backend integrado com ImGui. SDL3+OpenGL3 é candidato de menor complexidade, não decisão final. Consulte [estudo de addons](../07-ui/imgui-ecosystem.md).
+O escopo passou a exigir **docking completo imediatamente**. Dear ImGui possui essa infraestrutura; raylib sozinho não entrega o mesmo shell. Podemos usá-lo em experimentos independentes, mas a arquitetura da aplicação precisa de um platform/render backend integrado com ImGui. SDL3 + OpenGL3 é **decisão aprovada em 11/10/2026**. Consulte [estudo de addons](../07-ui/imgui-ecosystem.md).
 
 ## Linguagem / padrões
 
@@ -50,4 +50,4 @@ Esses comandos são **planejamento da estrutura**, não evidência de que o repo
 
 ## Stack de UI prevista para evolução
 
-Consultar [Stack completa de Dear ImGui](../07-ui/imgui-stack-complete.md) e [contratos de componentes](../07-ui/ui-component-contracts.md). O produto se prepara para ImGuizmo, ImPlot, atlas/UV, nodes, timeline, code editor e testes sem instalar todo addon na PoC. A próxima escolha é [SDL3 + renderer](./graphics-backend-decision.md); **OpenGL3 é recomendação para discussão, não aprovação**.
+Consultar [Stack completa de Dear ImGui](../07-ui/imgui-stack-complete.md) e [contratos de componentes](../07-ui/ui-component-contracts.md). O produto se prepara para ImGuizmo, ImPlot, atlas/UV, nodes, timeline, code editor e testes sem instalar todo addon na PoC. **SDL3 + OpenGL3 foi aprovado.** Ver [ADR](./graphics-backend-decision.md), [lifecycle GL3](./sdl3-opengl3-integration.md) e [viewport FBO](../07-ui/viewport-framebuffer-contract.md).

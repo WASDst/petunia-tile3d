@@ -12,8 +12,8 @@
 
 ## Pendente: decisões não confundidas com GUI
 
-- SDL3 ou GLFW para plataforma.
-- OpenGL3 ou WGPU para o renderer; Vulkan poderá ser avaliado, mas não é requisito.
+- **SDL3 aprovado** para plataforma, entrada, DPI, clipboard e GL context.
+- **OpenGL 3.3 Core aprovado** como backend inicial; SDL_GPU3/WGPU/Vulkan não entram no baseline.
 - Multi-viewport nativo em múltiplas janelas do SO e comportamento sob Wayland/X11.
 - Integração exata das bibliotecas de gizmo, file browser, texture inspector, gráficos, icon pack e automação (stack arquitetural definida, ainda não integradas).
 - Alternativa para acessibilidade semântica; teclado apenas é insuficiente.
@@ -22,4 +22,4 @@
 
 Renderizar atlas nearest + viewport 3D em textura GPU dentro de DockSpace; criar Palette e Inspector; arrastar, dividir, tabular, redimensionar e persistir/restaurar layout; alternar foco, Tab/F6 e interagir com campo numérico; validar capture de input e 100–200% scale Windows/Linux. Tentar multi-viewport externo separadamente.
 
-[Stack completa de longo prazo](./imgui-stack-complete.md) · [Catálogo de addons e bridges](./imgui-ecosystem.md) · [Componentes Odin](./ui-component-contracts.md) · [Próxima decisão: renderer](../13-engineering/graphics-backend-decision.md).
+[Stack completa de longo prazo](./imgui-stack-complete.md) · [Catálogo de addons e bridges](./imgui-ecosystem.md) · [Componentes Odin](./ui-component-contracts.md) · [ADR aprovado: SDL3/OpenGL3](../13-engineering/graphics-backend-decision.md).

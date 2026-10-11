@@ -35,7 +35,7 @@
 
 ## Estudo independente da GUI
 
-**Dear ImGui com docking completo está aprovado**. O spike deve decidir SDL3/GLFW, OpenGL3/WGPU e binding Odin prático, comprovando split/tab/floating interno, restore layout, viewport-texture, keyboard focus, escala, Linux/Windows. Addons e janelas externas do sistema seguem pendentes de validação.
+**Dear ImGui com docking completo está aprovado**. O spike deve decidir SDL3 + OpenGL3 e binding Odin prático, comprovando split/tab/floating interno, restore layout, viewport-texture, keyboard focus, escala, Linux/Windows. Addons e janelas externas do sistema seguem pendentes de validação.
 
 ## V1 — Funcionalidades já aprovadas
 
@@ -55,4 +55,8 @@ Half-edge universal, UV unwrap automatizado, renderer PBR, rigging, animação c
 
 ## Expansão da infraestrutura UI
 
-A [stack de interface de longo prazo](../07-ui/imgui-stack-complete.md) fica especificada desde o início. F0 entrega DockSpace, PanelRegistry, FocusRegistry, ThemeTokens, UiIntent, viewport-texture e persistência; F1 acrescenta ferramentas/ImGuizmo se validado; F2 pode acrescentar ImPlot/TexInspect; F3 reserva interfaces para Nodes/Curves/Timeline/Scripting, **sem depender delas no MVP**. Separadamente, [plataforma e renderer](../13-engineering/graphics-backend-decision.md) continuam decisão pendente.
+A [stack de interface de longo prazo](../07-ui/imgui-stack-complete.md) fica especificada desde o início. F0 entrega DockSpace, PanelRegistry, FocusRegistry, ThemeTokens, UiIntent, viewport-texture e persistência; F1 acrescenta ferramentas/ImGuizmo se validado; F2 pode acrescentar ImPlot/TexInspect; F3 reserva interfaces para Nodes/Curves/Timeline/Scripting, **sem depender delas no MVP**. Separadamente, [plataforma e renderer](../13-engineering/graphics-backend-decision.md) foram aprovados: **SDL3 + OpenGL 3.3 Core**.
+
+## Gate atual T3D-023
+
+A stack [SDL3 + OpenGL 3.3 Core](../13-engineering/sdl3-opengl3-integration.md) está aprovada, não implementada. Primeiro gate: DockSpace funcional, um quad texturizado em FBO, atlas nearest, ImTextureRef ImGui 1.92+, layout persistente, captura input e teste Windows/Linux. [Viewport](../07-ui/viewport-framebuffer-contract.md), [gizmo](../07-ui/imguizmo-integration.md), [compatibilidade](../11-quality/graphics-compatibility-matrix.md).

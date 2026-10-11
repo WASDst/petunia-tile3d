@@ -1,6 +1,6 @@
 # Ecossistema Dear ImGui — Odin e extensões úteis
 
-> Pesquisa 11/10/2026. **Decisão**: Odin + Dear ImGui com **docking interno completo desde o início**. **Não decidido**: backend SDL3/GLFW, renderer OpenGL/WGPU/Vulkan, multi-viewport nativo, bindings para extensões adicionais. Não há editor Odin implementado no repositório; suporte de addon a Odin só é afirmado quando localizado e documentado.
+> Pesquisa 11/10/2026. **Decisão**: Odin + Dear ImGui com **docking interno completo desde o início**. **Atualização 11/10/2026:** SDL3 + OpenGL 3.3 Core **aprovados**. Restam pendentes multi-viewport OS nativo e bindings de addons. Não há editor Odin implementado no repositório; suporte de addon a Odin só é afirmado quando localizado e documentado.
 
 ## Legenda
 
@@ -80,8 +80,8 @@ Todos os projetos desta segunda tabela são **candidatos para inspeção**, não
 ## Estrutura-alvo de UI
 
 ~~~text
-platform (SDL3 ou GLFW, pendente)
-  + renderer GPU (OpenGL3 ou WGPU, pendente)
+platform (SDL3, aprovado)
+  + renderer GPU (OpenGL 3.3 Core, aprovado)
   + odin-imgui (aprovado: Dear ImGui docking)
         ├── DockSpace persistente (exigido na primeira versão)
         ├── Tileset Palette (componente Tile3D)
@@ -110,7 +110,7 @@ platform (SDL3 ou GLFW, pendente)
 
 ## Fases propostas (sem implementação existente)
 
-1. Spike Odin + Capati + backend SDL3/OpenGL3 **como candidato**, DockSpace/menus/painel Palette/Viewport textura, layout.ini e 200% DPI.
+1. Spike Odin + Capati + backend SDL3/OpenGL3 **como stack aprovada, sujeita a build**, DockSpace/menus/painel Palette/Viewport textura, layout.ini e 200% DPI.
 2. Persistência e input: movimento/resize/undock interno, atalhos e câmera não capturados por widget, focus.
 3. Criação de tool panels e inspeção de textura nearest em Odin puro.
 4. Teste ImGuizmo/C shim se o authoring necessitar gizmo; arquivo nativo via SDL3 ou NFD; Test Engine condicionado a licença.
@@ -124,4 +124,4 @@ Pesquisa documental, não execução. Fontes: [Odin ImGui](https://github.com/Ca
 
 ## Complemento arquitetural de longo prazo
 
-A stack completa (com prioridades MVP/V1/futuro, contratos Odin, estado de adoção e estratégia de licenças) está em [Stack ImGui completa](./imgui-stack-complete.md). O [ADR de plataforma e renderer](../13-engineering/graphics-backend-decision.md) permanece **pendente**. Este catálogo é inventário de candidatos, não lockfile nem indicador de bibliotecas compiladas.
+A stack completa (com prioridades MVP/V1/futuro, contratos Odin, estado de adoção e estratégia de licenças) está em [Stack ImGui completa](./imgui-stack-complete.md). O [ADR de plataforma e renderer](../13-engineering/graphics-backend-decision.md) foi **aprovado**. Este catálogo é inventário de candidatos, não lockfile nem indicador de bibliotecas compiladas.
