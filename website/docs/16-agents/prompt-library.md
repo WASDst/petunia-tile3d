@@ -1,163 +1,55 @@
-# Biblioteca de prompts — criar Petunia Tile3D
+# Biblioteca de prompts — Odin Tile3D
 
-> Use somente o prompt do tipo de tarefa, substituindo `[PLACEHOLDERS]` por paths/criterios reais. Não autoriza copiar código GPL sem auditoria.
+> Exemplos de tarefas para agentes. Adapte paths conforme código real; nenhum trecho de editor está implementado por esta página.
 
-## P0 — Construir um vertical slice
+## P1 — Vertical slice TileRegion
 
-```text
-Você está implementando o novo software WASDst/petunia-tile3d,
-NÃO refatorando Petunia3D. Verifique branch/HEAD.
-Leia AGENTS.md, decision-register.md, implementation-protocol.md
-e docs relevantes em website/docs/. O repositório começou docs-only.
-Objetivo: [BEHAVIOR]. Non-goals: [EXCLUSIONS].
-Antes de alterar, produza gap matrix + owner de cada responsabilidade.
-Reuse Rust/std quando simples; examine cargo tree/licenças de cada crate.
-Implemente uma vertical slice observável: entrada -> ToolSession ->
-Command/Undo -> Document -> Render/Export e testes quando aplicável.
-NÃO introduza camadas genéricas, ECS, dependências pesadas ou GUI paralela.
-Quando UI mudar: keyboard-only, foco, F6, scale, Reduced Motion.
-Teste normal, invalido, cancel, Undo, save/load e high-DPI conforme escopo.
-Reporte HEAD, arquivos, comandos, resultados e gates não executados.
-```
+Implemente um pacote Odin puro para Atlas/TileRegion com bounds inteiros, conversão consistente de pixels para UV por canto e Rotate/Flip. Adicione odin test para retângulos fora de limite, rotação x4, flip x2, atlas assimétrico e coordenada Y. Sem raylib, UI ou arquivo.
 
-## P1 — Tile Region/UV math
+## P2 — Preview e PlaceTile
 
-```text
-Implementar tipos Rust puros PixelRect, TileRegion e corner UV conversion.
-Inputs: atlas WxH, rect X/Y/W/H, quarter turns, flips; output face-corner
-UV. Teste overflow, bounds, zero-size, 4 rotations, mirror, UV flip
-OpenGL, seams, sampling nearest e degenerate images. Zero Slint/GL/IO
-nesta crate. Compare invariantes do Petunia3D sem copiar dependency graph.
-```
+Crie ToolSession separada de Document e Command PlaceTile. Preview não pode alterar revisão, Esc cancela e um gesto completo gera um Undo. Eventos de mouse e teclado precisam passar pela mesma operação tipada. Teste camadas CPU antes da viewport.
 
-## P2 — Tile Brush / Sticky
+## P3 — Raylib viewport inicial
 
-```text
-Implementar Tile Brush e Sticky Edge como ToolSession transacional.
-Preview read-only, snapping pixel-based, target edge ID, geometry patch,
-1 gesto=1 Undo, Esc cancela, click-move-click, numeric angles/lengths.
-Teclado seleciona borda/posição sem drag; max tile stamps bounded.
-Testar atlas missing, locked object, near-parallel edge, duplicate face,
-undo all, no writes from UI. Render só recebe snapshot.
-```
+Monte câmera, workplane, grid, um atlas PNG nearest, um quad com UV e picking sobre plano. Não construa um toolkit GUI. Medir alinhamento de textura, coordenadas e resize; isolar adapter raylib de geometry.
 
-## P3 — Slint accessibility
+## P4 — Sticky Edge
 
-```text
-Projetar Shell mínimo BUILD com Palette/Viewport/Properties e nome de
-cada ação. F6/Header→Tool→Palette→Viewport→Properties; foco visível,
-tooltip por keyboard, High Contrast, Reduced Motion, 100-200% UI scale.
-Nenhuma feature se baseia exclusivamente em arrasto/hover/cor.
-Slint expõe accessible role/name/value corretos. Não copiar 10k linhas
-do app.slint de Petunia3D. Testar com NVDA/Orca quando disponível;
-registrar not-run se ambiente real não houver.
-```
+Permitir extensão de quad pela borda escolhida, com snap e indicação visual; preserva UV e não gera duplicata em face invalidada. Inputs: mouse e teclado, direção/ângulo numérico. Casos extremos: normal invertida e face degenerada.
 
-## P4 — Viewport GL PoC
+## P5 — Wall / Block Brush
 
-```text
-Conferir docs/07-ui/viewport-renderer.md. Construir Slint + OpenGL 3.3
-FBO+texture com um quad do atlas, picking, resize/HiDPI. Zero CPU readback
-por frame. Medir latência no hardware real. Não adicionar WGPU/egui por
-padrão. Se integração GL falhar, documentar RCA, ADR alternativo e rollback.
-```
+Proporção, altura, dimensões, preview e Undo único. Construir somente casca externa e agrupar faces por atlas/material. Sem voxel engine. Validar winding, seleção e cancellation.
 
-## P5 — Dependency review
+## P6 — Persistência e export
 
-```text
-Analisar [CRATE] e seu cargo tree, features, MSRV, licença, manutenção,
-security, size, build time, GPU path e ownership. Alternativa Rust/std
-somente se não aumentar riscos de parser/protocol/codec. Demonstrar
-por que importar petunia_mesh ou render-gl inteiro é insuficientemente
-leve no momento. Classificar reuse: borrow concept / extract math /
-copy-with-notices / adapt / avoid. Não modificar Petunia3D.
-```
+JSON versionado, IDs estáveis, asset paths relativos, save atômico e projeto reaberto idêntico. Gerar OBJ/MTL com UV por canto e PNG associado; inspecionar o arquivo em leitor externo.
 
-## P6 — Feature discovery / pesquisa
+## P7 — Teste técnico de GUI (sem decisão antecipada)
 
-```text
-Pesquisar demanda verificável para [IDEA] em Crocotile3D, Blockbench,
-Sprytile e outros. Separar oficialmente documentado, relatos datados,
-inferência e recurso ausente não demonstrado. Propor fluxo UI simples,
-algoritmos/estimativa relativos, a11y alternative, testes, tradeoffs
-e não objetivos. Registrar SOMENTE como hipótese em docs/15-ideas/,
-sem adicionar runtime ou marcar 'approved' até decisão humana.
-```
+Construa a mesma UI mínima com atlas, viewport, numeric field, redimensionamento, foco/Tab/F6, tooltip e status na alternativa candidata. Registre licença, binding Odin, build Windows/Linux, acessibilidade semântica real, screenshots, desempenho e integração GPU. Compare com a shortlist em GUI options.
 
-## P7 — Docs for agents / Conformance
+## P8 — Pixel Density Doctor
 
-```text
-Usar documentation-for-llms, cognitive-clarity e lean-progressive-context.
-Verificar rota de markdown, manifest.json, llms.txt, links relativos,
-no duplicate sources, título estável, no fake tests, pesquisa com URLs.
-Produzir matriz status/doc/impl e handoff compacto. Código de aplicação
-não é inferido a partir de Markdown.
-```
+Implemente primeiro uma função de domínio para computar escala texel/world por face, reportando discrepâncias, sem alterar UV. Preview de fix opcional com Undo e caso impossível documentado. Não prometer retopology automática.
 
-## P8 — Review independente
+## P9 — Surface Tile Stamp
 
-```text
-Atue como reviewer read-only do SHA [COMMIT]. Leia docs canônicos, código,
-testes e diff. Encontre bugs, boundary violations, regression, missing
-error handling, broken keyboard/a11y, dependency bloat e falhas IO/UV.
-Liste P0/P1/P2 com path e evidência, comandos realmente executados,
-recomendação mínima e unresolved gates. Não self-approve.
-```
+Aplique uma TileRegion a faces já criadas, com modos fit/orientation explicitados, UV preservation quando possível, preview de distorção e Undo agrupado. Sem UI duplicada.
 
-## Aplicação
+## P10 — Select / Replace Similar
 
-P0 é envelope padrão, com apenas 1–2 prompts especialistas. Sempre registrar non-goals, evitar carregar todos os catálogos Prumo ou o Petunia3D inteiro.
+Percorrer a cena por TileBinding/atlas escopado, mostrar contagem de afetados/ignorados, preview, parâmetros de tolerância e Undo único. Nunca substituir face sem confirmação ou resolver tiles inexistentes silenciosamente.
 
-## P9 — Surface Tile Stamp (T3D-016)
+## P11 — Tile Variations
 
-```text
-Implemente Surface Tile Stamp segundo docs/05-tools/surface-tile-stamp.md
-em slice pequeno, após validar FaceCornerUV/selection. O usuário deve
-escolher TileRegion, identificar face, ver UV ghost, aceitar Fit/Keep
-Pixel Scale e confirmar; sem novo UVMesh ou alteração topológica silenciosa.
-UV custom requer decisão explícita. App aplica 1 Command/Undo,
-Slint emite UiIntent; testes: face X/Y/Z, flip/rotation, nonplanar,
-missing/locked, no mutation on cancel, export.
-```
+Múltiplos TileRegion com pesos e seed documentada. Resultado não muda a cada render; persistir seed e vínculos. Testar determinismo, zero weights e atlas indisponível.
 
-## P10 — Select/Replace Similar (T3D-017)
+## P12 — Smart Wall/Roof
 
-```text
-Implemente read-only query de ocorrências por TileId/binding, scope visível,
-exclusão default de UV custom e bloqueados, preview com contagem/causas.
-Replace = transação atômica com FaceCornerUV + binding, 1 Undo.
-Conflito revision invalida preview. Rust std para index se medido.
-Não fazer image similarity nem update automático ao editar TilePalette.
-```
+Gerar wall strips entre pontos num plano, com preview de altura/orientação, alocação proporcional de UV e facetas minimizadas. Roof é etapa posterior, sem grafo procedural universal. Validar encerramento da transação, edição numérica e edge cases.
 
-## P11 — Pixel Density Doctor (T3D-015)
+## Para todos
 
-```text
-Primeiro entregue apenas uma query Rust pura para analisar texels por world
-unit usando transform/world surface e UV por face-corner, com relatórios
-de desvio e degeneração. Não auto-reparar; ao avançar, permitir somente
-fixes matematicamente viáveis com preview, confirmação e Undo.
-Teste atlas não quadrado, escala não uniforme, UV skew e limites de TileRegion.
-Prove que nenhum fix derrama UV para outros tiles do atlas.
-```
-
-## P12 — Tile Variations (T3D-019)
-
-```text
-Crie VariantGroup com TileIds e pesos, algoritmo inteiro seed/versionado
-e choice key por placement ID/cell estável. Preview fixo = commit;
-persistir TileId escolhido e FaceCornerUV final. Nunca reroll no render,
-abrir arquivo ou export. Sem crate rand salvo justificativa.
-Teste cross-platform fixtures, overflow, weighted distribution, Undo e a11y.
-```
-
-## P13 — Smart Wall / Roof (T3D-018)
-
-```text
-Comece somente com Wall Strip por grid ortogonal de quads usando
-Workplane, previews transientes e GeometryPatch/Command atômico.
-Dimension numeric + click-move-click, UV orientada, sem faces internas.
-Depois que Wall Strip passar testes/a11y, desenvolver gable roof simples;
-não adicionar graph procedural/CAD/booleans heavy. Teste cancel,
-winding, seams, dimensões degeneradas, export e Undo de grandes lotes.
-```
+Incluir classificação Observado/Missing/Partial, versão Odin, diff mínimo, tests e resultados, passos manuais, risco a11y, docs atualizadas, commit e próximos itens. Não inferir implementação de specs.

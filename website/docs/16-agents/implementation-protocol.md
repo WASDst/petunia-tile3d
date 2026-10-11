@@ -1,50 +1,39 @@
-# Protocolo de implementação para LLMs
+# Protocolo para agentes — Odin Tile3D
 
-> Produto novo significa implementação incremental, não "copiar Petunia3D e apagar features".
+## Solicitação de tarefa
 
-## Entrada
-
-```yaml
+~~~yaml
 task:
   id: "<issue>"
-  goal: "<observable behavior>"
+  goal: "<behavior observável>"
   repo: "WASDst/petunia-tile3d"
-  branch: "<confirmed target>"
+  ref: "<branch e SHA confirmados>"
   docs: ["website/docs/..."]
-  target_paths: ["crates/..."]
-  non_goals: ["all features outside the vertical slice"]
-  tests: ["unit + integration + a11y where relevant"]
-```
+  scope: ["menor pacote Odin afetado"]
+  non_goals: ["features fora do vertical slice"]
+  gates: ["odin test, build, screenshots e a11y conforme domínio"]
+~~~
 
-## 1. Explorar
+## 1 — Verificar
 
-Confirme HEAD/repo; leia [Fonte Canônica](./reading-navigation.md), [Arquitetura](../01-architecture/module-boundaries.md), código/testes existentes. Faça Gap Matrix e levantamento de dependências. **Se não houver código, declare ausência e implemente a partir do menor contrato**, não um framework universal.
+Leia decisões e specs do domínio. Inspecione código e testes reais; se só houver documentos, classifique **MISSING**. Não crie relatório afirmando implementação a partir de um protótipo de texto.
 
-## 2. Desenhar a menor vertical slice
+## 2 — Projetar
 
-- Primeiro `TileRegion -> FaceCornerUV -> Quad` 100% CPU, testável.
-- Depois `Place Tile` via ToolSession/Command com Undo/cancel.
-- Depois GL/Slint Go/No-Go integrado.
-- Depois `Project` persistente, PNG, GLB.
-- Sem plugins, ECS, PBR, camera scripting ou async framework prematuros.
+Testar primeiro TileRegion → CornerUV → Quad CPU. Depois preview/placement → Command/Undo; raylib viewport; JSON e OBJ. UI profissional e opções de GUI permanecem em pesquisa.
 
-## 3. Implementar
+## 3 — Implementar
 
-Rust std para algoritmos simples, APIs tipadas, sem duplicar fontes de estado. Snapshot/worker apenas por motivo justificado. Integração de Petunia3D depende de auditoria de licenças/transitives e testes de contrato. Sem `unsafe` desnecessário. UI é declarativa; efeitos só em Application. Todo gesto termina em 1 UndoRecord.
+Preferir Odin core/vendor, structs simples, função com entrada/saída explícita, ownership/allocators claros. Sem acoplar geometry a raylib, sem render no domínio, sem toolkit no Document. Não usar Rust crates, Slint, Cargo ou Go sidecar na PoC.
 
-## 4. Revisar
+## 4 — Revisar
 
-- Logic correctness/edge cases; UV x/y orientation, rotation/mirror.
-- Erros e cancel sem mutação, IDs e revisions estáveis.
-- Teste com PNG estranho/atlas faltante sem panic.
-- Accessibility keyboard only e labels/sliders/focus se UI.
-- GPU state, resize, HiDPI e compat hardware para GL.
-- `cargo tree` e tamanho binário quando adicionar dependência.
+UV, winding, invalid input, stale IDs/revisions, Undo atômico, cancel sem mutação, files/path validation, screen scaling, foco e teclado, FPS/CPU no hardware medido. Não confiar só em compilação.
 
-## 5. Comprovar e entregar
+## 5 — Comprovar
 
-Run commands + results on exact HEAD; `pass/fail/not run/blocked`; deferred issues e link para mudanças. Feature descrita na documentação com status verdadeiro. Independent reviewer se disponível; não se autoaprovar nem eliminar gate para green artificial.
+Registrar comando Odin, versão do compilador, plataforma, saída, SHA, status PASS/FAIL/NOT RUN/BLOCKED e pendências. Capturas nativas para visual, ações por teclado para a11y e import externo para export.
 
-## 6. Stop criteria
+## 6 — Entrega
 
-Nenhuma mudança extraneous, docs atualizados, código compilado e tested quando ambiente disponível, fluxo manual real quando GUI mudou. Onde impossível executar, entregar parcial honesto + próximo comando/sistema de teste.
+Descrever problema, fonte, mudança, resultado verificável, riscos e próximo passo. Atualizar docs no mesmo conjunto. Nenhum push forçado ou mutação de outro projeto por implicação.

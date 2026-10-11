@@ -1,36 +1,42 @@
-# Projeto nativo, recursos e salvamento
+# Formato de projeto da PoC
 
-> Modelo alvo, formato físico ainda a congelar depois do primeiro vertical slice. Não reutilizar diretamente `.petunia` do Petunia3D: os domínios possuem contratos próprios.
+> Novo documento Odin; formato **planejado** e ainda não estabilizado.
 
-## Dados persistidos
+## Primeira persistência: JSON versionado
 
-Project: `format_version`, app compatibility, objects/mesh, face-corner UV, textures/tileset metadata, TileRegion collection, TileBindings, palettes, groups, optional resource paths, project settings (pixels/world unit, grid units). Não persistir Camera e active selection como verdade autoral; workspace/layout preferences são locais da sessão.
+O editor deve salvar informações autorais e não o estado de GUI, GPU ou caches. Campos essenciais: schema_version, id, nome, tilesets (paths relativos, dimensões, hashes opcionais), objetos, faces, positions, corner UVs, tiles bindings e metadados mínimos. Preferir JSON para que o experimento seja debuggável.
 
-**Escolha preliminar:** pacote `.ptile3d` versionado e portable; decisão entre container zip + manifest e diretório de projeto será tomada após POC de IO simples. Evitar custom binary format complexo antes de medir tamanho/perf. Se usar ZIP, validar traversal, file sizes, ratio bombs, symlinks e count limits.
+~~~json
+{
+  "schema_version": 1,
+  "project_id": "example-id",
+  "tilesets": [
+    { "id": "atlas-1", "path": "assets/tiles.png", "width": 256, "height": 256 }
+  ],
+  "objects": [
+    {
+      "id": "object-1",
+      "name": "House",
+      "faces": [
+        { "id": "face-1", "atlas_id": "atlas-1", "vertices": [], "uv": [] }
+      ]
+    }
+  ]
+}
+~~~
 
-## Save
+**Esquema ilustrativo incompleto**. Os campos vertices/uv serão arrays válidos de quatro posições/cantos no contrato final; não tratar este exemplo como fixture.
 
-Snapshot imutável → staged write para tmp no mesmo volume → sync/flush quando suportado → atomic replace quando API/OS permitir → backup generation → commit clean revision. Se falhar, preservar arquivo anterior e retornar erro contextual.
+## Regras
 
-Autosave: cópia de recovery fora do caminho principal, controle de generations, recover prompt com comparação de timestamps/versions; nunca substituir projeto normal sem escolha.
+- ID persistente não depende do índice em array ou handle GPU.
+- Parse com limits: bytes máximos, número de faces, recursion, sizes e path traversal.
+- Validar referência do atlas e ausência de textura; não apagar faces por missing file.
+- Save atômico com arquivo temporário + replace e instruções de recuperação.
+- Paths normalizados e relativos; nenhum recurso externo executável.
+- Schema migrations explícitas; desconhecido não causa delete silencioso.
+- Save/Load com snapshot consistente, sem ToolSession incompleta.
 
-## Referências
+## Compatibilidade
 
-Embeddable PNG default para portabilidade; external linked tileset como opção explícita com path relative e Relink. IDs independentes do caminho. Linked mode não implica executar watcher/network ou sobrescrever PNG sem autorização. Corrupted/missing resource apresenta placeholder e recuperação.
-
-## Compat
-
-- Migração formal `vN -> vN+1` ou read-only onde não suportado.
-- Fixtures de projetos com missing atlas, changed dimensions, disconnected UVBinding, unknown extension fields.
-- Não afirmar compatibilidade total com `.petunia` do Petunia3D; formatos não são iguais.
-- Export GLB/OBJ serve a aplicações externas; preservar dados proprietários apenas no formato nativo.
-
-## Invariantes
-
-Save after Undo produz a mesma geometria e UV, sem referências quebradas; dados de cache/thumbnails não serializados; ids estáveis ao renomear/mover; payload externo validado antes de alocar excessivamente.
-
-## Evolução de formato para os diferenciais aprovados
-
-[Select/Replace Similar](../05-tools/replace-similar-tiles.md) usa `TileBinding` persistente e `FaceId` estável; [Tile Variations](../05-tools/tile-variations.md) requer `VariantGroup` versionado e salva TileId resolvido por face + UV final; [Wall/Roof](../05-tools/smart-wall-roof-brush.md) salva mesh convencional, com recipe somente metadata opcional. [Surface Stamp](../05-tools/surface-tile-stamp.md) persiste UV e provenance explicitamente; [Density Doctor](../05-tools/pixel-density-doctor.md) armazena preferências no EditorSession (não o relatório transitório) e modificações confirmadas como UV/Geometry normais.
-
-**Nenhuma alteração no schema é exigida nesta rodada documental.** Campos novos entram apenas quando o primeiro slice for implementado, com version bump ou `serde(default)` compatível conforme formato adotado e fixtures de reopen, Undo, renderer e export.
+Não prometer abrir formatos do Petunia3D sem converter. OBJ/MTL é export. Futuro GLB segue especificação glTF; os dados nativos poderão evoluir para contêiner após evidências.
