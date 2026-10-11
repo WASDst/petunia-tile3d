@@ -1,29 +1,19 @@
-# Licenças, proveniência e distribuição
+# Proveniência, autoria e licença
 
-> **Pendência para aprovação humana antes de importar código.** Esta página é política de engenharia, não parecer jurídico.
+## Website
 
-## Verificado
+O site atual descende da estrutura HTML/CSS/JS do website do Petunia3D, licenciado GPL-3.0-or-later. LICENSE e NOTICE em website/ são mantidos. Catálogos Prumo possuem referências e termos próprios; **não** são executados automaticamente.
 
-O `Cargo.toml` da [branch Petunia3D analisada](https://github.com/WASDst/petunia3d/blob/refactor/architecture-foundation/Cargo.toml) especifica `license = "GPL-3.0-or-later"`. O repositório tem [LICENSE GPLv3](https://github.com/WASDst/petunia3d/blob/refactor/architecture-foundation/LICENSE). Portanto copiar parte relevante de código não é "copiar livremente sem obrigações".
+## Editor Odin
 
-O código do **futuro aplicativo Rust** ainda não recebeu uma licença própria; não declarar suas crates como licenciadas ou redistribuí-las sem decisão do detentor de direitos. O **website/documentação** já contém código adaptado sob GPL-3.0-or-later, com [licença local](../../LICENSE) e [proveniência](../../NOTICE.md).
+**Licença ainda não escolhida.** O fato de ambos os projetos pertencerem à organização do responsável não resolve automaticamente as obrigações de licenças de dependências e de autores terceiros.
 
-## Caminhos viáveis (decidir)
+Antes de copiar, adaptar ou distribuir código, assets ou bindings:
 
-1. **GPL-3.0-or-later também para Tile3D**: caminho conservador para integrar código Petunia3D GPL sob seus termos (mantendo notices e atribuições). Ainda checar terceiros.
-2. **Código totalmente original que reproduz somente ideias/algoritmos gerais**: escolher licença independente, sem copiar expressão protegida nem assets de terceiros.
-3. **Re-licenciamento explícito**: possível apenas com direitos e consentimentos de titulares apropriados, incluindo contribuidores; não assumir que estar na mesma org resolve.
+1. Verificar licença e origem de cada componente.
+2. Registrar commit, Copyright, aviso e compatibilidade com a licença futura.
+3. Preferir implementar domínios novos e usar bibliotecas corretamente licenciadas quando apropriado.
+4. Revisar requisitos de distribuição de raylib, Dear ImGui e quaisquer bindings adotados.
+5. Não copiar imagem/asset de software concorrente como material de produção sem licença.
 
-Não transferir imagens do Crocotile3D, tilesets de terceiros, dados de usuário ou assets com licença incompatível. Créditos por inspiração não são licença de código.
-
-## Controle de provenance
-
-Cada cópia/adaptação deve registrar:
-- repository URL e commit SHA; caminho de origem;
-- direitos/licença declarados na origem;
-- autorias/notices preservados;
-- testes portados/modificados;
-- divergências e razões técnicas;
-- auditoria `cargo deny` ou ferramenta equivalente, se usada, sem adicionar ferramenta só por estética.
-
-`LICENSE` e `NOTICE` só serão adicionados com licença aprovada. Até lá o website pode ser visto, mas isso **não concede licença para reutilizar seu conteúdo** automaticamente.
+Documentar proveniência mesmo para projetos próprios quando isso tornar o histórico e futuras contribuições verificáveis.

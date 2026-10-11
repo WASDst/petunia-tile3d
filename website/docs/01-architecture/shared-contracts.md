@@ -1,58 +1,27 @@
-# Shared Engine API — superfície pública mínima
+# Contratos de composição e fronteiras
 
-> Exemplos Rust são **pseudocontratos**, não código compilado e não devem ser copiados sem revisar owners.
+Não existe obrigação de criar biblioteca compartilhada com Petunia3D durante a PoC Odin. O que compartilhamos agora são **conceitos testados**: Commands, documentos versionados, UV por canto, snaps, export e acessibilidade.
 
-## Tipos puros (exemplo)
+## Contratos mínimos
 
-```rust
-struct TileRegion {
-    atlas_id: AtlasId,
-    pixel_rect: PixelRect, // [x, y, width, height], integer, in source image
-    rotation_quarters: u8, // 0, 1, 2, 3; validate
-    mirror_x: bool,
-    mirror_y: bool,
-}
-struct TileStamp {
-    region: TileRegion,
-    workplane: WorkplaneFrame,
-    position: Vec3,
-    size_world: Vec2,
-}
-struct PlacedTileMeta {
-    tile_id: TileId,
-    source_region: TileRegion,
-    edit_policy: TileEditPolicy,
-}
-```
+| Contrato | Responsabilidade | Invariante |
+|---|---|---|
+| TileRegion | Recorte do atlas em pixels | Bounds validados, coordenadas inteiras |
+| TileBinding | Proveniência da textura | Não substitui UV persistida |
+| TileFace | Geometria e 4 UVs | Winding e normal verificáveis |
+| Document | Assets e entidades versionados | Nunca possui handles GPU |
+| ToolIntent | Pedido de ação | Não muta estado persistido |
+| CommandResult | Resultado de transação | Uma revisão + um Undo por gesto |
+| RenderSnapshot | Estado compilado de visualização | Não pode modificar autoral |
+| ExportSnapshot | Geometria/UV/texture para arquivo | Estável durante serialização |
 
-API alvo deve ter:
-- `validate_region(atlas_size, rect) -> Result`: integer overflow, bounds e dimensões positivas.
-- `build_quad(stamp) -> Result<GeometryPatch>`: determinismo, orientação e UV calculada sem estado global.
-- `attach_edge(mesh, edge_hit, stamp, normal/angle) -> Result<GeometryPatch>`: aderência/snap e deduplicação controlada.
-- `batch_patches` e `apply_geometry_patch`: um comando atômico com relatório/Undo.
-- `uv_for_corner(region, transformed_corner, sampling) -> UV`: atlas texel center/inset, no drift, seams preservadas.
-- `project_tileset_to_faces(face_ids, region) -> Command`: alteração de atributo UV sem modificar topologia.
-- `extract_render_mesh(snapshot) -> RenderData` e `export(snapshot, ...) -> Result`: avaliação pura, sem dirty no Document.
-- `DocumentRevision` nas queries. Worker descarta resposta antiga quando revision mismatch.
+## Futuras extensões
 
-## Reuso com Petunia3D
+- Face quad não significa voxel; split/triangulação pode ser derivado.
+- Onde houver índice, usar handle estável com geração/revisão para impedir referências obsoletas.
+- Regras de snapping e pixel density são do domínio, não do backend de UI.
+- GUI, Lua, MCP, plugins e ABI não entram no protótipo sem necessidade demonstrada.
 
-Algoritmos portados ou extraídos devem manter testes de propriedade (orientation, degenerate faces, UV seam); não assumir que crate Rust no mesmo workspace é automaticamente isolada. `petunia_mesh` hoje tem `geo`, `manifold-rust` e `xatlas-rs-v2`, maiores que o núcleo de um tile editor. Compartilhar **algoritmos e invariantes com interfaces pequenas**, não toda a dependency graph.
+## Interoperabilidade com Petunia3D
 
-## Contratos de estabilidade
-
-- Identidade não é posição de vector (nunca persistir `Vec` index como ID de vida longa).
-- Geometry autoral sempre é espaço local e uma só fonte.
-- Coordenadas de textura: convenção documentada para origin top-left dos pixels versus UV graphics bottom-left.
-- UV face-corner; seam significa mesma posição 3D com UV independente por face.
-- Undo por gesto, não por cada pixel/mousemove.
-- APIs públicas sem handle GPU nem widget Slint.
-- Features sugeridas em pesquisas só viram API depois de decisão documentada e vertical slice.
-
-## Interop contract
-
-GLB/OBJ são **formato de entrega**, não preservam semântica completa de TileRegion, VariantRules ou sessões. Arquivo nativo mantém essa semântica. Um objeto convertido no Petunia3D pode perder binding live, preservando visual/UV/material conforme export; representar perda antes de converter.
-
-## Portabilidade e crates
-
-O contrato da biblioteca compartilhada deve compilar para Linux/Windows sem abrir janela, inicializar GPU, acessar env ou filesystem. Invocar `cargo tree` ao integrar; se transitive dependencies explodirem, avaliar reimplementação Rust local do algoritmo limitado.
+OBJ/GLB como formatos de intercâmbio futuros; não dependências binárias internas. Nenhuma extração compartilhada até existir prova de pelo menos dois consumidores reais.

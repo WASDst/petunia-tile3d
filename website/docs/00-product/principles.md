@@ -1,37 +1,31 @@
-# Princípios do produto e critérios de exclusão
+# Filosofia do Petunia Tile3D
 
-> Direção inicial recomendada; revisável com decisão registrada.
+> Baseline de produto para um **novo editor Odin**. Não é port, fork nem versão reduzida do executável Petunia3D.
 
-## Proposta de valor
+## Propósito
 
-A jornada principal é **tileset 2D → geometria 3D texturizada editável → cena ou asset exportável**, com mínimo de operações e compreensão de UV desnecessária. O usuário pode começar com poucos conceitos: Tile, Surface, Workplane, Part, Project.
+Transformar regiões de imagens 2D em superfícies 3D editáveis, texturizadas e exportáveis **sem exigir um curso prévio de modelagem ou UV**. A ação primária é selecionar um tile e colocá-lo no espaço, com prévia previsível.
 
-## Desenho de experiência
+## Cinco princípios
 
-- A ação primária sempre disponível é **Place Tile**.
-- Selecionar tile no atlas produz imediatamente preview projetado na superfície/gride.
-- Indicação explícita de onde e com que orientação será colocado antes de confirmar.
-- Controles extras aparecem na Context Bar quando fazem sentido; Advanced recolhido.
-- Undo/Redo de um gesto; cancel sem mutação; cada operação contextual fornece nome e próximo passo.
-- Acessibilidade como contrato de sucesso (não modo à parte): F6 sequencia zonas, labels, tooltips, foco visível, sem dependência exclusiva de mouse/drag ou cor.
-- Tutorial interativo e exemplos simples são parte do produto; vídeos externos não são pré-requisito.
-- Interface escalável para 100–200%, reduced motion, alto contraste; gerenciar preferências no editor, não no formato do projeto.
+1. **Tile-first:** escolhe-se o material no atlas antes de construir a geometria; uma face possui geometria real e UV explícita.
+2. **Menor número de gestos:** Tile Brush, Sticky e Wall cobrem grande parte dos trabalhos de ambiente; detalhes avançados ficam contextuais.
+3. **Acessível e gentil:** nomes visíveis, foco claro, teclado completo, gestos alternativos, contraste, zoom de UI e feedback que explica causa + ação.
+4. **Odin simples e modular:** dados explícitos, pacotes pequenos, sem engine geral, ECS ou abstrações criadas sem consumidor.
+5. **Interoperabilidade honesta:** salvar em formato versionado; exportar malhas e texturas sem prometer round-trip perfeito.
 
-## Não objetivos
+## Não objetivos da PoC
 
-Não oferecer viewport multiparadigma de todo Petunia3D; renderer PBR completo; bone/rig v1; edição procedural universal; ECS genérico; plugin marketplace; cloud account, telemetry, online dependency, heavy GPU required. Um recurso só entra quando seu ganho em resultado supera custo cognitivo, código e superfície testável.
+- Modelador universal com B-Rep, sculpting, rigging, physics ou UV unwrap automático.
+- Voxel engine ou um cubo por tile.
+- Cloud obrigatório, store de plugins, marketplace ou contas.
+- GUI profissional completa e definitiva antes de medir os obstáculos reais.
+- Reaproveitamento por import automático de crates Rust.
 
-## Métricas de sucesso propostas
+## Experimentos mensuráveis
 
-- Primeira peça 3D em menos de cinco ações após importar imagem (meta de UX a validar, não benchmark comprovado).
-- Um iniciante conclui casa estilizada pequena sem abrir UV Editor.
-- Teclado permite todos os fluxos cruciais, incluindo seleção de tile, orientação, placement, Undo, export.
-- Arquivo corrompido nunca elimina um projeto válido; cópia recuperável.
-- Tris/quads exportados com UVs corretas, sem desalinhamento de pixel por padrão.
-- Projeto médio funciona em Linux e Windows modesto com orçamento a medir.
+Fluxo PNG → tile → quad → edge extension → parede → Undo → JSON → OBJ/MTL. Verificar UV em atlas com nearest-neighbor, consistência de escala, input alternativo, consumo de memória, FPS e depuração. 60 FPS com 10 mil faces é **alvo exploratório**, nunca resultado aferido. Registrar hardware.
 
-## Decisões versus hipóteses
+## Origem das decisões
 
-**Consolidado nesta proposta:** produto independente, foco tile-first, reuse seletivo, Rust com deps pequenas, UX acessível, baseline Slint/OpenGL 3.3 condicionada a protótipo técnico.
-
-**Para debate:** autotiling, presets de telhado, smart replacement, export de sprites, layers multiusuário, AI, ligação interativa com game engines. Pesquisas não são compromissos.
+O roadmap preserva cinco diferenciais aprovados: Pixel Density Doctor, Surface Tile Stamp, Similar Tile, Tile Variations e Smart Wall/Roof. Nenhum está implementado. A seleção de GUI continuará em discussão; ver [decisões](./decision-register.md).

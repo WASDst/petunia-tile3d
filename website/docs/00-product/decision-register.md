@@ -1,45 +1,37 @@
-# Registro de decisões, propostas e restrições
+# Registro de decisões — Odin (11/10/2026)
 
-> Atualizado 2026-10-09. **Produto em descoberta**: decisão arquitetural de fundação não equivale a código pronto, nem preferência de produto é um gate verde.
+> Rebaselining prospectivo. Mantemos decisões de produto anteriores que são independentes de linguagem; revisamos contratos técnicos que pressupunham Rust/Slint.
 
-| Código | Tema | Estado | Resumo |
+| ID | Área | Situação | Decisão / contrato |
 |---|---|---|---|
-| T3D-001 | Produto independente | baseline | repo `WASDst/petunia-tile3d`; separado do Petunia3D |
-| T3D-002 | Reuso | baseline | contratos/algoritmos seletivos, sem dependência do frontend/app inteiro |
-| T3D-003 | Rust lean | baseline | preferir Rust/std; justificar, auditar e versionar cada crate |
-| T3D-004 | Desktop UI | protótipo requerido | Slint com feedback acessível; Go/No-Go antes de fixar |
-| T3D-005 | Graphics | protótipo requerido | OpenGL 3.3 via glow/FBO; verificar composição real com Slint |
-| T3D-006 | Tile-first model | baseline | cena contém geometria real + UV per face-corner e metadados de origem |
-| T3D-007 | Document ownership | baseline | single writer via Commands/transactions/Undo |
-| T3D-008 | Tilesets | baseline | TextureAsset e TileRegion em pixels, sem alterar mesh ao editar atlas por padrão |
-| T3D-009 | Compatibilidade | baseline | projeto nativo versionado; GLB/OBJ via export, sem round-trip total presumido |
-| T3D-010 | Acessibilidade | requisito | teclado completo, foco, UI scale, contraste, cognitive clarity |
-| T3D-011 | Escopo MVP | proposta detalhada | importar PNG, palette, quad/sticky/block, seleção/transform, save/export |
-| T3D-012 | Features diferenciadoras | **inclusão aprovada** | cinco ferramentas T3D-015..019 aprovadas para roadmap; desenho fino sujeito a validação, implementação inexistente |
-| T3D-013 | Licença do aplicativo | PENDENTE | crates Rust futuras sem licença definida; **website GPL-3.0-or-later** com proveniência documentada |
-| T3D-014 | Code ownership/release | baseline | repositório e versionamento próprios; CI independente |
-| T3D-015 | Pixel Density Doctor | **aprovado para V1** | inspeção de escala dos pixels; reparos apenas quando matematicamente possíveis e após preview [spec](../05-tools/pixel-density-doctor.md) |
-| T3D-016 | Surface Tile Stamp | **aprovado para V1** | aplicar tiles a faces 3D sem abrir editor UV [spec](../05-tools/surface-tile-stamp.md) |
-| T3D-017 | Select/Replace Similar Tile | **aprovado para V1** | localizar/substituir ocorrências por binding e escopo, um Undo [spec](../05-tools/replace-similar-tiles.md) |
-| T3D-018 | Smart Wall/Roof Brush | **aprovado para V1+** | faixas de paredes primeiro, telhados básicos depois, sem graph procedural [spec](../05-tools/smart-wall-roof-brush.md) |
-| T3D-019 | Tile Variations | **aprovado para V1** | variantes ponderadas determinísticas via seed versionada [spec](../05-tools/tile-variations.md) |
+| T3D-001 | Produto | **Aprovado** | Produto independente em WASDst/petunia-tile3d; não migrar Petunia3D |
+| T3D-002 | Linguagem | **Aprovado para PoC** | Odin como linguagem principal e única do protótipo |
+| T3D-003 | Janela/3D inicial | **Provisório** | vendor:raylib para minimizar setup; medir limites |
+| T3D-004 | GUI final | **Pendente de estudo conjunto** | Não fixar ImGui, microui, Loom, Skald ou SDL3/WGPU agora |
+| T3D-005 | Dados | **Aprovado** | TileRegion + faces reais + UV por canto + provenance de tile |
+| T3D-006 | Estado | **Aprovado** | Single-writer, Commands, Undo transacional, previews isolados |
+| T3D-007 | Persistência | **Proposta para PoC** | JSON versionado; save atômico; textures relativas ao projeto |
+| T3D-008 | Export | **Proposta para PoC** | OBJ/MTL primeiro; GLB em etapa posterior |
+| T3D-009 | Acessibilidade | **Requisito** | Teclado, foco, alto contraste, escala e alternativa para drag |
+| T3D-010 | Plataformas | **Requisito** | Windows e Linux; hardware modesto, offline-first |
+| T3D-011 | Reuso | **Aprovado** | Reusar conhecimento/contratos; copiar/portar código só após licença+auditoria |
+| T3D-012 | Escopo de prova | **Aprovado como direção** | A: Palette/Brush; B: Sticky/Wall/Undo; C: Save/OBJ |
+| T3D-013 | Licença | **Pendente** | Website GPL-3.0-or-later; executável Odin não definido |
+| T3D-014 | UI declarativa Slint | **Substituída** | Baseline Rust/Slint de 09/10 não é mais a stack pretendida |
+| T3D-015 | Pixel Density Doctor | **Aprovada para V1** | Diagnóstico e reparo explícito, não implementado |
+| T3D-016 | Surface Tile Stamp | **Aprovada para V1** | Aplicação de atlas diretamente a face, não implementado |
+| T3D-017 | Select/Replace Similar | **Aprovada para V1** | Batch com preview/contagem e um Undo, não implementado |
+| T3D-018 | Smart Wall/Roof | **Aprovada para V1+** | Wall primeiro; Roof após contratos geométricos, não implementado |
+| T3D-019 | Tile Variations | **Aprovada para V1** | Variantes determinísticas versionadas, não implementado |
 
-## Escopo da aprovação de outubro/2026
+## O que está implementado?
 
-O usuário aprovou **incluir as cinco funcionalidades no produto e na documentação**, não sua implementação nesta rodada, datas de entrega nem todas as escolhas de UI/método propostas. Os contratos técnicos descritos nas specs são defaults recomendados sujeitos a protótipos e testes com usuários. MVP permanece concentrado no fluxo Tile Brush/Sticky/Atlas/Save/Export; V1 abriga quatro diferenciais e V1+ recebe Wall/Roof. A [pesquisa de oportunidades](../15-ideas/opportunity-backlog.md) continua com outras hipóteses **não aprovadas**.
+**Somente o website e documentação.** Não há evidência de uma aplicação Odin executável, viewport, GUI ou testes gráficos neste repositório.
 
-## Como alterar decisão
+## Como alterar uma decisão
 
-Cada proposta informa: problema, duas opções realistas, tradeoffs, evidência de usuário, custo de manutenção, risco para UX/acessibilidade e compatibilidade, decisão humana, data, aceite e plano de migração. Sem editar silenciosamente a baseline histórica.
+Registrar o problema, alternativas, trade-offs, evidência, implicações de acessibilidade, custo de manutenção, mudança de status, data e riscos de migração. Pesquisa **não é aprovação**.
 
-## Ordem de autoridade
+## Próxima decisão compartilhada
 
-1. Instrução autorizada do usuário atual.
-2. Este registro + [princípios](./principles.md) + contrato do domínio.
-3. [AGENTS.md](https://github.com/WASDst/petunia-tile3d/blob/main/AGENTS.md) para execução.
-4. Código real para status da implementação.
-5. Referências do Petunia3D, Prumo e concorrentes como consulta, **nunca autoridade automática**.
-
-## Status da implementação
-
-Atualmente: website + documentação. **Nenhuma feature de desktop implementada, validada, lançada ou distribuída** neste repositório.
+Confrontar bibliotecas de GUI nativas e interoperáveis de Odin com o protótipo de raylib: docking, acessibilidade, input, viewport, distribuição e custo de manutenção. Ver [estudo de GUI](../07-ui/gui-options.md).
