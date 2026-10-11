@@ -7,7 +7,7 @@
       <a class="hero-primary" href="#/docs/12-roadmap/milestones.md">Explorar o roadmap <span aria-hidden="true">↗</span></a>
       <a class="hero-secondary" href="#/docs/01-architecture/module-boundaries.md">Arquitetura Odin →</a>
     </div>
-    <div class="hero-meta"><span>● Em especificação</span><span>Odin + raylib (PoC)</span><span>ImGui docking</span></div>
+    <div class="hero-meta"><span>● Em especificação</span><span>Odin + Dear ImGui</span><span>ImGui docking</span></div>
   </div>
   <div class="hero-visual" aria-label="Ilustração conceitual: tiles coloridos organizados em um pequeno objeto tridimensional">
     <div class="visual-bar"><span class="visual-lights">● ● ●</span><span>tile3d / viewport</span><span>◎</span></div>
@@ -52,9 +52,9 @@ Em vez de construir uma malha complexa antes de aplicar texturas, você selecion
 
 Não migrar Petunia3D; nem carregar suas crates, GUI ou arquitetura Rust. Herdamos **aprendizados e padrões de qualidade** — não a implementação. [Leia o escopo](./02-reuse/reuse-audit.md).
 
-### 2. Raylib para experimentar, não para congelar a GUI
+### 2. Dear ImGui com docking desde a primeira versão
 
-A PoC poderá começar com raylib para janela, câmera, PNG e 3D. **Dear ImGui com docking completo foi aprovado**. Ainda precisamos validar a integração Odin, escolher o backend de janela/GPU e definir a estratégia de acessibilidade. [Ver opções](./07-ui/gui-options.md).
+**Dear ImGui com docking completo foi aprovado**. A PoC deve começar pela integração do shell e de um viewport dockável. Ainda precisamos validar binding Odin, escolher o backend de janela/GPU e definir a estratégia de acessibilidade. [Ver decisão](./07-ui/gui-options.md).
 
 ### 3. Fazer o primeiro objeto antes de criar um framework
 

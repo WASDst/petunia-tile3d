@@ -1,6 +1,6 @@
 # Interface proposta — foco no tile
 
-> Modelo de experiência **toolkit-agnostic**. O protótipo visual em raylib é provisório, enquanto a GUI definitiva ainda será analisada.
+> Contrato de experiência para **Dear ImGui com docking completo desde a primeira versão**. O domínio permanece toolkit-agnostic; SDL3/GLFW e renderer ainda serão validados.
 
 ## Primeiro contato
 

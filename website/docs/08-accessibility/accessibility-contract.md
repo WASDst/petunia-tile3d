@@ -1,6 +1,6 @@
 # Acessibilidade e experiência neuroinclusiva
 
-> **Contrato obrigatório** para a PoC Odin. Suporte a leitor de tela não é dado como garantido por raylib ou ImGui; será objeto de testes e da decisão de GUI.
+> **Contrato obrigatório** para a PoC Odin. Dear ImGui foi selecionado, mas **não oferece suporte geral garantido a leitores de tela**. A integração com UIA/AT-SPI e a estratégia de acessibilidade semântica exigem estudo específico e validação.
 
 ## Princípios
 
