@@ -507,6 +507,7 @@ function enhanceRenderedMarkdown() {
 async function openDoc(path, anchor) {
   try {
     currentPath = path;
+    content.classList.toggle("is-home", path === "home.md");
     const markdown = await loadText(path);
     const meta = fileMeta(path);
 
@@ -528,7 +529,7 @@ async function openDoc(path, anchor) {
     setActiveFile(path);
 
     document.title =
-      (meta ? meta.file.title : "Documentação") + " — Petunia3D";
+      (meta ? meta.file.title : "Documentação") + " — Petunia Tile3D";
 
     if (anchor) {
       requestAnimationFrame(function () {
