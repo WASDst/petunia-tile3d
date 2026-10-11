@@ -20,9 +20,9 @@ canonical_docs: ["website/docs/..."]
 scope: ["crates/..."]
 implemented: ["actual call paths, not promises"]
 tests:
-  - command: "cargo test -p ... "
+  - command: "odin test ./src -all-packages "
     status: "not run"
-    reason: "application crate not yet implemented"
+    reason: "application Odin package not yet implemented"
 a11y: "not tested / findings with environment"
 perf: "not measured / measured with hardware"
 risk: ["..."]

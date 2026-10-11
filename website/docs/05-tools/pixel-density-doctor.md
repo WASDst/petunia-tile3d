@@ -19,7 +19,7 @@ Props feitos com tiles de 8, 16 e 32 px frequentemente exibem pixels de tamanhos
 
 ```text
 DocumentSnapshot + TextureSize + evaluated world transforms
-    ↓ tile-domain/density_query (Rust puro)
+    ↓ tile_core/density_query (Odin puro)
 FaceDensityReport{face_id, pixels_per_unit_min/max, anisotropy, warnings}
     ↓ tile-app Query (read-only, revision keyed)
 AccessibilityReport + ViewportOverlay

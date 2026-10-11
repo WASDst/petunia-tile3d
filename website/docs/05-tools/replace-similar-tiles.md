@@ -52,4 +52,4 @@ Duplicação de part/IDs, atlas copiado/renomeado, UV customizada, mirrored/rota
 
 ## Dependências
 
-Implementar com `std::collections` (HashMap/HashSet) + loops determinísticos quando necessário; nenhuma engine de busca visual nem shader de análise, nenhuma nova crate por esta feature.
+Implementar com mapas/arrays Odin e loops determinísticos; nenhuma engine de busca visual nem shader de análise, nenhuma dependência adicional por esta feature.
