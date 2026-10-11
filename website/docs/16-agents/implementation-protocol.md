@@ -37,3 +37,7 @@ Registrar comando Odin, versão do compilador, plataforma, saída, SHA, status P
 ## 6 — Entrega
 
 Descrever problema, fonte, mudança, resultado verificável, riscos e próximo passo. Atualizar docs no mesmo conjunto. Nenhum push forçado ou mutação de outro projeto por implicação.
+
+## Baseline de renderer aprovado (T3D-023)
+
+Code agent deve usar Odin + SDL3 + OpenGL 3.3 Core e Dear ImGui docking. Ler [lifecycle](../13-engineering/sdl3-opengl3-integration.md), [viewport FBO](../07-ui/viewport-framebuffer-contract.md), [ImGuizmo](../07-ui/imguizmo-integration.md) e [matriz de testes](../11-quality/graphics-compatibility-matrix.md). Verificar ImTextureRef 1.92+ e links/binaries do Capati/odin-imgui pinado. Nunca declarar GPU validada com CI documental. Não trocar para raylib, WGPU ou SDL_GPU sem aprovação explícita.

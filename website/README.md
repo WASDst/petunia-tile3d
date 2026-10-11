@@ -28,3 +28,7 @@ Frontend derivado do website Petunia3D sob GPL-3.0-or-later, com histórico e de
 ## Stack de interface de longo prazo
 
 A seleção do shell é **Odin + Dear ImGui com docking completo**. A [stack completa](docs/07-ui/imgui-stack-complete.md) contém módulos futuros, contratos e critérios de adoção; a [próxima decisão](docs/13-engineering/graphics-backend-decision.md) compara SDL3+OpenGL3, SDL_GPU3 e WGPU. Bibliotecas não são consideradas integradas só por constarem no roadmap.
+
+## Renderer escolhido (11/10/2026)
+
+O baseline aprovado é **Odin + SDL3 + OpenGL 3.3 Core + Dear ImGui docking completo**, com viewport offscreen em FBO e desenho por `ImTextureRef` na API ImGui 1.92+. Não existe editor executável neste repositório. [ADR](docs/13-engineering/graphics-backend-decision.md) · [Integração](docs/13-engineering/sdl3-opengl3-integration.md) · [Gizmo](docs/07-ui/imguizmo-integration.md).

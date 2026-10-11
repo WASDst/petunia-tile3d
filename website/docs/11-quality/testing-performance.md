@@ -30,3 +30,7 @@ Meta exploratória de 60 FPS em cena com 10 mil faces e custo de input baixo. Pu
 ## Reportar honestamente
 
 Usar PASS, FAIL, NOT RUN, BLOCKED, NOT APPLICABLE; incluir SHA e comandos. Não declarar a11y ou integridade do export com base apenas em screenshots ou docs.
+
+## Renderer SDL3/OpenGL3: compatibilidade obrigatória
+
+Executar a [matriz de compatibilidade gráfica](./graphics-compatibility-matrix.md) com logs reais Windows/Linux/Wayland/X11, drivers, FBO resize, ImTextureRef 1.92+, DPI, ImGuizmo/Undo, memória, frame time e evidências. Todos os testes GPU permanecem **NOT RUN** até execução local comprovada.
