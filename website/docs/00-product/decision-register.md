@@ -24,7 +24,9 @@
 | T3D-018 | Smart Wall/Roof | **Aprovada para V1+** | Wall primeiro; Roof após contratos geométricos, não implementado |
 | T3D-019 | Tile Variations | **Aprovada para V1** | Variantes determinísticas versionadas, não implementado |
 | T3D-020 | Multi-viewport OS | **Pendente de validação** | Docking interno é obrigatório; painéis em janelas nativas independentes exigem teste SDL3/GL e Wayland |
-| T3D-021 | Addons | **Pesquisa, não aprovação** | ImGuizmo, ImPlot, ImGuiFileDialog, TexInspect e outros são candidatos conforme catálogo |
+| T3D-021 | Addons | **Arquitetura planejada, implementação pendente** | Contratos para ImGuizmo, ImPlot, atlas/UV, nodes, timeline e scripting; incluir somente após uso e validação |
+| T3D-022 | Stack de UI a longo prazo | **Aprovado como planejamento** | PanelRegistry, UiIntent, InputRouter, ThemeTokens, FocusRegistry e pontos de extensão ImGui, sem dependências instaladas |
+| T3D-023 | Renderer + plataforma | **PRÓXIMA DECISÃO / PENDENTE** | Comparar SDL3+OpenGL3, SDL3+SDL_GPU3 e SDL3+WGPU; recomendar A como default condicionado a testes |
 
 ## O que está implementado?
 
@@ -36,4 +38,4 @@ Registrar o problema, alternativas, trade-offs, evidência, implicações de ace
 
 ## Próxima decisão compartilhada
 
-Validar **Capati/odin-imgui + docking** com a plataforma/renderizador ainda a escolher e identificar a estratégia de acessibilidade semântica. Ver [decisão](../07-ui/gui-options.md) e [catálogo de extensões](../07-ui/imgui-ecosystem.md).
+A arquitetura da stack futura está detalhada em [Stack completa de UI](../07-ui/imgui-stack-complete.md). A **próxima decisão humana** é [backend gráfico/plataforma](../13-engineering/graphics-backend-decision.md): OpenGL3, SDL_GPU3 ou WGPU, usando SDL3 como plataforma candidata. Teclado/acessibilidade semântica continuam gates independentes.

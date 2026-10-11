@@ -27,3 +27,7 @@ Painéis não executam mutações diretamente. Consumir UiIntent → Command. Er
 ## Gates
 
 Verificar em 1366×768 e com 200% de UI Scale. Teclado-only e teclado remapeado. Leitor de tela deve ser demonstrado ou permanecer registrado como lacuna do Dear ImGui; não prometer compatibilidade que o toolkit não fornece.
+
+## Implementação futura em Odin
+
+Tokens semânticos light/dark/high-contrast, ícones Phosphor de subconjunto local e tipografia licenciada com fallback Unicode. Componentes são wrappers Odin registrados no [contrato de componentes](./ui-component-contracts.md), não widgets isolados espalhados pelos painéis. Usar [stack completa](./imgui-stack-complete.md) como referência. Acessibilidade de leitor de tela continua lacuna técnica a ser validada.

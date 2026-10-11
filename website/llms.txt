@@ -17,7 +17,10 @@ Leia nesta ordem:
 8. website/docs/06-application/commands-undo.md
 9. website/docs/07-ui/gui-options.md
 10. website/docs/07-ui/imgui-ecosystem.md
-11. website/docs/08-accessibility/accessibility-contract.md
+11. website/docs/07-ui/imgui-stack-complete.md
+12. website/docs/07-ui/ui-component-contracts.md
+13. website/docs/13-engineering/graphics-backend-decision.md
+14. website/docs/08-accessibility/accessibility-contract.md
 12. website/docs/12-roadmap/milestones.md
 13. website/docs/13-engineering/dependencies-odin.md
 14. website/docs/16-agents/index.md

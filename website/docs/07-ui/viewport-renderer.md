@@ -33,3 +33,7 @@ A viewport será desenhada para framebuffer/textura GPU e exibida dentro de uma 
 ## Anti-objetivos
 
 Não introduzir materiais PBR, sombras complexas, ECS, physics, animação ou ray tracing antes de conseguir a primeira parede texturizada e exportável.
+
+## Backend independente do painel
+
+RenderSnapshot → RenderBackend → texture GPU offscreen → ImGui::Image dentro do painel dockável; coordenadas de ponteiro convertidas por ViewportRect e DPI. O renderer não conhece Document mutável. OpenGL3, SDL_GPU3 e WGPU são avaliados na [próxima decisão](../13-engineering/graphics-backend-decision.md); nenhum está aprovado. ImGuizmo requer sincronizar view/projection e input capture, não alterar Document diretamente.

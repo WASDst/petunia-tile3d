@@ -121,3 +121,7 @@ platform (SDL3 ou GLFW, pendente)
 Pesquisa documental, não execução. Fontes: [Odin ImGui](https://github.com/Capati/odin-imgui), [OdinVulkan/ImPlot](https://hilderin.github.io/OdinVulkan/38_implot.html), [CImGui organisation](https://github.com/cimgui), [ImGui Useful Extensions](https://github.com/ocornut/imgui/wiki/Useful-Extensions), [Docking](https://github.com/ocornut/imgui/wiki/Docking), [ImGui Test Engine license](https://github.com/ocornut/imgui_test_engine/blob/main/imgui_test_engine/LICENSE.txt).
 
 **Não existe garantia de completude literal** de todas as bibliotecas comunitárias para Odin; cada nova descoberta deve registrar URL, commit, binding status, requisitos de compilação e integração, licença e teste. O site documental continua sem editor executável.
+
+## Complemento arquitetural de longo prazo
+
+A stack completa (com prioridades MVP/V1/futuro, contratos Odin, estado de adoção e estratégia de licenças) está em [Stack ImGui completa](./imgui-stack-complete.md). O [ADR de plataforma e renderer](../13-engineering/graphics-backend-decision.md) permanece **pendente**. Este catálogo é inventário de candidatos, não lockfile nem indicador de bibliotecas compiladas.

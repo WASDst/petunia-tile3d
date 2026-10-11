@@ -24,3 +24,7 @@ Pode ser servido como conteúdo estático. Na Vercel, utilizar este repositório
 ## Proveniência
 
 Frontend derivado do website Petunia3D sob GPL-3.0-or-later, com histórico e deveres indicados em LICENSE e NOTICE.md. Licença do executável Odin segue indefinida.
+
+## Stack de interface de longo prazo
+
+A seleção do shell é **Odin + Dear ImGui com docking completo**. A [stack completa](docs/07-ui/imgui-stack-complete.md) contém módulos futuros, contratos e critérios de adoção; a [próxima decisão](docs/13-engineering/graphics-backend-decision.md) compara SDL3+OpenGL3, SDL_GPU3 e WGPU. Bibliotecas não são consideradas integradas só por constarem no roadmap.

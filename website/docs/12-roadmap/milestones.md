@@ -52,3 +52,7 @@
 ## Fora de escopo
 
 Half-edge universal, UV unwrap automatizado, renderer PBR, rigging, animação complexa, scripting/plugins/MCP, multiplayer e voxel world. Somente reabrir com caso de uso comprovado.
+
+## Expansão da infraestrutura UI
+
+A [stack de interface de longo prazo](../07-ui/imgui-stack-complete.md) fica especificada desde o início. F0 entrega DockSpace, PanelRegistry, FocusRegistry, ThemeTokens, UiIntent, viewport-texture e persistência; F1 acrescenta ferramentas/ImGuizmo se validado; F2 pode acrescentar ImPlot/TexInspect; F3 reserva interfaces para Nodes/Curves/Timeline/Scripting, **sem depender delas no MVP**. Separadamente, [plataforma e renderer](../13-engineering/graphics-backend-decision.md) continuam decisão pendente.
