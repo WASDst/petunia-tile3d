@@ -32,7 +32,7 @@ As cinco obedecem ao mesmo modelo autoral: `TileRegion/TileBinding + Mesh/FaceCo
 - Teste com iniciantes: construir uma casa simples e repetir elementos, comparando número de ações, erros e esforço percebido.
 - Casos de aceitação por teclado, sem drag/hover; `F6`, labels, orientação textual, undo e preview previsível.
 - Benchmark local com cenas de centenas/milhares de faces e poucos atlases; nenhuma afirmação de FPS sem medição.
-- Extrair algoritmos Rust/std somente após confrontar matemática/UV com os contratos do Petunia3D.
+- Estudar algoritmos e contratos geométricos do Petunia3D sem copiar ou portar Rust para Odin sem auditoria de licença, origem e testes.
 
 ## Pesquisas (não prova de exclusividade)
 

@@ -41,7 +41,7 @@ WallRoofIntent {
   → Document.Mesh + FaceCornerUV + TileBindings
 ```
 
-Os algoritmos de geração (grid, quads, roof triangles, UV assignments) são funções determinísticas Rust/std no domínio geometric. Uma `WallRecipe` é um input de comando e, se persistida no projeto, só metadata rastreável até existir **um gerador paramétrico vivo explicitamente aprovado**. Não manter mesh final e generator concorrendo por verdade nem regenerar ao abrir arquivo.
+Os algoritmos de geração (grid, quads, roof triangles, UV assignments) são procedures determinísticas Odin no domínio geometric. Uma `WallRecipe` é um input de comando e, se persistida no projeto, só metadata rastreável até existir **um gerador paramétrico vivo explicitamente aprovado**. Não manter mesh final e generator concorrendo por verdade nem regenerar ao abrir arquivo.
 
 ## Edição, compatibilidade e Undo
 
@@ -63,4 +63,4 @@ Roof: footprint retangular, pitched angle 0/15/45/80, symmetric ridge, overhang 
 
 ## Trade-offs
 
-Benefício de UX alto, porém maior risco de complexidade que Similar/Variants; fase V1+ impede bloat no MVP. Nenhuma dependência de booleans (`manifold-rust`), gerador procedural universal, sistemas arquitetônicos avançados ou machine learning.
+Benefício de UX alto, porém maior risco de complexidade que Similar/Variants; fase V1+ impede bloat no MVP. Nenhuma dependência de booleans (Manifold), gerador procedural universal, sistemas arquitetônicos avançados ou machine learning.

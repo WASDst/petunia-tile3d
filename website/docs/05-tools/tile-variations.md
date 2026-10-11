@@ -28,7 +28,7 @@ VariantChoiceKey = (GroupId, PlacementId or stable cell coords, user seed, algor
     → stable PRNG / hash → weighted choice → resolved TileId
 ```
 
-Preferir PRNG/hash inteiro simples implementado em Rust puro com especificação versionada e fixtures. Não usar `HashMap` iteration order nem `std::hash::RandomState` para escolha estável. Usar **placement stable ID** após confirmar (não index de Vec), ou coordenadas inteiras canonizadas + object ID no preview antes do commit; garantir que preview não muda aleatoriamente a cada redraw. Se IDs gerados ao confirmar, reservar o ID no ToolSession para que preview/commit coincidam. `Reroll` incrementa salt/seed explicitamente e é um Command.
+Preferir PRNG/hash inteiro simples implementado em Odin puro com especificação versionada e fixtures. Não depender da ordem de iteração de mapas nem de hash não versionado para escolha estável. Usar **placement stable ID** após confirmar (não index de Vec), ou coordenadas inteiras canonizadas + object ID no preview antes do commit; garantir que preview não muda aleatoriamente a cada redraw. Se IDs gerados ao confirmar, reservar o ID no ToolSession para que preview/commit coincidam. `Reroll` incrementa salt/seed explicitamente e é um Command.
 
 `seed` não é uma autoridade de UV alternativa: cada face persiste o TileId escolhido + FaceCorner UV como resultado visual final. Não recalcular textura ao carregar projeto com versão nova do algoritmo, exceto `Revariar` explícito; variante futura ausente é diagnóstico com `Relink` e preservação da UV já gravada.
 
@@ -50,8 +50,8 @@ Group list com thumbnails, nome de tile, peso (%) calculado e campo numérico; r
 
 ## Testes e gates
 
-Mesma seed + mesmo placement/group → resultado idêntico em Windows/Linux, depois de save/reopen, após Undo/Redo e diferentes versões de Rust; distribuição de 1000 amostras para pesos (estatístico com tolerância), zero/overflow, rotated/mirrored, atlas missing, invalid region, locked faces, changes of group choices, no `reroll on redraw`, preview=commit, import/export preserving visual tile. Em grandes strokes, O(N) ou melhor e um Undo record.
+Mesma seed + mesmo placement/group → resultado idêntico em Windows/Linux, depois de save/reopen, após Undo/Redo e versões futuras do compilador Odin; distribuição de 1000 amostras para pesos (estatístico com tolerância), zero/overflow, rotated/mirrored, atlas missing, invalid region, locked faces, changes of group choices, no `reroll on redraw`, preview=commit, import/export preserving visual tile. Em grandes strokes, O(N) ou melhor e um Undo record.
 
 ## Dependências
 
-Rust/std + structs + pequeno PRNG integer. Nenhuma crate procedural, physics ou AI.
+Odin + structs + PRNG integer especificado. Nenhum framework procedural, física ou IA.

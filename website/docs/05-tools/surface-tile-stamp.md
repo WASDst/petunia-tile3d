@@ -43,7 +43,7 @@ Rectangular planar quads têm mapeamento bilinear sem alteração topológica, d
 
 ## Boundary e biblioteca
 
-Geometria/UV math em Rust puro (`tile-domain` ou `tile-geometry`); App valida e aplica Command; Slint expõe intent e preview; Renderer não re-projeta nem grava bindings. Nenhuma dependência de `module-uv` legada do Petunia3D ou unwrap automático do xatlas. Reduzir GPU upload para UV dirty region e batching por atlas.
+Geometria/UV em Odin puro (tile_core/geometry); App valida e aplica Command; o adapter da GUI candidata emite intent e preview; Renderer não re-projeta nem grava bindings. Nenhuma dependência de `module-uv` legada do Petunia3D ou unwrap automático do xatlas. Reduzir GPU upload para UV dirty region e batching por atlas.
 
 ## Testes e DoD
 

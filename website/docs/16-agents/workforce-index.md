@@ -19,17 +19,17 @@
 
 | Especialidade | Catálogo |
 |---|---|
-| Clean code, Rust, testes, arquitetura, documentação para LLM, github e orquestração | [Skills — foundations](./skills-foundations.md) |
+| Clean code, Odin, testes, arquitetura, documentação para LLM, github e orquestração | [Skills — foundations](./skills-foundations.md) |
 | Design, UX, acessibilidade, neurodivergência, focus, keyboard, screen readers | [Skills — experience](./skills-experience.md) |
 | Engine, tiles, GPU, shaders, assets, geometry, realtime | [Skills — engine graphics](./skills-engine-graphics.md) |
 | Segurança de projeto, paths, plugins, IO, MCP, supply chain | [Skills — security](./skills-security-delivery.md) |
-| Rust, GLSL, Lua, linguagens e special tooling | [Skills — languages](./skills-languages-specialized.md) |
+| Odin, GPU, linguagens e special tooling | [Skills — languages](./skills-languages-specialized.md) |
 
 [Inventário machine-readable e versionado](./workforce-catalog.json).
 
 ## Seleção preferencial para Tile3D
 
-- **Every change:** `grounded-implementation`, `implementation-reality-verification`, `clean-code`, `testing-quality`, `lang-rust` sob demanda.
+- **Every change:** `grounded-implementation`, `implementation-reality-verification`, `clean-code`, `testing-quality`, skills especializadas após verificar compatibilidade com Odin.
 - **UI e interação:** `accessibility`, `keyboard-accessibility`, `cognitive-clarity`, `focus-management`, `screen-reader`, `design-system`, `ui-ux-review`, `design-psychology`.
 - **Tile domain:** `editor-tooling`, `architecture-quality`, `rendering-3d`, `shaders`, `performance-native`, `asset-pipeline`, `color-science`, `serialization`.
 - **Doc/agents:** `documentation-for-llms`, `lean-progressive-context`, `prumo-navigation`, `prompt-engineering`, `orchestration-multi-agent`.

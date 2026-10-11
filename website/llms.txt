@@ -1,51 +1,27 @@
-# Petunia Tile3D — documentação canônica para agentes e humanos
+# Petunia Tile3D — documentação para agentes e LLMs
 
-> New tile-first 3D editor, NOT Petunia3D refactor. This repo initially contains only documentation.
-> Repository https://github.com/WASDst/petunia-tile3d
-> Product website lives in website/; GitHub Pages/deploy not implied.
-> Never claim feature implemented without code and test evidence. Exactly five additional features are approved for roadmap (T3D-015..019), NOT implemented; other ideas remain proposals.
+Repo: https://github.com/WASDst/petunia-tile3d
+Estado (11/10/2026): docs-first, nenhuma aplicação Odin funcional demonstrada.
+Stack do futuro editor: **Odin**. Raylib é candidato inicial para PoC; GUI profissional pendente. NÃO interpretar Slint/Rust do histórico como baseline.
+Projeto greenfield autônomo. Não migração nem fork do Petunia3D.
+Site: HTML/CSS/JS em website/, documentação em website/docs/manifest.json.
 
-## Fast entrance
-- [AGENTS.md](https://github.com/WASDst/petunia-tile3d/blob/main/AGENTS.md): mandatory rules and repo boundaries.
-- [Home](docs/home.md): value proposition and chapter links.
-- [Product principles](docs/00-product/principles.md)
-- [Decision register](docs/00-product/decision-register.md)
-- [Module boundaries](docs/01-architecture/module-boundaries.md)
-- [Reuse audit Petunia3D](docs/02-reuse/reuse-audit.md)
-- [License and provenance](docs/02-reuse/license-provenance.md)
-- [Dependency-light Rust](docs/13-engineering/dependencies-rust.md)
+Leia nesta ordem:
+1. AGENTS.md
+2. website/docs/00-product/decision-register.md
+3. website/docs/00-product/principles.md
+4. website/docs/01-architecture/module-boundaries.md
+5. website/docs/03-domain/tileset-tilemap-model.md
+6. website/docs/04-geometry/tile-mesh-uv.md
+7. website/docs/05-tools/mvp-tools.md
+8. website/docs/06-application/commands-undo.md
+9. website/docs/07-ui/gui-options.md
+10. website/docs/08-accessibility/accessibility-contract.md
+11. website/docs/12-roadmap/milestones.md
+12. website/docs/13-engineering/dependencies-odin.md
+13. website/docs/16-agents/index.md
 
-## Authoring and implementation
-- [Tilesets and binding model](docs/03-domain/tileset-tilemap-model.md)
-- [Placement and snapping](docs/03-domain/placement-rules.md)
-- [Mesh UV](docs/04-geometry/tile-mesh-uv.md)
-- [MVP tools](docs/05-tools/mvp-tools.md)
-- [Pixel Density Doctor — approved V1, unimplemented](docs/05-tools/pixel-density-doctor.md)
-- [Surface Tile Stamp — approved V1, unimplemented](docs/05-tools/surface-tile-stamp.md)
-- [Select/Replace Similar Tile — approved V1, unimplemented](docs/05-tools/replace-similar-tiles.md)
-- [Tile Variations — approved V1, unimplemented](docs/05-tools/tile-variations.md)
-- [Smart Wall/Roof Brush — approved V1+, unimplemented](docs/05-tools/smart-wall-roof-brush.md)
-- [Application Commands](docs/06-application/commands-undo.md)
-- [Slint Shell](docs/07-ui/workspaces-and-shell.md)
-- [OpenGL renderer PoC](docs/07-ui/viewport-renderer.md)
-- [Accessibility and neurodivergence](docs/08-accessibility/accessibility-contract.md)
-- [Project format](docs/09-project/project-format.md)
-- [Interoperability](docs/10-interop/export-pipeline.md)
-- [CI/quality](docs/11-quality/testing-performance.md)
-- [Roadmap](docs/12-roadmap/milestones.md)
-
-## Research and optional ideas (remaining ideas NOT approved)
-- [Competitive landscape](docs/14-research/competitive-landscape.md)
-- [Software killer hypotheses](docs/15-ideas/opportunity-backlog.md)
-
-## Code agents
-- [Agent guide](docs/16-agents/index.md)
-- [Navigation](docs/16-agents/reading-navigation.md)
-- [Implementation](docs/16-agents/implementation-protocol.md)
-- [Prompt Library](docs/16-agents/prompt-library.md)
-- [Evidence](docs/16-agents/evidence-handoffs.md)
-- [Full Prumo workforce](docs/16-agents/workforce-index.md): 39 Agents, 189 Skills, 20 Recipes with direct official source links.
-- [Catalog JSON](docs/16-agents/workforce-catalog.json): versioned inventory.
-- [Manifest](docs/manifest.json): all site Markdown routes.
-
-Only documentation is committed. No desktop GUI, geometry, OpenGL or app commands exist until implemented and verified.
+PoC: A TileAtlas/TileRegion/Tile Brush; B Sticky Edge/Wall/Block/Undo; C JSON/OBJ export.
+V1 aprovado: Pixel Density Doctor, Surface Tile Stamp, Select/Replace Similar, Tile Variations.
+V1+ aprovado: Smart Wall/Roof. Nenhuma funcionalidade do executável foi implementada.
+Não copiar código/arte de terceiros sem licença. Website é GPL-3.0-or-later; licença do editor futura pendente.

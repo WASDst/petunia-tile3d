@@ -1,66 +1,54 @@
-# Mesh, topology, FaceCorner UV e Pixel Art
+# Malha Tile3D, faces e UV por canto
 
-> Fundamental para Tile3D: **desenhar tiles produz superfícies 3D reais**, não sprites sobrepostos fora de topologia.
+> Contrato de dados da PoC Odin — sem topologia half-edge universal, sem voxels e sem toolkit gráfico no core.
 
-## Representação alvo
+## Uma face é geometria, não voxel
 
-```rust
-struct FaceCorner {
-    vertex: VertexId,
-    uv: [f32; 2],
+Um tile de atlas é ligado a uma superfície real (quad) definida por quatro posições 3D e quatro UVs. Uma face pode estar em qualquer plano, não necessariamente em cubo ou grade ortogonal.
+
+~~~text
+TileAtlas (PNG + width/height)
+  └─ TileRegion (x/y/width/height em px)
+       └─ TileBinding (atlasId, regionId, rotação/flip de origem)
+            └─ TileFace (faceId, 4 x Position, 4 x CornerUV)
+~~~
+
+**FaceCornerUV é a verdade persistida.** TileBinding é procedência e não reescreve UV se o atlas mudar sem comando explícito.
+
+## Modelo Odin conceitual
+
+~~~odin
+package geometry
+
+Tile_Region :: struct {
+    atlas_id:       u64,
+    x, y:           int,
+    width, height:  int,
 }
-struct Face {
-    id: FaceId,
-    corners: Vec<FaceCorner>, // 3 ou 4 na baseline; n-gon futuro
-    material_id: MaterialId,
+
+Tile_Face :: struct {
+    id:       u64,
+    position: [4][3]f32,
+    uv:       [4][2]f32,
+    region:   Tile_Region,
 }
-struct EditableMesh {
-    vertices: Vec<Vertex>,
-    faces: Vec<Face>,
-    revision: u64,
-}
-```
+~~~
 
-Código ilustrativo: IDs precisam resolver estabilidade/remapping ao excluir faces, não só indices `Vec`. UV está ligada a cada face-corner, nunca só vertex global. Essa estrutura evita `face.verts.len() == face.uv.len()` mantidos manualmente; preservar seams.
+Exemplo de contrato; **não compilado ou inserido num editor existente**. Concluir detalhes de IDs, allocator e estruturas compartilhadas durante implementação.
 
-## Operações base
+## UV
 
-- Quad from plane frame + dimensions + orientation.
-- Append Face to compatible edge with dedup vertices.
-- Remove Face, move vertex, translate/rotate/scale geometry or UV.
-- Flip winding versus Mirror UV são ações distintas.
-- Split quad to triangles com interpolação UV deterministic.
-- Select vertex/edge/face e weld com tolerância configurável.
-- Validate geometry: nonfinite, degenerate, self intersection, invalid indices/UV, duplicate faces; não auto-fix silencioso sem explicação.
+- Converter retângulo de pixels para UV normalizada pelo tamanho do atlas; documentar origem vertical da imagem versus API de GPU/export.
+- Implementar Rotate 90°/180°/270° por permutação dos quatro cantos; Flip horizontal/vertical por permutação definida, sem deformar geometria.
+- Coordenadas de atlas fora de limite são erro; nunca corrigir silenciosamente recorte.
+- Nearest filtering; avaliar padding, bleeding/mipmapping, seams e resolução de export.
+- Operações geométricas (Move/Rotate/Scale) **não** mudam UV automaticamente, a menos que contrato da operação diga exatamente isso.
+- Topologia autoral aceita quads; renderer e OBJ triangulam ou escrevem polígonos conforme capacidade com winding validado.
 
-## Pixel density
+## Validação
 
-Configurar `pixels_per_world_unit` de projeto. Painel mostra indicador de densidade relativa e warnings de faces esticadas. `Keep Pixel Scale` recalcula UV somente quando usuário escolhe política, nunca transiciona aleatoriamente; ao deformar, oferecer Stretch vs Preserve Density.
+Area zero, vertice duplicado, normal invertida, recorte zero, UV NaN/Inf, dimensões inválidas e textura ausente têm tratamento explícito. Testar faces giradas e atlas assimétrico. Alterações retornam remaps ou IDs novos em operações destrutivas.
 
-## Filter e alpha
+## Futuro
 
-MVP: nearest sampling default para pixel art, transparent alpha handling, dark/light preview, no forced mipmaps blur. Texturas com atlas bleeding usam inset e, quando necessário, gutters explícitos. `clamp` vs `repeat` por material configura acesso fora de atlas; não presumir que todo atlas é power-of-two.
-
-## Performance
-
-Compartilhar vertex buffers/material por atlas e **batch por cena/objeto/textura**; não instanciar GPU object por face. Não exigir mesh manifold para painéis/decorativos, mas diagnóstico não-manifold deve existir para export, colisão e edição.
-
-## Testes
-
-- UV orientation para 0/90/180/270 e horizontal/vertical flips;
-- winding + normals sob mirror e face reversal;
-- attach 100 times sem fendas e duplicação silenciosa;
-- denormal/NaN, zero-area, invalid width/height;
-- UV seam independente em borda compartilhada;
-- Undo/replay idempotent por comando;
-- raw GL extraction mantém correspondência face-corner ao triangulate.
-
-## Semântica de novos fluxos aprovados
-
-[Surface Tile Stamp](../05-tools/surface-tile-stamp.md) trabalha apenas em atributos UV da face escolhida: conservar winding, normais, topologia e seams. Para n-gons não planares/deformados não fingir projeção perfeita; preview de distorção ou rejeição. [Replace Similar](../05-tools/replace-similar-tiles.md) reusa aplicação de UV com orientação individual persistida.
-
-[Pixel Density Doctor](../05-tools/pixel-density-doctor.md) mede escala a partir de **geometria em mundo + pixels de atlas + UV face-corner**; não inferir densidade somente por rect width ou grid. Escala não uniforme, faces oblíquas e atlas anisotrópico exigem análise dos eixos tangentes; faces degeneradas são reportadas como não mensuráveis. UV não pode escapar de `TileRegion` para fabricar densidade inexistente. Auto fix com limites é distinto da query read-only.
-
-[Wall/Roof](../05-tools/smart-wall-roof-brush.md) produz GeometryPatch com orientação e UV coerentes, sem gerador universal paralelo. [Tile Variations](../05-tools/tile-variations.md) só escolhe TileId determinístico a cada placement e fixa UV, não ativa shader random.
-
-**DoD transversal:** preview/cancel não mutam malha; Commands atualizam geometry/UV/binding em uma única transação, validam revision e permitem Undo integral. Testar export roundtrip visual sem exigir que GLB/OBJ carregue os metadados exclusivos do editor.
+Não adotar Manifold, xatlas, Boolean generalista ou UV unwrap na PoC. Face split/weld e malha compartilhada podem ser propostos após Sticky e Wall estarem comprovados.

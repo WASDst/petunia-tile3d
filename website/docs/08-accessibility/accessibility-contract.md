@@ -1,54 +1,39 @@
-# Acessibilidade e facilidade — critérios de conformidade
+# Acessibilidade e experiência neuroinclusiva
 
-> **Obrigatório**, não checklist opcional. Princípios inspirados em WCAG 2.2 AA quando aplicável; GUI desktop Slint não é HTML e exige validação de APIs de acessibilidade de SO e leitores de tela reais.
+> **Contrato obrigatório** para a PoC Odin. Suporte a leitor de tela não é dado como garantido por raylib ou ImGui; será objeto de testes e da decisão de GUI.
 
-## Teclado end-to-end
+## Princípios
 
-Todos os fluxos essenciais realizáveis sem pointer: importar imagem, escolher tile na palette, navegar viewport via virtual cursor/numeric coordinates, colocar, Sticky edge selection, flip/rotate, Undo, Save e Export. `Tab/Shift+Tab` navega controles, `F6` transita regiões, `Esc` cancela ferramenta primeiro, `Enter/Space` ativa. Keymap remapeável, no obrigar chord com modifier mantido.
+A ferramenta deve preservar autonomia sem gestos de precisão obrigatórios, poucos conceitos de cada vez, interface com nomes claros, estado sempre visível e fluxo previsível para pessoas com distintas habilidades motoras, visuais e cognitivas.
 
-**Click-move-click** é alternativa explícita a drag-and-drop; não iniciar ações em `mouse-down` irreversíveis. Strokes e box brush têm entrada de dimensões e posicionamento numérico.
+## Keyboard-first
 
-## Visual
+- F6 / Shift+F6 propõe transitar entre Header, Tools, Palette, Viewport, Inspector, Status.
+- Tab navega dentro de zona; Esc cancela ToolSession antes de alterar seleção ou fechar app.
+- Ações de placement possuem click-to-click, teclado com cursor virtual ou campos de posição/medida.
+- Sticky Edge permite escolher aresta por teclado; Undo/Redo, Save e Export são acessíveis sem mouse.
+- Comandos nomeados e atalhos remapeáveis; evitar obrigar usuário a manter modificador pressionado.
 
-- UI Scale de 100–200% sem cortar ações primárias em viewport comum; zoom do canvas independente da escala da UI.
-- Focus ring persistente, 3:1 para contornos não-textuais significativos e 4.5:1 texto comum quando WCAG se aplicar; uso de forma/ícone/texto além de cor.
-- High Contrast, dark/light bem definidos. Texturas pixel art podem usar original color, mas overlays acessíveis usam tokens escolhidos.
-- Reduced Motion remove transição decorativa, não informações.
-- Hover/pressed/active/disabled/selected visíveis e rotulados; tooltips seguem keyboard-focus também.
-- Linha da seleção e tamanho de handles adaptáveis. Não informar error somente via toast efêmero.
+## Visão, densidade e escala
 
-## Cognição/neurodivergência
+- Interface em 100–200% sem clipping e com área mínima útil para viewport.
+- Tema alto contraste, foco explícito diferente de hover/selected, status textual, não somente vermelho/verde.
+- Paleta de tiles nearest, grid legível, aumento de células/targets e opção para ocultar efeitos.
+- Reduced Motion e animação evitável; tooltips não são a única fonte de ajuda.
+- Feedback de orientação/snap também disponível como coordenada e descrição.
 
-Ações têm nomes literais e consequências previsíveis. Paleta sempre apresenta tile selecionado + orientação. Interface progressiva: 5 ferramentas primárias e Advanced recolhido. Não forçar usuário a memorizar modificadores, mudanças de workplane ou conversão de UV; indicar na própria Work Surface o plano alvo. Dialog modal apenas para operações destrutivas, não micro decisões.
+## Fluxo cognitivo
 
-Linguagem inclusiva, explicações "o que aconteceu / por que / como corrigir", Command Search para localizar ações, histórico Undo legível e tutorial guiado opcional por tarefa.
+Começar por Importar/Exemplo; uma dica contextual por vez. Permitir nomes significativos, presets, recuperação de trabalho, confirmations proporcionais à perda de dados, Undo transacional. Erros descrevem causa + impacto + correção.
 
-## Screen reader / A11y tree
+## Critério para GUI
 
-Slint `accessible-role`, `accessible-label`, `accessible-description` e `accessible-value` ou API efetivamente compatível com versão escolhida; não assumir suporte sem testar NVDA (Windows) e Orca (Linux) nos controles. Viewport 3D requer camada acessível de listagem/seleção de faces e anúncio de posição/orientação em texto.
+Um widget renderizado visualmente não garante semântica nativa. Comparar a capacidade real das bibliotecas Odin de expor accessibility tree e leitores de tela Windows/Linux, incluindo Wayland. Se inexistente, registrar BLOQUEADOR ou planejar uma estratégia de adaptação verificável.
 
-## Cenários de teste
+## Critérios de aceite
 
-- Somente teclado: do tileset PNG até colocar dez tiles e salvar.
-- Teclado com Sticky Edge: selecionar borda, confirmar ângulo 90°, Undo.
-- 200% scale e 1366×768: funcionalidades primárias sem clipping.
-- High Contrast/Reduced Motion: foco e preview ainda claros.
-- NVDA/Orca: nome/role/state de tool, tile grid, numeric fields, overlays, errors.
-- Touchpad/mouse: não causar jumps quando scroll na palette, wheel em numeric fields só com foco.
-- Cognição: 5 usuários-alvo completam fluxo iniciante sem conhecimento de UV (meta de pesquisa, não resultado obtido).
-
-## Gate
-
-Um recurso não está `verified` se o percurso essencial depende de drag, icon sem accessible name, keymap não remapeável ou erro bloqueante inacessível. Documentar indisponibilidade real de AT/OS como `not tested`, nunca `passed`.
-
-## Gates dos cinco diferenciais aprovados
-
-| Feature | Percurso **sem mouse/drag** | Feedback não exclusivamente visual |
-|---|---|---|
-| [Pixel Density Doctor](../05-tools/pixel-density-doctor.md) | Abrir via Command Search → escopo/target numérico → percorrer diagnósticos por teclado → preview/cancel/fix | `Face X: 8 pixels/unidade, alvo 16, alongamento`, causa e ação sugerida |
-| [Surface Tile Stamp](../05-tools/surface-tile-stamp.md) | Escolher tile na Palette → selecionar face por lista/teclado → escolher mapping → Enter/Undo | Nome do tile, alvo e resultado, orientação e distorção anunciados |
-| [Replace Similar](../05-tools/replace-similar-tiles.md) | Escolher tile → `Selecionar semelhantes` → filtrar escopo → preview → substituir → Undo | `Encontradas N, ignoradas M`; motivos de exclusão acessíveis |
-| [Tile Variations](../05-tools/tile-variations.md) | Criar grupo pela Palette → ajustar pesos por campos → alternar brush variation → confirmar placement/reroll | Variante selecionada e quantidades enunciadas, sem flicker |
-| [Smart Wall/Roof](../05-tools/smart-wall-roof-brush.md) | Selecionar tool → preencher posição/dimensões/ângulo → preview → Confirmar/Cancelar | Estimativa de faces e tiles, pitch, invalid targets e cause |
-
-Esses percursos precisam ser testados em Linux/Windows reais com foco, leitores de tela e UI Scale 200%. `Not tested` não é `pass`; alternativas por teclado existem mesmo para posicionamento no mundo via valores X/Y/Z e seleção de faces. Nunca promover uma feature como concluída somente porque o button Slint está desenhado.
+- Criar, orientar, apagar, desfazer e exportar tiles inteiramente por teclado.
+- Inspecionar modo, tile ativo e foco sem depender da cor.
+- Não perder a operação com zoom 200%, janela reduzida ou troca de painel.
+- Erros não destroem documento nem forçam reinício da aplicação.
+- Teste manual assistivo identificado por tecnologia e plataforma; não declarar conformidade WCAG/AT-SPI/IAccessible2/Windows UIA sem evidência.

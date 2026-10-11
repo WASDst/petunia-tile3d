@@ -16,7 +16,7 @@
     },
     {
       "id": "architecture",
-      "title": "Arquitetura Modular",
+      "title": "Arquitetura Odin",
       "files": [
         {
           "path": "01-architecture/module-boundaries.md",
@@ -30,7 +30,7 @@
     },
     {
       "id": "reuse",
-      "title": "Reuso do Petunia3D",
+      "title": "Relação com Petunia3D",
       "files": [
         {
           "path": "02-reuse/reuse-audit.md",
@@ -112,15 +112,23 @@
     },
     {
       "id": "ui",
-      "title": "UI, Viewport & Renderer",
+      "title": "Interface, GUI & Viewport",
       "files": [
         {
           "path": "07-ui/workspaces-and-shell.md",
-          "title": "Slint — Shell, Palette e Work Surface"
+          "title": "Shell e interação tile-first"
+        },
+        {
+          "path": "07-ui/design-system.md",
+          "title": "Componentes, estados e foco"
         },
         {
           "path": "07-ui/viewport-renderer.md",
-          "title": "OpenGL 3.3 — PoC e renderer"
+          "title": "Viewport raylib — PoC"
+        },
+        {
+          "path": "07-ui/gui-options.md",
+          "title": "GUI em Odin — estudo aberto"
         }
       ]
     },
@@ -166,7 +174,7 @@
     },
     {
       "id": "roadmap",
-      "title": "Roadmap MVP / V1",
+      "title": "Roadmap da PoC",
       "files": [
         {
           "path": "12-roadmap/milestones.md",
@@ -176,11 +184,15 @@
     },
     {
       "id": "dependencies",
-      "title": "Rust & Dependências",
+      "title": "Odin & Ferramentas",
       "files": [
         {
-          "path": "13-engineering/dependencies-rust.md",
-          "title": "Rust cru e dependências leves"
+          "path": "13-engineering/dependencies-odin.md",
+          "title": "Stack Odin e dependências mínimas"
+        },
+        {
+          "path": "13-engineering/odin-conformance.md",
+          "title": "Conformance e testes Odin"
         }
       ]
     },

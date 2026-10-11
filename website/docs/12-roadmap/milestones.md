@@ -1,58 +1,54 @@
-# Roadmap e vertical slices
+# Roadmap — Odin Tile3D PoC
 
-> Sequência de desenvolvimento sem datas de entrega. O usuário aprovou **incluir cinco funcionalidades** no roadmap (T3D-015..019); o MVP permanece concentrado no básico. Implementação, UX final e cronograma continuam sujeitos aos gates.
+> Sem prazos prometidos. Todas as etapas são **planejadas**; o website não comprova implementação do editor.
 
-## Fase 0 — Docs + protótipos CPU
+## A — A primeira face
 
-**Entrega atual:** website documental, estudo e decisões preliminares. **Falta:** aplicação.
+**Entrada:** novo projeto e PNG. **Saída:** câmera e plano 3D, região de atlas, preview e criação de face com UV correta.
 
-- Testar `TileRegion`, `PixelRect`, UV orientation, quads e patch Undo em Rust std sem GUI.
-- Auditar Petunia3D por função e licenças; medir `cargo tree` antes de compartilhar crate.
-- PoC GL 3.3 + Slint (FBO/texture, Linux/Windows); falha documentada leva à decisão de backend.
-- Validar requisitos de UI com 1–3 usuários-alvo antes de inflexibilidade arquitetural.
+- Odin toolchain documentada, projeto mínimo, janela raylib, render de um quad.
+- TileRegion em pixels, palette nearest, resize, grid/workplane e preview valid/invalid.
+- Seleção e apagamento de tile, Rotate/Flip UV, câmera orbit/pan/zoom.
+- Testes CPU de UV e bounds, primeira validação manual de input.
 
-**Gate:** math tests + PoC funcional com um quad e picking; não construir 30 painéis antes deste gate.
+**Go/No-Go:** abrir um tileset de referência e criar dez faces com UV sem distorcer escala.
 
-## Fase 1 — Primeira criação real (MVP)
+## B — Construção fluida
 
-- Criar/abrir/salvar projeto e importar PNG atlas.
-- Tileset Palette zoom/grid/selection por mouse e teclado.
-- 3D viewport renderiza quad, orbit/pan/zoom, grid e hover ghost.
-- Tile Brush e Sticky Edge; Select/Move/Rotate/Delete; Flip/Rotate UV.
-- Command Undo/Redo e cancel; export GLB mínimo validado.
-- Dark/light, keyboard, F6, Contrast, scale 200%, missing atlas case.
+**Saída:** criar parede e volume de forma previsível, editar, cancelar e desfazer.
 
-**Critério:** casa/prop pequeno criado sem UV manual, salvo/reaberto e exportado; sem regressão keyboard-only.
+- Sticky/Edge Snap, Wall/Rectangle e Block Brush.
+- Select, transformações, snapping numérico, tool sessions.
+- Command dispatcher e Undo/Redo por gesto.
+- Casos extremos: normal invertida, face degenerada, overlap e uso por teclado.
 
-## Fase 2 — Produto utilizável (V1 candidata)
+**Go/No-Go:** criar uma casa low-poly simples sem editor UV.
 
-- Block Brush robusto com Add/Erase validated; multi-face stamps.
-- Groups/Parts e Palette tags/favorites; copies e prefabs leves.
-- [Surface Tile Stamp](../05-tools/surface-tile-stamp.md): aplicar TileRegion a faces com preview, preservando UV e orientação.
-- [Select/Replace Similar Tile](../05-tools/replace-similar-tiles.md): localizar ocorrências por binding, substituir em lote, um Undo.
-- [Tile Variations](../05-tools/tile-variations.md): variações de tiles com seeds determinísticas e preview estável.
-- [Pixel Density Doctor](../05-tools/pixel-density-doctor.md): relatório de densidade e reparos explícitos apenas quando viáveis.
-- Rebind manual e UV tool simples permanecem como suporte especializado, sem recriar um UV workspace completo.
-- Projeto portátil/recovery, OBJ, relink e atlas consistency.
-- Advanced shortcuts/help, tutorial em contexto e pipeline de release.
+## C — Um arquivo de verdade
 
-**Critério:** cenas maiores mantêm boa interação em hardware modesto; problemas export identificáveis e corrigíveis.
+**Saída:** fechar/abrir documento e exportar asset em outro editor.
 
-## Fase 3 — Construção contextual (V1+ aprovada)
+- JSON versionado com IDs persistentes, textures relativas, save atômico e missing file.
+- OBJ/MTL com UV/materiais, nomenclatura e escala testadas fora do Tile3D.
+- Render cache por atlas/material; benchmark 100/1k/10k faces no hardware registrado.
+- Checklist Windows/Linux, 1366×768, alta escala e comandos acessíveis.
 
-- [Smart Wall/Roof Brush](../05-tools/smart-wall-roof-brush.md): começar por **Wall Strip** de quads com grid/UV previsíveis, seguir com telhado básico em duas águas quando o primeiro vertical slice estiver validado.
-- Evitar graph procedural genérico e geometria implícita concorrente com Mesh: resultado é mesh normal + UV explícita, batch Command/Undo.
+## Estudo independente da GUI
 
-**Gate:** casa com paredes e telhado texturizados construída com teclado e exportável, sem faces internas/duplicadas, com preview e cancel seguros.
+Em paralelo **após o primeiro vertical slice**, testar Dear ImGui, microui, Loom, Skald e SDL3/WGPU contra UI mínima raylib. **Não transformar estudo em decisão ou dependência** antes do benchmark a11y/input/docking.
 
-## Fase 4 — Outras hipóteses (ainda não aprovadas)
+## V1 — Funcionalidades já aprovadas
 
-Autotile contextual de cantos, additional roof presets, sprite export, animated UV tiles, texture editor embutido e outros somente após pesquisa/testes de usuário e nova decisão. [Backlog](../15-ideas/opportunity-backlog.md).
+- Pixel Density Doctor.
+- Surface Tile Stamp.
+- Select / Replace Similar.
+- Tile Variations.
 
-## Explicitamente não priorizar
+## V1+ — Construção assistida
 
-Rig/skeleton, generalized animation timeline, full PBR/GLTF editor, full Paint stack, fluid simulation, online sharing, marketplace, universal scripting engine e multiuser collaboration. Podem ter valor em outro produto, mas criariam uma superfície desproporcional neste.
+- Smart Wall/Roof Brush com paredes primeiro e telhados básicos depois.
+- Outros itens permanecem propostas, não compromissos.
 
-## Política de issues
+## Fora de escopo
 
-Cada Task: user journey, before/after, source canônica, risk, non-goals, architecture, a11y alternative, tests e acceptance. Mudanças pequenas, verificáveis, com handoff de agents.
+Half-edge universal, UV unwrap automatizado, renderer PBR, rigging, animação complexa, scripting/plugins/MCP, multiplayer e voxel world. Somente reabrir com caso de uso comprovado.

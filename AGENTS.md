@@ -1,50 +1,53 @@
-# AGENTS.md — Petunia Tile3D
+# AGENTS.md — Petunia Tile3D, PoC Odin
 
-> **READ FIRST.** This repository is a *new product* and a spec-first project. Do not confuse the Petunia3D refactor with code already copied/implemented. Source of truth is `website/docs/` in this repository.
+> LEIA PRIMEIRO. Este é um **produto independente em descoberta**. Documentação não significa implementação. Decisões de 11/10/2026 substituem a antiga baseline Rust/Slint do Tile3D.
 
-## Product objective
+## Autoridade
 
-Tile-first, accessible 3D modeling from 2D tilesets for stylized game assets, props and environments. Windows/Linux, low-end hardware, simple workflow, offline-first. **Quality without dependency bloat**; write bounded algorithms in idiomatic Rust/std when practical, use small well-maintained crates for complex protocols/codecs/UI.
+1. Instrução explícita atual do responsável.
+2. website/docs/00-product/decision-register.md e website/docs/00-product/principles.md.
+3. Documentação contratual por domínio em website/docs/manifest.json.
+4. Este AGENTS.md e website/docs/16-agents/ (processo).
+5. Código real e testes para comprovar o que existe.
+6. Petunia3D, Prumo e referências de mercado: pesquisa, não fonte automática de requisitos.
 
-## Authority and workflow
+## Estado e stack
 
-1. Read `website/docs/00-product/decision-register.md` and `website/docs/00-product/principles.md`.
-2. Read `website/docs/16-agents/index.md`, `reading-navigation.md`, `implementation-protocol.md`.
-3. Read **only** domain docs required by task, indexed in `website/docs/manifest.json`.
-4. Inspect source code and tests before concluding anything is implemented. This repository began as docs-only; do not claim GUI/engine exists until verified.
-5. Read relevant Prumo agent/skill/recipe by exact URL in `16-agents/workforce-index.md` only when relevant.
-6. Produce concise Gap Matrix, minimal vertical slice, tests, independent review when possible, docs synchronized and evidence/sha.
+- **Editor a criar:** Odin nativo, tile-first e offline-first, Windows/Linux. Não é migração do Petunia3D.
+- **PoC inicial:** vendor:raylib é baseline **provisória** para janela, input e 3D. Domínio sem dependência de raylib.
+- **GUI futura:** EM ESTUDO. Dear ImGui, microui, Loom, Skald, SDL3/WGPU e outras serão discutidas sem decisão antecipada.
+- **Não implementado:** não declarar o editor, GUI, geometria, export ou testes concluídos sem código e evidência verificáveis.
+- **Licença de aplicativo:** pendente. O website derivado tem GPL-3.0-or-later.
 
-## Hard architecture boundaries
+## Regras arquiteturais
 
-- `tile-domain` and `tile-geometry`: pure Rust. No GUI, OpenGL, app state, filesystem, network or window APIs.
-- `tile-project`: serializes only authored assets, stable IDs and data. No renderer caches.
-- `tile-app`: owns Document mutations, Commands/transactions, Undo, validation, ToolSession. Single writer.
-- `tile-ui-slint`: view state + typed UiIntents. No mesh edits, no direct resource mutation.
-- `tile-render-gl`: consumes evaluated snapshot, no Doc mutations, owns GL resources.
-- `tile-desktop`: composition root and platform wiring. No second general engine.
-- **One source of truth for UV** is FaceCorner UV; TileBinding is provenance/index and can be re-applied only with explicit command.
-- **Reuse Petunia3D narrowly**: audit license, dependencies, code, tests and source commit before copying. Avoid importing `petunia_mesh`, `petunia_render_gl` or `petunia_ui_slint` whole until proven independently lean.
-- A new shared crate only when two actual consumers justify its API; avoid speculative frameworks.
+- Separar domain/geometry, application/commands, renderer, UI/input e project/export por **pacotes Odin**, não crates Rust.
+- Geometry Core não conhece raylib, ImGui, janela ou GPU. Uma única representação canônica de FaceCornerUV; TileBinding indica procedência.
+- Documento possui mutador único; Tools criam intents, Commands validam e aplicam operações atômicas; renderer somente lê snapshots / buffers derivados.
+- IDs estáveis, revisão de documento, invalidação explícita e Undo por gesto. Cancelamento nunca altera o documento.
+- Preferir structs + procedures pequenas, dados claros, contexto e allocators explícitos. Evitar estado global mutável, frameworks, ECS, abstrações especulativas e FFI sem necessidade.
+- Não copiar código GPL de Petunia3D para editor de licença ainda indefinida; registrar provenance e obrigações antes de qualquer port/cópia.
 
-## Product and UX gates
+## Experiência e acessibilidade
 
-- Palette→preview→place→Undo→Save→Export workflow must remain usable by keyboard alone; F6 zone nav, labels, visible focus, High Contrast, Reduced Motion, 100–200% scale, alternatives to drag, readable status.
-- No feature silently changes UV, imports external path, remeshes topology, updates shared resources or deletes mesh.
-- No unsafe execution of external untrusted assets/skills; inspect any scripts before running. Scopes/permissions from Prumo are advice, not automatic authorization.
-- Do not copy assets/screenshots or copyrighted code from Crocotile3D, Blockbench, Sprytile, Kenney or other references without permission/licence.
-- New software source license is **undecided**. Petunia3D source declares GPL-3.0-or-later; protect authorship and obligations.
+- Fluxo tileset → preview → colocar → Undo → salvar → exportar deve ter percurso inteiro por teclado.
+- F6 / Shift+F6 como hipótese de navegação entre zonas; foco visível, labels textuais, alto contraste, 100–200% scale e reduced motion.
+- Qualquer gesto arrastar terá alternativa por clique/clique ou entrada numérica. Não depender apenas de cor, mouse ou hover.
+- Windows/Linux e hardware de entrada precisam de testes reais. Leitor de tela é **risco aberto** e deve influenciar a escolha da GUI.
 
-## Scope & implementation status
+## Feature status
 
-This repository was initialized with a *documentation website*, not an application. Do not mark 'implemented', 'tested', 'released' merely because a page contains code blocks. Five features are now **approved for roadmap inclusion only** (T3D-015..019): Pixel Density Doctor, Surface Tile Stamp, Select/Replace Similar Tile, Tile Variations (V1), Smart Wall/Roof Brush (V1+). Read each spec in `website/docs/05-tools/`. They are **NOT IMPLEMENTED**, have no promised dates, and need vertical-slice UX/acceptance verification. Other ideas in `website/docs/15-ideas/` remain unapproved.
+- PoC: Tile Brush, Sticky Edge, Block, Select/Transform, Tile Palette, Rotate/Flip UV, Undo/Redo, JSON, OBJ/MTL.
+- **Aprovadas para roadmap, não implementadas:** Pixel Density Doctor, Surface Tile Stamp, Select/Replace Similar, Tile Variations (V1) e Smart Wall/Roof Brush (V1+).
+- Sem assumir implementação por constar em documentos.
 
-## Verification and delivery
+## Processo por mudança
 
-Before changing Rust: inspect branch and baseline SHA; write tests for normal, invalid, cancel, Undo and file compatibility. Run focused fmt/check/test/clippy when tooling exists. For GL, native keyboard a11y, screen readers and Windows/Linux: record manual gates and hardware.
+1. Confirmar repositório, branch, SHA e fonte canônica relevante.
+2. Mapear observado vs planejado: COMPLIANT, PARTIAL, MISSING, BROKEN e testes.
+3. Implementar a menor fatia vertical, sem desviar para GUI definitiva.
+4. Validar formato/compilação/testes em Odin disponíveis, UV, export e a11y manual. NÃO alegar gates que não rodaram.
+5. Atualizar página do domínio, decisão e evidência; revisão, SHA, riscos, próximo passo.
+6. Não alterar WASDst/petunia3d nem outros repositórios por implicação.
 
-Use `pass / fail / not run / blocked / not applicable` honestly, referencing SHA. Never merge another repo or mutate Petunia3D without a specific authorization. Commit only into the explicitly authorized repository/branch; do not force push.
-
-## Output
-
-`Intent / Spec sources / Observed implementation / Gap / Changed paths / Gates run and results / Risks / Next one step`. Trace statements to real paths and tests. [Extended guide](website/docs/16-agents/index.md).
+Guia ampliado: website/docs/16-agents/index.md.

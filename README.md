@@ -1,28 +1,36 @@
-# Petunia Tile3D
+# Petunia Tile3D — Odin proof of concept
 
-**Modelagem 3D por tiles, acessível desde o primeiro clique.**
+**Da imagem 2D à geometria 3D.** Projeto experimental independente da WASD Studio para testar um fluxo de modelagem *tile-first* em Odin.
 
-Novo produto da [WASD Studio](https://wasd.lat), tecnicamente relacionado ao [Petunia3D](https://github.com/WASDst/petunia3d), mas com UX, escopo, releases e aplicação próprios.
+> Estado em 11/10/2026: **documentação / definição de PoC**. Este repositório contém um website documental; **não há editor Odin funcional publicado ou validado aqui**.
 
-**Estado:** specification / product discovery. O repositório contém documentação de produto e website; **não existe editor funcional implementado aqui neste momento**.
+## Direção atual
+
+- **Linguagem do editor:** Odin (decisão de experimento, não migração do Petunia3D).
+- **PoC gráfica candidata:** Odin + vendor:raylib. A GUI definitiva **não foi escolhida**.
+- **Domínio:** regiões de tileset, faces 3D com UV, workplane, snapping, ferramentas, comandos, Undo/Redo.
+- **Primeira entrega:** importar PNG → selecionar TileRegion → criar/editar faces → salvar JSON → exportar OBJ/MTL.
+- **Windows e Linux**, hardware acessível, editor offline-first, fluxo completo por teclado e acessibilidade desde a primeira ferramenta.
+- Sem ECS universal, sistema de voxels, render PBR, rig, plugins ou importação de todo o Petunia3D na PoC.
 
 ## Documentação
 
-- [Início do caderno](website/docs/home.md)
-- [Site estático](website/README.md) — `python3 -m http.server 8080 -d website`
-- [Princípios e decisões](website/docs/00-product/principles.md)
-- [Arquitetura e limites](website/docs/01-architecture/module-boundaries.md)
-- [Integração com Petunia3D](website/docs/02-reuse/reuse-audit.md)
-- [Ferramentas e fluxos](website/docs/05-tools/mvp-tools.md)
-- [Diferenciais aprovados para V1/V1+](website/docs/05-tools/post-mvp-tools.md): Surface Tile Stamp, Replace Similar, Tile Variations, Pixel Density Doctor e Smart Wall/Roof
+O website está em [website/](website/README.md), fonte canônica de produto, contratos, estudos técnicos e diretivas para agentes.
+
+- [Visão e decisões](website/docs/00-product/decision-register.md)
+- [Arquitetura Odin](website/docs/01-architecture/module-boundaries.md)
+- [Escolha experimental de dependências](website/docs/13-engineering/dependencies-odin.md)
+- [Interface — opções em análise](website/docs/07-ui/gui-options.md)
+- [Roadmap e gates](website/docs/12-roadmap/milestones.md)
 - [Acessibilidade](website/docs/08-accessibility/accessibility-contract.md)
-- [Research + ideias para discussão](website/docs/14-research/competitive-landscape.md)
-- [Code agents](AGENTS.md)
+- [Agentes](AGENTS.md)
 
-O site usa HTML/CSS/JavaScript sem bundler e Markdown registrado em `website/docs/manifest.json`. Hospedagem pública ainda precisa ser configurada; a existência dos arquivos não implica deploy.
+Website local: python3 -m http.server 8080 -d website, depois abra http://localhost:8080.
 
-**Licenciamento:** licença da nova aplicação ainda será decidida; reutilização de código GPL-3.0-or-later de Petunia3D exige preservação de obrigações e avaliação antes de copiar qualquer código. Consulte [estratégia de licenças](website/docs/02-reuse/license-provenance.md).
+## Relação com Petunia3D
 
-## Licença
+Inspiração em conceito e requisitos do [Petunia3D](https://github.com/WASDst/petunia3d) e do histórico do Tile3D. A PoC **não é porte** nem depende do código Rust. Nenhum arquivo do core Rust é presumido reutilizável; eventual port de algoritmo exige análise explícita da licença, proveniência e testes.
 
-A estrutura do **website/** e seus documentos derivados são disponibilizados sob GPL-3.0-or-later — ver [LICENSE](website/LICENSE) e [NOTICE](website/NOTICE.md). O licenciamento do aplicativo Rust que ainda será desenvolvido permanece **pendente de decisão**.
+## Direitos
+
+O website derivado conserva GPL-3.0-or-later, conforme [website/LICENSE](website/LICENSE) e [NOTICE](website/NOTICE.md). A licença do futuro aplicativo Odin é **decisão pendente**.

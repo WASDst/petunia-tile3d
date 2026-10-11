@@ -1,23 +1,26 @@
-# Website — Petunia Tile3D
+# Website — Petunia Tile3D / Odin
 
-Caderno de **criação de produto novo**, não documento de refatoração. Baseado na experiência e layout do [website do Petunia3D](https://github.com/WASDst/petunia3d/tree/refactor/architecture-foundation/website), mas conteúdo e manifesto independentes.
+Site documental para uma PoC independente de modelagem tile-first em **Odin**. A arquitetura anterior Rust + Slint está substituída na **baseline prospectiva**; documentos históricos permanecem recuperáveis via Git.
 
-## Executar
-```bash
+## Rodar
+
+~~~bash
 python3 -m http.server 8080 -d website
-```
-Abra `http://localhost:8080`. Não abrir diretamente via `file://` porque `fetch()` usa arquivos Markdown.
+~~~
 
-## Stack do SITE (não do aplicativo Rust)
-HTML, CSS e JavaScript. Sem bundler/npm/build obrigatório. A interface herdada usa Web Awesome, Phosphor Icons, Alpine.js, Marked e Fuse.js via CDN pinado; portanto **o website requer internet para a experiência completa**. O aplicativo desktop deverá ser offline-first e não herda essas dependências. Avaliar no futuro reduzir CDNs e colocar assets locais com integridade.
+Abra http://localhost:8080. O arquivo index.html não funciona integralmente em file:// porque as páginas são carregadas por fetch().
 
-Novas páginas: adicionar `website/docs/<area>/<page>.md` e atualizar `website/docs/manifest.json`. `website/llms.txt` é o índice de contexto para assistentes. Conteúdo de pesquisa e propostas não recebe status de decisão aprovada.
+## Stack do site vs stack do editor
 
-Publicação: servir `website/` como diretório estático. Nenhuma implantação foi configurada somente por criar os arquivos.
+- **Site:** HTML + CSS + JavaScript, sem bundler. Retém shell documental responsivo e ferramentas de navegação/search do site do Petunia3D.
+- **Editor (a implementar):** Odin, domínio independente, renderer inicial candidato raylib, GUI definitiva em aberto.
+- O site depende de bibliotecas front-end em CDN (Web Awesome, Phosphor, Marked, Alpine e busca opcional com Fuse). Não confundir com a meta de editor desktop offline-first.
+- Edite website/docs/manifest.json para adicionar/remover páginas da navegação. Manter links locais e status rastreáveis.
 
-## Fonte e direitos
-Estrutura visual/roteamento adaptados do website Petunia3D; não copiar docs de refatoração como se fossem requisitos deste produto. Consulte `docs/02-reuse/license-provenance.md`.
+## Deploy
 
-## Licença e origem
+Pode ser servido como conteúdo estático. Na Vercel, utilizar este repositório com outputDirectory website (ver vercel.json da raiz). **Adicionar configuração não equivale a deployment publicado**.
 
-O website e seus documentos são **GPL-3.0-or-later**, seguindo a licença do website Petunia3D do qual esta implementação de site deriva: [LICENSE](./LICENSE), [NOTICE](./NOTICE.md). O licenciamento do futuro editor desktop é **decisão ainda pendente** e deve ser tratado separadamente.
+## Proveniência
+
+Frontend derivado do website Petunia3D sob GPL-3.0-or-later, com histórico e deveres indicados em LICENSE e NOTICE.md. Licença do executável Odin segue indefinida.

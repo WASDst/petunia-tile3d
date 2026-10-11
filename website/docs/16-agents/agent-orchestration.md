@@ -8,7 +8,7 @@
 Human Goal approved
   → Explorer (source + spec mapping; no implementation)
   → Architect (boundary and narrow Task plan, only for structural work)
-  → Implementer OR specialist (pure Rust/domain/Slint/GL; focused test)
+  → Implementer OR specialist (Odin/domain/GUI/renderer; focused test)
   → Tester (independent if available)
   → Reviewer (functional architecture, quality, dependencies)
   → Accessibility Reviewer for GUI (keyboard/focus/AT/cognitive load)
@@ -26,10 +26,10 @@ Não abrir 39 agentes por padrão. Menor equipe que apresente evidência indepen
 |---|---|---|
 | explorer | entender estado docs-only + repo code | ContextPack, source links; sem writes |
 | architect / systems-architect | novos contracts, ownership, dependency choice | API/ADR pequeno; não reabrir filosofia sozinho |
-| implementer | vertical slice limitado | Rust + testes; sem autoaprovação |
+| implementer | vertical slice limitado | Odin + testes; sem autoaprovação |
 | engine-engineer | tiles, mesh, UV, workplane | algorithms com invariantes e Undo |
 | renderer-engineer | GL, atlas sampling, batching | GPU states, benchmark e HiDPI |
-| ui-component-engineer / editor-engineer | Slint, palette, numeric controls, keymap | UI Intents e A11y states, sem editar mesh |
+| ui-component-engineer / editor-engineer | UI candidata, palette, numeric controls, keymap | UI Intents e A11y states, sem editar mesh |
 | ux-architect / accessibility-reviewer | newcomer task, screen reader, focus, 200% | scorecard pass/fail/not-tested; review-only no implementation |
 | tester / reviewer | fim de vertical slice | testes executados, issues severidade |
 | security-reviewer | images/project/import/export paths | trust boundaries, denial-of-service and corruption |
@@ -39,7 +39,7 @@ Não abrir 39 agentes por padrão. Menor equipe que apresente evidência indepen
 
 ## Skills essenciais por risco
 
-- Domínio: `lang-rust`, `clean-code`, `architecture-quality`, `grounded-implementation`, `implementation-reality-verification`, `testing-quality`.
+- Domínio: `clean-code`, `architecture-quality`, `grounded-implementation`, `implementation-reality-verification`, `testing-quality`.
 - UI: `accessibility`, `keyboard-accessibility`, `cognitive-clarity`, `focus-management`, `screen-reader`, `design-system`.
 - GL: `rendering-3d`, `shaders`, `performance-native`, `benchmarking`.
 - IO: `filesystem-security`, `untrusted-project-security`, `serialization`, `secure-coding`.
