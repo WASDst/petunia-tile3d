@@ -128,7 +128,11 @@
         },
         {
           "path": "07-ui/gui-options.md",
-          "title": "GUI em Odin — estudo aberto"
+          "title": "Dear ImGui — docking aprovado"
+        },
+        {
+          "path": "07-ui/imgui-ecosystem.md",
+          "title": "ImGui — addons e bindings Odin"
         }
       ]
     },

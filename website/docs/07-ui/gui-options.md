@@ -1,45 +1,25 @@
-# Estudo de GUI para Odin — DECISÃO PENDENTE
+# Decisão de GUI — Dear ImGui + docking completo
 
-> **Esta página é uma agenda de comparação, não uma seleção final.** A PoC inicial usa raylib como candidata para um viewport simples; a GUI do produto será decidida em conjunto após uma avaliação técnica de bibliotecas e testes reais.
+> **Aprovada em 11/10/2026.** Este documento substitui a antiga shortlist genérica de toolkits. A avaliação das **bibliotecas auxiliares** não significa instalação ou aprovação automática.
 
-## A necessidade do editor
+## Decisão fechada
 
-O Tile3D é um **aplicativo de autoria**, não um jogo. Precisará exibir simultaneamente: atlas 2D com nearest-neighbor, viewport 3D interativo, toolbar, painel contextual, estrutura do projeto, informações de seleção, caixas numéricas, diálogos, command search e feedback acessível.
+- **Linguagem:** Odin.
+- **GUI:** Dear ImGui com docking completo desde a primeira versão.
+- **Requisito:** DockSpace, abas, dividir por arrasto, floating interno, reordenar painéis e layouts persistentes.
+- **Binding base preferido para prova técnica:** [Capati/odin-imgui](https://github.com/Capati/odin-imgui), Dear ImGui v1.92.9b-docking. Escolha do pacote definitivo condicionada a build real Windows/Linux.
+- **Mantemos:** Geometry Core separado de GUI, Tool → Command → Document, teclado, feedback e acessibilidade como obrigações.
 
-Uma biblioteca gráfica não oferece automaticamente uma GUI; e uma GUI com docking não implementa automaticamente viewport 3D.
+## Pendente: decisões não confundidas com GUI
 
-## Shortlist para pesquisa
+- SDL3 ou GLFW para plataforma.
+- OpenGL3 ou WGPU para o renderer; Vulkan poderá ser avaliado, mas não é requisito.
+- Multi-viewport nativo em múltiplas janelas do SO e comportamento sob Wayland/X11.
+- Biblioteca de gizmo, file browser, texture inspector, gráficos, icon pack e automação.
+- Alternativa para acessibilidade semântica; teclado apenas é insuficiente.
 
-| Alternativa | Papel potencial | Perguntas críticas | Estado |
-|---|---|---|---|
-| **raylib + UI mínima** | Base da PoC e medições | Controle de foco e campos? custos de widgets? | Candidata à PoC |
-| **Dear ImGui (odin-imgui)** | GUI imediata com docking madura | Bindings, multi-viewport, DPI, acessibilidade semântica? | Avaliar |
-| **microui** | UI pequena e nativa via vendor | Árvores/painéis, escala, widgets avançados, teclado? | Avaliar |
-| **Loom** | Sistema GUI orientado a editores em Odin | Manutenção, licença, APIs de render, docking real? | Investigar |
-| **Skald** | GUI Odin nativa com GPU | Disponibilidade, docking, maturidade e semântica a11y? | Investigar |
-| **SDL3 + WGPU + GUI** | Composição de nível mais baixo | Tempo de infraestrutura e estabilidade de glue? | Alternativa técnica |
+## Teste mínimo obrigatório
 
-## Fontes iniciais verificadas
+Renderizar atlas nearest + viewport 3D em textura GPU dentro de DockSpace; criar Palette e Inspector; arrastar, dividir, tabular, redimensionar e persistir/restaurar layout; alternar foco, Tab/F6 e interagir com campo numérico; validar capture de input e 100–200% scale Windows/Linux. Tentar multi-viewport externo separadamente.
 
-- [Odin vendor collection](https://pkg.odin-lang.org/vendor/) — raylib, SDL3, microui e APIs gráficas.
-- [Odin raylib](https://pkg.odin-lang.org/vendor/raylib/) — janela, input e primitivas 3D.
-- [Odin WGPU](https://pkg.odin-lang.org/vendor/wgpu/) — renderizador com libs nativas externas.
-- [odin-imgui](https://github.com/Capati/odin-imgui) — bindings comunitários para Dear ImGui docking.
-- Para Loom e Skald, verificar repositório canônico, licença, exemplos e atividade antes de firmar afirmações.
-
-## Matriz obrigatória de testes
-
-1. **Viewport + atlas:** texturas nearest e picking sem interferência de input.
-2. **Docking e layout:** dois painéis redimensionáveis, persistência e restauração.
-3. **Campos numéricos:** digitação, keyboard step, drag sensível e validação.
-4. **Acessibilidade:** foco visível, Tab/F6, leitor de tela quando suportado, nomes acessíveis, zoom 100–200%.
-5. **Feedback:** tooltip, hover, selected, disabled, progress, erro, toast.
-6. **Desempenho:** CPU/RAM idle, latência de input, FPS de cena em hardware modesto.
-7. **Distribuição:** Wayland/X11, Windows, DPI, bibliotecas dinâmicas, build reproduzível.
-8. **Manutenção:** atualizações e wrappers, dependências, permissões/licenças, tooling de testes.
-
-## Regras da decisão
-
-Não comparar apenas screenshots, FPS ou quantidade de widgets. Criar o **mesmo vertical slice** em finalistas e registrar issues reproduzíveis. A GUI escolhida deve se conectar por intents à mesma Application API, sem acoplar Odin Geometry Core ao toolkit.
-
-**Próxima conversa:** pontuar as alternativas por evidência; se nenhuma atender acessibilidade real, considerar composição híbrida ou reduzir escopo — nunca esconder a lacuna.
+[Catálogo de addons e bridges](./imgui-ecosystem.md) · [Arquitetura do viewport](./viewport-renderer.md).

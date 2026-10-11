@@ -6,7 +6,7 @@
 
 **Entrada:** novo projeto e PNG. **Saída:** câmera e plano 3D, região de atlas, preview e criação de face com UV correta.
 
-- Odin toolchain documentada, projeto mínimo, janela raylib, render de um quad.
+- Odin toolchain documentada, projeto mínimo, janela com Dear ImGui + DockSpace, render de um quad por backend a validar.
 - TileRegion em pixels, palette nearest, resize, grid/workplane e preview valid/invalid.
 - Seleção e apagamento de tile, Rotate/Flip UV, câmera orbit/pan/zoom.
 - Testes CPU de UV e bounds, primeira validação manual de input.
@@ -35,7 +35,7 @@
 
 ## Estudo independente da GUI
 
-Em paralelo **após o primeiro vertical slice**, testar Dear ImGui, microui, Loom, Skald e SDL3/WGPU contra UI mínima raylib. **Não transformar estudo em decisão ou dependência** antes do benchmark a11y/input/docking.
+**Dear ImGui com docking completo está aprovado**. O spike deve decidir SDL3/GLFW, OpenGL3/WGPU e binding Odin prático, comprovando split/tab/floating interno, restore layout, viewport-texture, keyboard focus, escala, Linux/Windows. Addons e janelas externas do sistema seguem pendentes de validação.
 
 ## V1 — Funcionalidades já aprovadas
 

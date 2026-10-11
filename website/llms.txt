@@ -2,7 +2,7 @@
 
 Repo: https://github.com/WASDst/petunia-tile3d
 Estado (11/10/2026): docs-first, nenhuma aplicação Odin funcional demonstrada.
-Stack do futuro editor: **Odin**. Raylib é candidato inicial para PoC; GUI profissional pendente. NÃO interpretar Slint/Rust do histórico como baseline.
+Stack do futuro editor: **Odin**. Dear ImGui + docking completo aprovados para PoC; Capati binding é candidato ao spike. SDL3/OpenGL3 e addons pendentes de validação. NÃO interpretar Slint/Rust do histórico como baseline.
 Projeto greenfield autônomo. Não migração nem fork do Petunia3D.
 Site: HTML/CSS/JS em website/, documentação em website/docs/manifest.json.
 
@@ -16,10 +16,11 @@ Leia nesta ordem:
 7. website/docs/05-tools/mvp-tools.md
 8. website/docs/06-application/commands-undo.md
 9. website/docs/07-ui/gui-options.md
-10. website/docs/08-accessibility/accessibility-contract.md
-11. website/docs/12-roadmap/milestones.md
-12. website/docs/13-engineering/dependencies-odin.md
-13. website/docs/16-agents/index.md
+10. website/docs/07-ui/imgui-ecosystem.md
+11. website/docs/08-accessibility/accessibility-contract.md
+12. website/docs/12-roadmap/milestones.md
+13. website/docs/13-engineering/dependencies-odin.md
+14. website/docs/16-agents/index.md
 
 PoC: A TileAtlas/TileRegion/Tile Brush; B Sticky Edge/Wall/Block/Undo; C JSON/OBJ export.
 V1 aprovado: Pixel Density Doctor, Surface Tile Stamp, Select/Replace Similar, Tile Variations.
